@@ -1,0 +1,5 @@
+# use `git submodule` due to incompatible Result in RAC & APIKit
+github "ReactiveCocoa/ReactiveCocoa" "v4.0-alpha.1"
+#github "ishkawa/APIKit" "1.0.0-beta5" # use `git submodule`
+github "ikesyo/Himotoki" "swift2"
+github "meteochu/HanekeSwift" "swift-2.0"

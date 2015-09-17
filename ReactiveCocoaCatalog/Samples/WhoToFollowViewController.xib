@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WhoToFollowViewController" customModule="ReactiveCocoaCatalog" customModuleProvider="target">
+            <connections>
+                <outlet property="refreshButton" destination="8mM-ra-fVO" id="ieR-oP-bhd"/>
+                <outlet property="user1Button" destination="4pe-Mz-59O" id="J6Q-lC-E1s"/>
+                <outlet property="user2Button" destination="tqK-pD-2ia" id="Bor-iO-ZHD"/>
+                <outlet property="user3Button" destination="BcW-gC-3fk" id="isA-b1-eIJ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8mM-ra-fVO">
+                    <rect key="frame" x="211" y="355" width="178" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="178" id="Ij8-aJ-VmI"/>
+                        <constraint firstAttribute="height" constant="51" id="OzG-pv-SLW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                    <state key="normal" title="Refresh All">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pe-Mz-59O">
+                    <rect key="frame" x="225" y="174" width="150" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="xG6-l0-dgI"/>
+                        <constraint firstAttribute="height" constant="51" id="xni-UF-L2Y"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                    <state key="normal" title="@Reactive">
+                        <color key="titleColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqK-pD-2ia">
+                    <rect key="frame" x="225" y="233" width="150" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="9F0-YQ-zAA"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="dTb-J5-MS2"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                    <state key="normal" title="@Cocoa">
+                        <color key="titleColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BcW-gC-3fk">
+                    <rect key="frame" x="225" y="292" width="150" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="W81-t8-tah"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="pe4-64-uCG"/>
+                    </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
+                    <state key="normal" title="@Catalog">
+                        <color key="titleColor" red="0.20000000000000001" green="0.59999999999999998" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="8mM-ra-fVO" firstAttribute="top" secondItem="BcW-gC-3fk" secondAttribute="bottom" constant="12" id="CiE-IC-Jws"/>
+                <constraint firstAttribute="centerX" secondItem="4pe-Mz-59O" secondAttribute="centerX" id="FI8-sV-LyQ"/>
+                <constraint firstAttribute="centerX" secondItem="tqK-pD-2ia" secondAttribute="centerX" id="GEK-BC-KlK"/>
+                <constraint firstItem="8mM-ra-fVO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H4v-BJ-U7N"/>
+                <constraint firstItem="tqK-pD-2ia" firstAttribute="top" secondItem="4pe-Mz-59O" secondAttribute="bottom" constant="8" id="Wja-fe-u4a"/>
+                <constraint firstItem="8mM-ra-fVO" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="80" id="dsr-15-hXg"/>
+                <constraint firstAttribute="centerX" secondItem="BcW-gC-3fk" secondAttribute="centerX" id="qsT-gg-bfs"/>
+                <constraint firstItem="BcW-gC-3fk" firstAttribute="top" secondItem="tqK-pD-2ia" secondAttribute="bottom" constant="8" id="vPK-Zj-QRL"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

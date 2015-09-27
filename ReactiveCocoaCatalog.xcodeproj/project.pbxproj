@@ -7,12 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F8517E71BA516F300C1FCB0 /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8517E61BA516F300C1FCB0 /* Himotoki.framework */; };
 		1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */; settings = {ASSET_TAGS = (); }; };
 		1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */; settings = {ASSET_TAGS = (); }; };
-		1F8DF48A1BA51641004B7D09 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8DF4891BA51641004B7D09 /* ReactiveCocoa.framework */; };
-		1F8DF48C1BA5164B004B7D09 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8DF48B1BA5164B004B7D09 /* APIKit.framework */; };
-		1F8DF48E1BA5164F004B7D09 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F8DF48D1BA5164F004B7D09 /* Result.framework */; };
+		1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; };
+		1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADC1BB79F1000D16C55 /* Haneke.framework */; };
+		1FE03AE31BB79F1000D16C55 /* Haneke.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADC1BB79F1000D16C55 /* Haneke.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FE03AE41BB79F1000D16C55 /* Himotoki.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADD1BB79F1000D16C55 /* Himotoki.framework */; };
+		1FE03AE51BB79F1000D16C55 /* Himotoki.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADD1BB79F1000D16C55 /* Himotoki.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FE03AE61BB79F1000D16C55 /* ReactiveCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */; };
+		1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADF1BB79F1000D16C55 /* Result.framework */; };
+		1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADF1BB79F1000D16C55 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FEE10A11BA9E440006E9335 /* LogSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE10A01BA9E440006E9335 /* LogSink.swift */; settings = {ASSET_TAGS = (); }; };
 		1FF369F51BA50BFD00A49E30 /* IncrementalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF369F41BA50BFD00A49E30 /* IncrementalSearchViewController.swift */; };
 		480F7B481BA9705100E10892 /* WhoToFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */; settings = {ASSET_TAGS = (); }; };
@@ -21,7 +27,6 @@
 		486CF3301B53B34D0056E591 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CF32F1B53B34D0056E591 /* Catalog.swift */; };
 		487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */; settings = {ASSET_TAGS = (); }; };
 		487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		489A91561BA9ACE400A43AF7 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489A91551BA9ACE400A43AF7 /* Haneke.framework */; };
 		48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D914431B4FB4C400E70080 /* AppDelegate.swift */; };
 		48D914461B4FB4C400E70080 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D914451B4FB4C400E70080 /* MasterViewController.swift */; };
 		48D9144B1B4FB4C400E70080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D914491B4FB4C400E70080 /* Main.storyboard */; };
@@ -45,13 +50,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1FE03AEA1BB79F1000D16C55 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1FE03AE31BB79F1000D16C55 /* Haneke.framework in Embed Frameworks */,
+				1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */,
+				1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */,
+				1FE03AE51BB79F1000D16C55 /* Himotoki.framework in Embed Frameworks */,
+				1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		1F8517E61BA516F300C1FCB0 /* Himotoki.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Himotoki.framework; path = "../Carthage/Checkouts/Himotoki/build/Debug-iphoneos/Himotoki.framework"; sourceTree = "<group>"; };
 		1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAPI.swift; sourceTree = "<group>"; };
 		1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Ext.swift"; sourceTree = "<group>"; };
-		1F8DF4891BA51641004B7D09 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveCocoa.framework; path = "../Carthage/Checkouts/ReactiveCocoa/build/Debug-iphoneos/ReactiveCocoa.framework"; sourceTree = "<group>"; };
-		1F8DF48B1BA5164B004B7D09 /* APIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = APIKit.framework; path = "../Carthage/Checkouts/APIKit/build/Debug-iphoneos/APIKit.framework"; sourceTree = "<group>"; };
-		1F8DF48D1BA5164F004B7D09 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = "../Carthage/Checkouts/Result/build/Debug-iphoneos/Result.framework"; sourceTree = "<group>"; };
+		1FE03ADB1BB79F1000D16C55 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FE03ADC1BB79F1000D16C55 /* Haneke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Haneke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FE03ADD1BB79F1000D16C55 /* Himotoki.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Himotoki.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FE03ADF1BB79F1000D16C55 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FEE10A01BA9E440006E9335 /* LogSink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSink.swift; sourceTree = "<group>"; };
 		1FF369F41BA50BFD00A49E30 /* IncrementalSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncrementalSearchViewController.swift; sourceTree = "<group>"; };
 		48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +84,6 @@
 		487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoToFollowViewController.swift; sourceTree = "<group>"; };
 		487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhoToFollowViewController.xib; sourceTree = "<group>"; };
-		489A91551BA9ACE400A43AF7 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "Carthage/Checkouts/HanekeSwift/build/Debug-iphoneos/Haneke.framework"; sourceTree = SOURCE_ROOT; };
 		48D9143E1B4FB4C400E70080 /* ReactiveCocoaCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveCocoaCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D914421B4FB4C400E70080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48D914431B4FB4C400E70080 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,11 +106,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				489A91561BA9ACE400A43AF7 /* Haneke.framework in Frameworks */,
-				1F8517E71BA516F300C1FCB0 /* Himotoki.framework in Frameworks */,
-				1F8DF48E1BA5164F004B7D09 /* Result.framework in Frameworks */,
-				1F8DF48C1BA5164B004B7D09 /* APIKit.framework in Frameworks */,
-				1F8DF48A1BA51641004B7D09 /* ReactiveCocoa.framework in Frameworks */,
+				1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */,
+				1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */,
+				1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */,
+				1FE03AE41BB79F1000D16C55 /* Himotoki.framework in Frameworks */,
+				1FE03AE61BB79F1000D16C55 /* ReactiveCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,11 +136,11 @@
 		1F8517F81BA52E3C00C1FCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				489A91551BA9ACE400A43AF7 /* Haneke.framework */,
-				1F8517E61BA516F300C1FCB0 /* Himotoki.framework */,
-				1F8DF48D1BA5164F004B7D09 /* Result.framework */,
-				1F8DF48B1BA5164B004B7D09 /* APIKit.framework */,
-				1F8DF4891BA51641004B7D09 /* ReactiveCocoa.framework */,
+				1FE03ADB1BB79F1000D16C55 /* APIKit.framework */,
+				1FE03ADC1BB79F1000D16C55 /* Haneke.framework */,
+				1FE03ADD1BB79F1000D16C55 /* Himotoki.framework */,
+				1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */,
+				1FE03ADF1BB79F1000D16C55 /* Result.framework */,
 			);
 			name = Frameworks;
 			path = Shared;
@@ -228,6 +251,7 @@
 				48D9143A1B4FB4C400E70080 /* Sources */,
 				48D9143B1B4FB4C400E70080 /* Frameworks */,
 				48D9143C1B4FB4C400E70080 /* Resources */,
+				1FE03AEA1BB79F1000D16C55 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

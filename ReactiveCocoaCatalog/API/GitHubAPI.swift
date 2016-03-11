@@ -76,10 +76,10 @@ public final class GitHubAPI: API
             API.sendRequest(request) { result in
                 switch result {
                     case .Success(let response):
-                        sendNext(observer, response)
-                        sendCompleted(observer)
+                        observer.sendNext(response)
+                        observer.sendCompleted()
                     case .Failure(let error):
-                        sendError(observer, error)
+                        observer.sendFailed(error)
                 }
             }
         }

@@ -1,4 +1,4 @@
 github "meteochu/HanekeSwift" "f87220fccba7810955fe5392ebd492a5c9baf050"
 github "ikesyo/Himotoki" "a8854a7252c2c9aa8d016770173d1b29c0985813"
-github "antitypical/Result" "76f9a972ed61ff872b731460bc610c8acbfae58c"
-github "ReactiveCocoa/ReactiveCocoa" "8ebff4f192ad11dfc62c55e8151c235d005f390b"
+github "antitypical/Result" "1.0.2"
+github "ReactiveCocoa/ReactiveCocoa" "v4.0.1"

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Result
 import ReactiveCocoa
 
 private let MIN_PASSWORD_LENGTH = 4

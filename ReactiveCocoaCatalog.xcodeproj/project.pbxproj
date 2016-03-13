@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */; settings = {ASSET_TAGS = (); }; };
-		1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */; settings = {ASSET_TAGS = (); }; };
+		1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */; };
+		1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */; };
+		1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */; };
+		1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */; };
 		1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; };
 		1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADC1BB79F1000D16C55 /* Haneke.framework */; };
@@ -19,25 +21,25 @@
 		1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADF1BB79F1000D16C55 /* Result.framework */; };
 		1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADF1BB79F1000D16C55 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1FEE10A11BA9E440006E9335 /* LogSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE10A01BA9E440006E9335 /* LogSink.swift */; settings = {ASSET_TAGS = (); }; };
+		1FEE10A11BA9E440006E9335 /* LogSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE10A01BA9E440006E9335 /* LogSink.swift */; };
 		1FF369F51BA50BFD00A49E30 /* IncrementalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF369F41BA50BFD00A49E30 /* IncrementalSearchViewController.swift */; };
-		480F7B481BA9705100E10892 /* WhoToFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		480F7B481BA9705100E10892 /* WhoToFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */; };
 		48375AAA1B54B2F200BDA6F3 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */; };
 		48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */; };
 		486CF3301B53B34D0056E591 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CF32F1B53B34D0056E591 /* Catalog.swift */; };
-		487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */; settings = {ASSET_TAGS = (); }; };
-		487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */; };
+		487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */; };
 		48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D914431B4FB4C400E70080 /* AppDelegate.swift */; };
 		48D914461B4FB4C400E70080 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D914451B4FB4C400E70080 /* MasterViewController.swift */; };
 		48D9144B1B4FB4C400E70080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D914491B4FB4C400E70080 /* Main.storyboard */; };
 		48D9144D1B4FB4C400E70080 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48D9144C1B4FB4C400E70080 /* Images.xcassets */; };
 		48D914501B4FB4C400E70080 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48D9144E1B4FB4C400E70080 /* LaunchScreen.xib */; };
 		48D9145C1B4FB4C400E70080 /* ReactiveCocoaCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9145B1B4FB4C400E70080 /* ReactiveCocoaCatalogTests.swift */; };
-		48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63891BA92F5D007F1251 /* TextFieldViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		48EA638E1BA92F5D007F1251 /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA638A1BA92F5D007F1251 /* TextFieldViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63871BA92F5D007F1251 /* MultipleTextFieldViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		48EA63921BA938A5007F1251 /* MultipleTextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA63881BA92F5D007F1251 /* MultipleTextFieldViewController.xib */; settings = {ASSET_TAGS = (); }; };
-		48EA63941BA939A9007F1251 /* SignalProducer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63931BA939A9007F1251 /* SignalProducer+Ext.swift */; settings = {ASSET_TAGS = (); }; };
+		48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63891BA92F5D007F1251 /* TextFieldViewController.swift */; };
+		48EA638E1BA92F5D007F1251 /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA638A1BA92F5D007F1251 /* TextFieldViewController.xib */; };
+		48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63871BA92F5D007F1251 /* MultipleTextFieldViewController.swift */; };
+		48EA63921BA938A5007F1251 /* MultipleTextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA63881BA92F5D007F1251 /* MultipleTextFieldViewController.xib */; };
+		48EA63941BA939A9007F1251 /* SignalProducer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63931BA939A9007F1251 /* SignalProducer+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZundokoViewController.swift; sourceTree = "<group>"; };
+		1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZundokoViewController.xib; sourceTree = "<group>"; };
 		1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAPI.swift; sourceTree = "<group>"; };
 		1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Ext.swift"; sourceTree = "<group>"; };
 		1FE03ADB1BB79F1000D16C55 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +179,8 @@
 				1FF369F41BA50BFD00A49E30 /* IncrementalSearchViewController.swift */,
 				48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */,
 				48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */,
+				1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */,
+				1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 				48D9144B1B4FB4C400E70080 /* Main.storyboard in Resources */,
 				487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */,
 				48EA63921BA938A5007F1251 /* MultipleTextFieldViewController.xib in Resources */,
+				1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */,
 				48D914501B4FB4C400E70080 /* LaunchScreen.xib in Resources */,
 				48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */,
 				48D9144D1B4FB4C400E70080 /* Images.xcassets in Resources */,
@@ -357,6 +364,7 @@
 				48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */,
 				1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */,
 				1FEE10A11BA9E440006E9335 /* LogSink.swift in Sources */,
+				1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */,
 				48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
 				486CF3301B53B34D0056E591 /* Catalog.swift in Sources */,

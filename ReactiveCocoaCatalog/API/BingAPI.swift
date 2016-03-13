@@ -10,7 +10,7 @@ import Foundation
 import ReactiveCocoa
 import APIKit
 
-public protocol BingRequest: Request {}
+public protocol BingRequest: RequestType {}
 
 extension BingRequest
 {
@@ -65,14 +65,14 @@ public struct BingSearchResponse
     public let suggestions: [String]
 }
 
-public final class BingAPI: API
+public struct BingAPI
 {
     public static func searchProducer(query: String) -> SignalProducer<BingSearchResponse, APIError>
     {
         return SignalProducer { observer, disposable in
             let request = BingSearchRequest(query: query)
             
-            API.sendRequest(request) { result in
+            Session.sendRequest(request) { result in
                 switch result {
                     case .Success(let response):
                         observer.sendNext(response)

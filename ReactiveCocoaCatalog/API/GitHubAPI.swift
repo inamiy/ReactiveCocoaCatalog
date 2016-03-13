@@ -11,7 +11,7 @@ import ReactiveCocoa
 import APIKit
 import Himotoki
 
-public protocol GitHubRequest: Request {}
+public protocol GitHubRequest: RequestType {}
 
 extension GitHubRequest
 {
@@ -66,14 +66,14 @@ public struct GitHubUser: Decodable
     }
 }
 
-public final class GitHubAPI: API
+public struct GitHubAPI
 {
     public static func usersProducer(since: Int = Int(arc4random_uniform(500))) -> SignalProducer<[GitHubUser], APIError>
     {
         return SignalProducer { observer, disposable in
             let request = GitHubUsersRequest(since: since)
             
-            API.sendRequest(request) { result in
+            Session.sendRequest(request) { result in
                 switch result {
                     case .Success(let response):
                         observer.sendNext(response)

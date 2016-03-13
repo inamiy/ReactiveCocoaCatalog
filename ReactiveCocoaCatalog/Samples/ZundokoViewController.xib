@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZundokoViewController" customModule="ReactiveCocoaCatalog" customModuleProvider="target">
+            <connections>
+                <outlet property="textView" destination="yBf-Qt-ZpH" id="zib-hk-fcb"/>
+                <outlet property="view" destination="iN0-l3-epB" id="1cT-Cf-uzM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWX-Ya-9Hp">
+                    <rect key="frame" x="300" y="410" width="120" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="0M7-lo-k7g"/>
+                        <constraint firstAttribute="width" constant="120" id="qWd-EU-FsS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <state key="normal" title="Doko">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqq-lD-aON">
+                    <rect key="frame" x="180" y="410" width="120" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="Gzu-d7-uLF"/>
+                        <constraint firstAttribute="width" constant="120" id="v03-Gj-a8l"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <state key="normal" title="Zun">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yBf-Qt-ZpH">
+                    <rect key="frame" x="40" y="128" width="520" height="250"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="Cqi-Ws-fEQ"/>
+                    </constraints>
+                    <string key="text">Zun, Zun Zun, Zun Doko...
+＿人人 人人 人人＿
+＞   Ki-yo-shi!!!   ＜
+￣Y^Y^Y^Y^Y^Y￣</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nqq-lD-aON" firstAttribute="top" secondItem="yBf-Qt-ZpH" secondAttribute="bottom" constant="40" id="9KA-WB-Jn3"/>
+                <constraint firstItem="wWX-Ya-9Hp" firstAttribute="top" secondItem="nqq-lD-aON" secondAttribute="top" id="ARd-66-VP9"/>
+                <constraint firstItem="yBf-Qt-ZpH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="120" id="DSt-02-Ltt"/>
+                <constraint firstAttribute="trailing" secondItem="yBf-Qt-ZpH" secondAttribute="trailing" constant="40" id="dCv-bq-naz"/>
+                <constraint firstItem="nqq-lD-aON" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="-60" id="e0h-0c-ya0"/>
+                <constraint firstItem="yBf-Qt-ZpH" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="kez-5y-CRp"/>
+                <constraint firstItem="wWX-Ya-9Hp" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" constant="60" id="pB0-wC-UCK"/>
+                <constraint firstItem="yBf-Qt-ZpH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="yJO-dl-s9G"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+        </view>
+    </objects>
+</document>

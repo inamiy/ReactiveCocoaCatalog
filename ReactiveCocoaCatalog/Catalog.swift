@@ -42,6 +42,11 @@ struct Catalog
                 title: "Action",
                 description: "Action Example",
                 class_: ActionViewController.self
+            ),
+            Catalog(
+                title: "ZunDoko",
+                description: "Zun, Zun Zun, Zun Doko, Kiyoshi!",
+                class_: ZundokoViewController.self
             )
         ]
     }

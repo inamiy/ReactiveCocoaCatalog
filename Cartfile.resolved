@@ -1,5 +1,6 @@
-github "meteochu/HanekeSwift" "f87220fccba7810955fe5392ebd492a5c9baf050"
-github "ikesyo/Himotoki" "a8854a7252c2c9aa8d016770173d1b29c0985813"
+github "thoughtbot/Argo" "v2.3.0"
+github "thoughtbot/Curry" "v2.0.0"
+github "Haneke/HanekeSwift" "v0.10.1"
 github "antitypical/Result" "1.0.2"
 github "ishkawa/APIKit" "1.2.1"
 github "ReactiveCocoa/ReactiveCocoa" "v4.0.1"

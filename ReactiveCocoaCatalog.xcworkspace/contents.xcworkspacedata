@@ -8,13 +8,16 @@
          location = "group:Carthage/Checkouts/Result/Result.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Carthage/Checkouts/Curry/Curry.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Carthage/Checkouts/APIKit/APIKit.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Carthage/Checkouts/Himotoki/Himotoki.xcodeproj">
+         location = "group:Carthage/Checkouts/Argo/Argo.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Carthage/Checkouts/HanekeSwift/Haneke.xcodeproj">

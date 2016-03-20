@@ -7,9 +7,10 @@
 //
 
 import Foundation
+import Curry
 import ReactiveCocoa
 import APIKit
-import Himotoki
+import Argo
 
 public protocol GitHubRequest: RequestType {}
 
@@ -48,7 +49,7 @@ public struct GitHubUsersRequest: GitHubRequest
     public func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> [GitHubUser]?
     {
 //        print("response object = \(object)")
-        return decodeArray(object)
+        return decode(object)
     }
 }
 
@@ -56,13 +57,12 @@ public struct GitHubUser: Decodable
 {
     public let login: String
     public let avatarURL: NSURL
-    
-    public static func decode(e: Extractor) -> GitHubUser?
+
+    public static func decode(j: JSON) -> Decoded<GitHubUser>
     {
-        return build(self.init)(
-            e <| "login",
-            (e <| "avatar_url").flatMap { NSURL(string: $0) }
-        )
+        return curry(GitHubUser.init)
+            <^> j <| "login"
+            <*> (j <| "avatar_url").flatMap { .fromOptional(NSURL(string: $0)) }
     }
 }
 

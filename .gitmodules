@@ -1,9 +1,6 @@
 [submodule "Carthage/Checkouts/HanekeSwift"]
 	path = Carthage/Checkouts/HanekeSwift
-	url = https://github.com/meteochu/HanekeSwift.git
-[submodule "Carthage/Checkouts/Himotoki"]
-	path = Carthage/Checkouts/Himotoki
-	url = https://github.com/ikesyo/Himotoki.git
+	url = https://github.com/Haneke/HanekeSwift.git
 [submodule "Carthage/Checkouts/Result"]
 	path = Carthage/Checkouts/Result
 	url = https://github.com/antitypical/Result.git
@@ -13,3 +10,9 @@
 [submodule "Carthage/Checkouts/APIKit"]
 	path = Carthage/Checkouts/APIKit
 	url = https://github.com/ishkawa/APIKit.git
+[submodule "Carthage/Checkouts/Argo"]
+	path = Carthage/Checkouts/Argo
+	url = https://github.com/thoughtbot/Argo.git
+[submodule "Carthage/Checkouts/Curry"]
+	path = Carthage/Checkouts/Curry
+	url = https://github.com/thoughtbot/Curry.git

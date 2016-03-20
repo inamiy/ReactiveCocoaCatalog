@@ -9,7 +9,7 @@
 import UIKit
 import ReactiveCocoa
 import APIKit
-import Himotoki
+import Argo
 
 private let _reuseIdentifier = "reuseIdentifier"
 

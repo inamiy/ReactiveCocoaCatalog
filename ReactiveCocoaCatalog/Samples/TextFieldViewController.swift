@@ -22,7 +22,7 @@ class TextFieldViewController: UIViewController
         super.viewDidLoad()
         
         let textProducer = self.textField!.rac_textSignal().toSignalProducer()
-            .castErrorType(NoError)
+            .ignoreCastError(NoError)
         
         let labelProperty = DynamicProperty(object: self.label, keyPath: "text")
         let throttleLabelProperty = DynamicProperty(object: self.throttleLabel, keyPath: "text")

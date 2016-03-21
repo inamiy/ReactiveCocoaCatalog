@@ -40,8 +40,8 @@ class WhoToFollowViewController: UIViewController
             
         let fetchedUsersProducer = refreshProducer
             .beginWith("startup refresh")
-            .castErrorType(APIError)
-            .flatMap(.Merge) { _ in GitHubAPI.usersProducer() }
+            .ignoreCastError(APIError)
+            .flatMap(.Merge) { _ in _randomUsersProducer() }
         
         func bindButton(button: UIButton)
         {
@@ -49,7 +49,7 @@ class WhoToFollowViewController: UIViewController
                 .beginWith("startup userButton")
             
             combineLatest(buttonTapProducer, fetchedUsersProducer.mapError { $0 as NSError })
-                .map { _, users -> GitHubUser? in
+                .map { _, users -> GitHubAPI.User? in
                     let randomIndex = Int(arc4random_uniform(UInt32(users.count)))
                     return users[randomIndex]
                 }
@@ -72,4 +72,10 @@ class WhoToFollowViewController: UIViewController
         bindButton(self.user3Button!)
         
     }
+}
+
+private func _randomUsersProducer(since: Int = Int(arc4random_uniform(500))) -> SignalProducer<[GitHubAPI.User], APIError>
+{
+    let request = GitHubAPI.UsersRequest(since: since)
+    return Session.responseProducer(request)
 }

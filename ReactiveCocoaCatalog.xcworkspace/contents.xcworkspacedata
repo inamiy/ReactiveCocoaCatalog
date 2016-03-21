@@ -20,6 +20,9 @@
          location = "group:Carthage/Checkouts/Argo/Argo.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Carthage/Checkouts/WebLinking.swift/WebLinking.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Carthage/Checkouts/HanekeSwift/Haneke.xcodeproj">
       </FileRef>
    </Group>

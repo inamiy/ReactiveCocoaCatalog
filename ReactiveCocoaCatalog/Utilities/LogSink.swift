@@ -8,9 +8,16 @@
 
 import Foundation
 
+private let _maxLogCharacterCount = 200
+
 func logSink<T>(name: String) -> T -> ()
 {
     return { arg in
-        print("[\(name)] \(arg)")
+        var argChars = "\(arg)".characters
+        argChars = argChars.prefix(_maxLogCharacterCount)
+        if argChars.count == _maxLogCharacterCount {
+            argChars.append("…")
+        }
+        print("  🚦[\(name)] \(String(argChars))")
     }
 }

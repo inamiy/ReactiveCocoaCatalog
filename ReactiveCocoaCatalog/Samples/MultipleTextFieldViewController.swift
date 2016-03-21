@@ -49,7 +49,7 @@ class MultipleTextFieldViewController: UIViewController
         let password2Producer = self.password2TextField!.rac_textSignal().toSignalProducer().map { $0 as? String ?? "" }
         
         let combinedProducer = combineLatest(usernameProducer, emailProducer, passwordProducer, password2Producer)
-            .castErrorType(NoError)
+            .ignoreCastError(NoError)
         
         // logging
         combinedProducer.startWithNext { print("combinedProducer = \($0)") }

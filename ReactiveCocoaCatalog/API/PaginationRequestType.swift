@@ -11,7 +11,7 @@ import Argo
 
 protocol PaginationRequestType: RequestType
 {
-    typealias Response: PaginationResponseType
+    associatedtype Response: PaginationResponseType
 
     var page: Int { get }
 
@@ -28,7 +28,7 @@ struct PaginationResponse<Item: Decodable>: PaginationResponseType
 
 protocol PaginationResponseType
 {
-    typealias Item: Decodable
+    associatedtype Item: Decodable
 
     var items: [Item] { get }
 

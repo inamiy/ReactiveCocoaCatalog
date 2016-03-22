@@ -39,7 +39,7 @@ final class PaginationViewModel<Req: PaginationRequestType>
 
     private func _setupSignals(nextPage nextPage: Int?)
     {
-        print(__FUNCTION__, nextPage)
+        print(#function, nextPage)
 
         let refreshRequest = refreshPipe.0
             .take(1)

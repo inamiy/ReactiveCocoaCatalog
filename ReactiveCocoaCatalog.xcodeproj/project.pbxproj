@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F12CAD01C9F95D6007D7F51 /* WebLinking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */; };
+		1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F20D65F1C9F90CC00DC0153 /* PaginationRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */; };
+		1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863571C9F76C6004627D3 /* PaginationViewController.swift */; };
+		1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */; };
+		1F28635C1C9F85DA004627D3 /* APIKit+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */; };
 		1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */; };
 		1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */; };
 		1F7987E41C9F6AE6003AFE72 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7987E31C9F6AE6003AFE72 /* Argo.framework */; };
@@ -15,6 +21,7 @@
 		1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7987F31C9F6F5F003AFE72 /* Curry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */; };
 		1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */; };
+		1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */; };
 		1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; };
 		1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADC1BB79F1000D16C55 /* Haneke.framework */; };
@@ -65,6 +72,7 @@
 				1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */,
 				1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */,
 				1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */,
+				1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */,
 				1F7987E51C9F6AE6003AFE72 /* Argo.framework in Embed Frameworks */,
 				1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */,
 			);
@@ -74,12 +82,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebLinking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationRequestType.swift; sourceTree = "<group>"; };
+		1F2863571C9F76C6004627D3 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
+		1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewModel.swift; sourceTree = "<group>"; };
+		1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIKit+Ext.swift"; sourceTree = "<group>"; };
 		1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZundokoViewController.swift; sourceTree = "<group>"; };
 		1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZundokoViewController.xib; sourceTree = "<group>"; };
 		1F7987E31C9F6AE6003AFE72 /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Argo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F7987F31C9F6F5F003AFE72 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAPI.swift; sourceTree = "<group>"; };
 		1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Ext.swift"; sourceTree = "<group>"; };
+		1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PaginationViewController.storyboard; sourceTree = "<group>"; };
 		1FE03ADB1BB79F1000D16C55 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE03ADC1BB79F1000D16C55 /* Haneke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Haneke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +132,7 @@
 				1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */,
 				1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */,
 				1FE03AE61BB79F1000D16C55 /* ReactiveCocoa.framework in Frameworks */,
+				1F12CAD01C9F95D6007D7F51 /* WebLinking.framework in Frameworks */,
 				1F7987E41C9F6AE6003AFE72 /* Argo.framework in Frameworks */,
 				1F7987F41C9F6F5F003AFE72 /* Curry.framework in Frameworks */,
 			);
@@ -136,6 +151,7 @@
 		1F8517E91BA5176C00C1FCB0 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */,
 				1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */,
 				487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */,
 			);
@@ -145,6 +161,7 @@
 		1F8517F81BA52E3C00C1FCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */,
 				1F7987F31C9F6F5F003AFE72 /* Curry.framework */,
 				1F7987E31C9F6AE6003AFE72 /* Argo.framework */,
 				1FE03ADB1BB79F1000D16C55 /* APIKit.framework */,
@@ -160,9 +177,73 @@
 			isa = PBXGroup;
 			children = (
 				48EA63931BA939A9007F1251 /* SignalProducer+Ext.swift */,
+				1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */,
 				1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1FC7EA231C9FE88E00C6B76C /* Pagination */ = {
+			isa = PBXGroup;
+			children = (
+				1F2863571C9F76C6004627D3 /* PaginationViewController.swift */,
+				1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */,
+				1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */,
+			);
+			name = Pagination;
+			sourceTree = "<group>";
+		};
+		1FC7EA241C9FE89500C6B76C /* Zundoko */ = {
+			isa = PBXGroup;
+			children = (
+				1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */,
+				1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */,
+			);
+			name = Zundoko;
+			sourceTree = "<group>";
+		};
+		1FC7EA251C9FE89B00C6B76C /* Action */ = {
+			isa = PBXGroup;
+			children = (
+				48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */,
+				48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */,
+			);
+			name = Action;
+			sourceTree = "<group>";
+		};
+		1FC7EA261C9FE89F00C6B76C /* Incremental Search */ = {
+			isa = PBXGroup;
+			children = (
+				1FF369F41BA50BFD00A49E30 /* IncrementalSearchViewController.swift */,
+			);
+			name = "Incremental Search";
+			sourceTree = "<group>";
+		};
+		1FC7EA271C9FE8A600C6B76C /* Who to Follow */ = {
+			isa = PBXGroup;
+			children = (
+				487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */,
+				487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */,
+			);
+			name = "Who to Follow";
+			sourceTree = "<group>";
+		};
+		1FC7EA281C9FE8AE00C6B76C /* Multiple TextField (login) */ = {
+			isa = PBXGroup;
+			children = (
+				48EA63871BA92F5D007F1251 /* MultipleTextFieldViewController.swift */,
+				48EA63881BA92F5D007F1251 /* MultipleTextFieldViewController.xib */,
+			);
+			name = "Multiple TextField (login)";
+			sourceTree = "<group>";
+		};
+		1FC7EA291C9FE8BD00C6B76C /* TextField (throttle) */ = {
+			isa = PBXGroup;
+			children = (
+				48EA63891BA92F5D007F1251 /* TextFieldViewController.swift */,
+				48EA638A1BA92F5D007F1251 /* TextFieldViewController.xib */,
+			);
+			name = "TextField (throttle)";
 			sourceTree = "<group>";
 		};
 		1FEE109F1BA9E440006E9335 /* Utilities */ = {
@@ -176,17 +257,13 @@
 		486CF3311B53B4710056E591 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
-				48EA63891BA92F5D007F1251 /* TextFieldViewController.swift */,
-				48EA638A1BA92F5D007F1251 /* TextFieldViewController.xib */,
-				48EA63871BA92F5D007F1251 /* MultipleTextFieldViewController.swift */,
-				48EA63881BA92F5D007F1251 /* MultipleTextFieldViewController.xib */,
-				487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */,
-				487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */,
-				1FF369F41BA50BFD00A49E30 /* IncrementalSearchViewController.swift */,
-				48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */,
-				48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */,
-				1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */,
-				1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */,
+				1FC7EA291C9FE8BD00C6B76C /* TextField (throttle) */,
+				1FC7EA281C9FE8AE00C6B76C /* Multiple TextField (login) */,
+				1FC7EA271C9FE8A600C6B76C /* Who to Follow */,
+				1FC7EA261C9FE89F00C6B76C /* Incremental Search */,
+				1FC7EA251C9FE89B00C6B76C /* Action */,
+				1FC7EA241C9FE89500C6B76C /* Zundoko */,
+				1FC7EA231C9FE88E00C6B76C /* Pagination */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -339,6 +416,7 @@
 				48D9144B1B4FB4C400E70080 /* Main.storyboard in Resources */,
 				487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */,
 				48EA63921BA938A5007F1251 /* MultipleTextFieldViewController.xib in Resources */,
+				1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */,
 				1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */,
 				48D914501B4FB4C400E70080 /* LaunchScreen.xib in Resources */,
 				48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */,
@@ -362,6 +440,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				48D914461B4FB4C400E70080 /* MasterViewController.swift in Sources */,
+				1F20D65F1C9F90CC00DC0153 /* PaginationRequestType.swift in Sources */,
+				1F28635C1C9F85DA004627D3 /* APIKit+Ext.swift in Sources */,
 				48375AAA1B54B2F200BDA6F3 /* ActionViewController.swift in Sources */,
 				1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */,
 				487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */,
@@ -369,7 +449,9 @@
 				1FF369F51BA50BFD00A49E30 /* IncrementalSearchViewController.swift in Sources */,
 				48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */,
 				1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */,
+				1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */,
 				1FEE10A11BA9E440006E9335 /* LogSink.swift in Sources */,
+				1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */,
 				1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */,
 				48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
@@ -506,6 +588,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ReactiveCocoaCatalog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.inamiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -518,6 +601,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ReactiveCocoaCatalog/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.inamiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

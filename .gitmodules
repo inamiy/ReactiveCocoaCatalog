@@ -16,3 +16,6 @@
 [submodule "Carthage/Checkouts/Curry"]
 	path = Carthage/Checkouts/Curry
 	url = https://github.com/thoughtbot/Curry.git
+[submodule "Carthage/Checkouts/WebLinking.swift"]
+	path = Carthage/Checkouts/WebLinking.swift
+	url = https://github.com/kylef/WebLinking.swift.git

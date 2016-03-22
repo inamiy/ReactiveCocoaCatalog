@@ -11,7 +11,7 @@ import ReactiveCocoa
 import APIKit
 import Argo
 
-private let _reuseIdentifier = "reuseIdentifier"
+private let _cellIdentifier = "IncrementalSearchCellIdentifier"
 
 class IncrementalSearchViewController: UITableViewController, UISearchBarDelegate
 {
@@ -27,7 +27,7 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: _reuseIdentifier)
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: _cellIdentifier)
         self.tableView.tableHeaderView = searchController.searchBar
         
         // workaround for iOS8
@@ -39,7 +39,7 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
         self.searchController = searchController
         
         let producer = searchController.searchBar.rac_textSignal.toSignalProducer()
-            .castErrorType(APIError)
+            .ignoreCastError(APIError)
             .throttle(0.15, onScheduler: QueueScheduler.mainQueueScheduler)
             .map { value -> SignalProducer<BingSearchResponse, APIError> in
                 if let str = value as? String {
@@ -74,7 +74,7 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(_reuseIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier(_cellIdentifier, forIndexPath: indexPath)
         
         cell.textLabel?.text = self.bingSearchResponse?.suggestions[indexPath.row]
         

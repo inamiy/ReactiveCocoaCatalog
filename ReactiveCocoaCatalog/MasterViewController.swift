@@ -69,7 +69,13 @@ class MasterViewController: UITableViewController
     {
         let catalog = self.catalogs[index]
         
-        let newVC: UIViewController = catalog.class_.init()
+        let newVC: UIViewController
+        if let storyboard = catalog.storyboard {
+            newVC = storyboard.instantiate()
+        }
+        else {
+            newVC = catalog.class_.init()
+        }
         let newNavC = UINavigationController(rootViewController: newVC)
         self.splitViewController?.showDetailViewController(newNavC, sender: self)
         

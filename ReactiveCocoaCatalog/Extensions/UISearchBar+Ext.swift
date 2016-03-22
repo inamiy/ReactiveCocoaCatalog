@@ -20,7 +20,7 @@ extension UISearchBar: UISearchBarDelegate
         if signal == nil,
             let delegate = self.delegate as? NSObject
         {
-            signal = delegate.rac_signalForSelector("searchBar:textDidChange:", fromProtocol: UISearchBarDelegate.self)
+            signal = delegate.rac_signalForSelector(#selector(UISearchBarDelegate.searchBar(_:textDidChange:)), fromProtocol: UISearchBarDelegate.self)
                 .map { value in
                     let tuple = value as! RACTuple
                     return tuple.second

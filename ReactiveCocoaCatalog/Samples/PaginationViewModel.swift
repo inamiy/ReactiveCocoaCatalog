@@ -17,10 +17,14 @@ final class PaginationViewModel<Req: PaginationRequestType>
     let refreshPipe = Signal<(), NoError>.pipe()
     let loadNextPipe = Signal<(), NoError>.pipe()
 
-    let items = MutableProperty<[Req.Response.Item]>([])
+    let items: AnyProperty<[Req.Response.Item]>
+    private let _items = MutableProperty<[Req.Response.Item]>([])
 
-    let hasNextPage = MutableProperty<Bool>(false)
-    let loading = MutableProperty<Bool>(false)
+    let lastLoaded: AnyProperty<(page: Int, hasNext: Bool)>
+    private let _lastLoaded = MutableProperty<(page: Int, hasNext: Bool)>(page: 0, hasNext: true)
+
+    let loading: AnyProperty<Bool>
+    private let _loading = MutableProperty(false)
 
     let paginationRequest: Req
 
@@ -28,7 +32,11 @@ final class PaginationViewModel<Req: PaginationRequestType>
     {
         self.paginationRequest = paginationRequest
 
-        self._setupSignals(nextPage: nil)
+        self.items = AnyProperty(self._items)
+        self.lastLoaded = AnyProperty(self._lastLoaded)
+        self.loading = AnyProperty(self._loading)
+
+        self._setupSignals()
     }
 
     deinit
@@ -37,21 +45,27 @@ final class PaginationViewModel<Req: PaginationRequestType>
         print("\n", "[deinit] \(self) \(addr)", "\n")
     }
 
-    private func _setupSignals(nextPage nextPage: Int?)
+    private func _setupSignals()
     {
-        print(#function, nextPage)
+        print(#function)
 
         let refreshRequest = refreshPipe.0
-            .take(1)
-            .on(next: { print("refresh -> requestWithPage(1)") })
-            .map { self.paginationRequest.requestWithPage(1) }
+            .sampleFrom(self.loading.producer)
+            .map { $1 }
+            .filter { !$0 }
+            .map { _ in self.paginationRequest.requestWithPage(1) }
+            .on(next: { _ in print("refresh -> requestWithPage(1)") })
 
         let nextPageRequest = loadNextPipe.0
-            .take(1)
-            .on(next: { print("loadNext -> requestWithPage(\(nextPage))") })
-            .flatMap(.Merge) { _ -> SignalProducer<Req, NoError> in
-                if let nextPage = nextPage {
-                    return .init(value: self.paginationRequest.requestWithPage(nextPage))
+            .sampleFrom(self.lastLoaded.producer)
+            .map { $1 }
+            .sampleFrom(self.loading.producer)
+            .map { ($0.0, $0.1, $1) }
+            .filter { !$2 }
+            .flatMap(.Merge) { page, hasNext, loading -> SignalProducer<Req, NoError> in
+                if hasNext {
+                    return SignalProducer(value: self.paginationRequest.requestWithPage(page + 1))
+                        .on(next: { _ in print("loadNext -> requestWithPage(\(page + 1))") })
                 }
                 else {
                     return .empty
@@ -59,7 +73,6 @@ final class PaginationViewModel<Req: PaginationRequestType>
             }
 
         let request = Signal<Req, NoError>.merge([refreshRequest, nextPageRequest])
-            .take(1)
             .on(event: logSink("request"))
 
         let response = request
@@ -67,35 +80,29 @@ final class PaginationViewModel<Req: PaginationRequestType>
             .flatMap(.Merge) { Session.responseProducer($0) }
             .on(event: logSink("response"))
 
-        self.loading <~ Signal<Bool, NoError>.merge([
+        self._loading <~ Signal<Bool, NoError>.merge([
             request.map { _ in true },
             response
                 .map { _ in false }
-                .flatMapError { _ in SignalProducer<Bool, NoError>(value: false) }
+                .flatMapError { _ in .init(value: false) }
         ])
             .on(event: logSink("loading"))
 
-        self.items <~ refreshPipe.0.map { [] }
+        self._items <~ refreshPipe.0.map { [] }
 
-        self.items <~ combineLatest(
-            self.items.producer,
-            SignalProducer(signal: response.ignoreCastError(NoError))
-        )
-            .map { (repositories, response: Req.Response) -> [Req.Response.Item] in
+        self._items <~ response
+            .ignoreCastError(NoError)
+            .sampleFrom(self._items.producer)
+            .map { (response: Req.Response, repositories) -> [Req.Response.Item] in
                 return response.hasPreviousPage
                     ? repositories + response.items
                     : response.items
             }
-            .take(1)
-            .observeOn(QueueScheduler.mainQueueScheduler) // avoid NSLock deadlock
-//            .on(event: logSink("items"))
 
-        self.hasNextPage <~ response
-            .map { $0.hasNextPage }
-            .ignoreCastError(NoError)
+        self._lastLoaded <~ zip(request, response.errorToNilValue())
+            .map { req, resOpt in resOpt.map { (req.page, $0.hasNextPage) } }
+            .ignoreNil()
+            .on(event: logSink("_lastLoaded"))
 
-        response.observeNext { [weak self] response in
-            self?._setupSignals(nextPage: response.nextPage)
-        }
     }
 }

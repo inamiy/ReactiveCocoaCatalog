@@ -41,11 +41,12 @@ class PaginationViewController: UITableViewController
         self.racc_hookSelector(#selector(viewWillAppear(_:)))
             .start(self.viewModel.refreshPipe.1)
 
-        let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: #selector(refresh))
+        let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: nil)
+        refreshButtonItem.rac_command = triggerCommand()
         self.navigationItem.rightBarButtonItem = refreshButtonItem
 
-        refreshButtonItem
-            .racc_hookSelector(#selector(refresh))
+        refreshButtonItem.rac_command.executionSignals.toSignalProducer()
+            .triggerize()
             .start(self.viewModel.refreshPipe.1)
 
         DynamicProperty(object: self.tableView, keyPath: "contentOffset").signal
@@ -68,11 +69,6 @@ class PaginationViewController: UITableViewController
             .startWithNext { [weak self] repositories in
                 self?.tableView.reloadData()
             }
-    }
-
-    func refresh()
-    {
-        // do nothing (just for suppressing Swift 2.2 compiler error which `#selector(...)` now checks method existence statically)
     }
 }
 

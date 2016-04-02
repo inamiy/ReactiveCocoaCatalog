@@ -103,3 +103,8 @@ extension SignalProducer
         return SignalProducer<SignalProducer<Value, Error>, Error>(values: [self, other]).flatten(.Merge)
     }
 }
+
+func triggerCommand() -> RACCommand
+{
+    return toRACCommand(Action<AnyObject?, AnyObject?, NoError> { _ in .init(value: nil) })
+}

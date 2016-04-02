@@ -42,7 +42,7 @@ class PaginationViewController: UITableViewController
             .start(self.viewModel.refreshPipe.1)
 
         let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: nil)
-        refreshButtonItem.rac_command = triggerCommand()
+        refreshButtonItem.rac_command = RACCommand.triggerCommand()
         self.navigationItem.rightBarButtonItem = refreshButtonItem
 
         refreshButtonItem.rac_command.executionSignals.toSignalProducer()

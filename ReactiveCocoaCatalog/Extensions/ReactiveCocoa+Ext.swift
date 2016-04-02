@@ -1,5 +1,5 @@
 //
-//  SignalProducer+Ext.swift
+//  ReactiveCocoa+Ext.swift
 //  ReactiveCocoaCatalog
 //
 //  Created by Yasuhiro Inami on 2015-09-16.
@@ -9,15 +9,7 @@
 import Result
 import ReactiveCocoa
 
-extension NSObject
-{
-    /// Easy selector hook, discarding value and error.
-    public func racc_hookSelector(selector: Selector) -> SignalProducer<(), NoError>
-    {
-        return self.rac_signalForSelector(selector).toSignalProducer()
-            .triggerize()
-    }
-}
+// MARK: Swift
 
 extension Signal
 {
@@ -104,7 +96,22 @@ extension SignalProducer
     }
 }
 
-func triggerCommand() -> RACCommand
+// MARK: Foundation
+
+extension RACCommand
 {
-    return toRACCommand(Action<AnyObject?, AnyObject?, NoError> { _ in .init(value: nil) })
+    public static func triggerCommand() -> RACCommand
+    {
+        return toRACCommand(Action<AnyObject?, AnyObject?, NoError> { _ in .init(value: nil) })
+    }
+}
+
+extension NSObject
+{
+    /// Easy selector hook, discarding value and error.
+    public func racc_hookSelector(selector: Selector) -> SignalProducer<(), NoError>
+    {
+        return self.rac_signalForSelector(selector).toSignalProducer()
+            .triggerize()
+    }
 }

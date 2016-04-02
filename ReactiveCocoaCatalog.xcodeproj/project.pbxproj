@@ -48,7 +48,7 @@
 		48EA638E1BA92F5D007F1251 /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA638A1BA92F5D007F1251 /* TextFieldViewController.xib */; };
 		48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63871BA92F5D007F1251 /* MultipleTextFieldViewController.swift */; };
 		48EA63921BA938A5007F1251 /* MultipleTextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA63881BA92F5D007F1251 /* MultipleTextFieldViewController.xib */; };
-		48EA63941BA939A9007F1251 /* SignalProducer+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63931BA939A9007F1251 /* SignalProducer+Ext.swift */; };
+		48EA63941BA939A9007F1251 /* ReactiveCocoa+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63931BA939A9007F1251 /* ReactiveCocoa+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,7 +120,7 @@
 		48EA63881BA92F5D007F1251 /* MultipleTextFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleTextFieldViewController.xib; sourceTree = "<group>"; };
 		48EA63891BA92F5D007F1251 /* TextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldViewController.swift; sourceTree = "<group>"; };
 		48EA638A1BA92F5D007F1251 /* TextFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldViewController.xib; sourceTree = "<group>"; };
-		48EA63931BA939A9007F1251 /* SignalProducer+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SignalProducer+Ext.swift"; sourceTree = "<group>"; };
+		48EA63931BA939A9007F1251 /* ReactiveCocoa+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReactiveCocoa+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +176,7 @@
 		1F8517F91BA52E8100C1FCB0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				48EA63931BA939A9007F1251 /* SignalProducer+Ext.swift */,
+				48EA63931BA939A9007F1251 /* ReactiveCocoa+Ext.swift */,
 				1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */,
 				1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */,
 			);
@@ -456,7 +456,7 @@
 				48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
 				486CF3301B53B34D0056E591 /* Catalog.swift in Sources */,
-				48EA63941BA939A9007F1251 /* SignalProducer+Ext.swift in Sources */,
+				48EA63941BA939A9007F1251 /* ReactiveCocoa+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

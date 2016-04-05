@@ -56,9 +56,27 @@ struct Catalog
                 storyboard: Storyboard(
                     name: "PaginationViewController",
                     identifier: "PaginationViewController"
+                )
+            ),
+            Catalog(
+                title: "ReactiveArray (TableView)",
+                description: "ReactiveArray + TableView",
+                class_: ReactiveTableViewController.self,
+                storyboard: Storyboard(
+                    name: "ReactiveArray",
+                    identifier: "ReactiveTableViewController"
+                )
+            ),
+            Catalog(
+                title: "ReactiveArray (CollectionView)",
+                description: "ReactiveArray + CollectionView",
+                class_: ReactiveCollectionViewController.self,
+                storyboard: Storyboard(
+                    name: "ReactiveArray",
+                    identifier: "ReactiveCollectionViewController"
                 ),
                 selected: true
-            )
+            ),
         ]
     }
     

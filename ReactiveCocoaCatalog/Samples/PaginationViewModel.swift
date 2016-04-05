@@ -39,11 +39,7 @@ final class PaginationViewModel<Req: PaginationRequestType>
         self._setupSignals()
     }
 
-    deinit
-    {
-        let addr = String(format: "%p", unsafeAddressOf(self))
-        print("\n", "[deinit] \(self) \(addr)", "\n")
-    }
+    deinit { logDeinit(self) }
 
     private func _setupSignals()
     {

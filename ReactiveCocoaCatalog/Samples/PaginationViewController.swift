@@ -28,11 +28,7 @@ class PaginationViewController: UITableViewController
         paginationRequest: GitHubAPI.SearchRepositoriesRequest(query: "Swift")
     )
 
-    deinit
-    {
-        let addr = String(format: "%p", unsafeAddressOf(self))
-        print("\n", "[deinit] \(self) \(addr)", "\n")
-    }
+    deinit { logDeinit(self) }
 
     override func viewDidLoad()
     {

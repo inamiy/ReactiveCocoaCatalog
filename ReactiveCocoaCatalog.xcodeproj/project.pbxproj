@@ -13,6 +13,7 @@
 		1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863571C9F76C6004627D3 /* PaginationViewController.swift */; };
 		1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */; };
 		1F28635C1C9F85DA004627D3 /* APIKit+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */; };
+		1F665A901CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665A8F1CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift */; };
 		1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */; };
 		1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */; };
 		1F7987E41C9F6AE6003AFE72 /* Argo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7987E31C9F6AE6003AFE72 /* Argo.framework */; };
@@ -21,7 +22,10 @@
 		1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7987F31C9F6F5F003AFE72 /* Curry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */; };
 		1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */; };
+		1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */; };
 		1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */; };
+		1FD70D471CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */; };
+		1FD70D4B1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */; };
 		1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; };
 		1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADC1BB79F1000D16C55 /* Haneke.framework */; };
@@ -30,9 +34,15 @@
 		1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADF1BB79F1000D16C55 /* Result.framework */; };
 		1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADF1BB79F1000D16C55 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1FEE10A11BA9E440006E9335 /* LogSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE10A01BA9E440006E9335 /* LogSink.swift */; };
+		1FE0DF7B1CAFF01100893311 /* UIBarButtonItem+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE0DF7A1CAFF01100893311 /* UIBarButtonItem+Ext.swift */; };
+		1FE0DF7D1CAFF55000893311 /* ReactiveArrayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE0DF7C1CAFF55000893311 /* ReactiveArrayViewModel.swift */; };
+		1FEE10A11BA9E440006E9335 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEE10A01BA9E440006E9335 /* Helpers.swift */; };
 		1FF369F51BA50BFD00A49E30 /* IncrementalSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF369F41BA50BFD00A49E30 /* IncrementalSearchViewController.swift */; };
 		480F7B481BA9705100E10892 /* WhoToFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */; };
+		48258F621CAA8673003BB383 /* ReactiveArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48258F611CAA8673003BB383 /* ReactiveArray.framework */; };
+		48258F631CAA8673003BB383 /* ReactiveArray.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48258F611CAA8673003BB383 /* ReactiveArray.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		48258F651CAA8BCC003BB383 /* ReactiveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48258F641CAA8BCC003BB383 /* ReactiveTableViewController.swift */; };
+		48258F711CAA9669003BB383 /* ReactiveArray.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48258F701CAA9669003BB383 /* ReactiveArray.storyboard */; };
 		48375AAA1B54B2F200BDA6F3 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */; };
 		48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */; };
 		486CF3301B53B34D0056E591 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CF32F1B53B34D0056E591 /* Catalog.swift */; };
@@ -73,6 +83,7 @@
 				1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */,
 				1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */,
 				1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */,
+				48258F631CAA8673003BB383 /* ReactiveArray.framework in Embed Frameworks */,
 				1F7987E51C9F6AE6003AFE72 /* Argo.framework in Embed Frameworks */,
 				1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */,
 			);
@@ -87,19 +98,28 @@
 		1F2863571C9F76C6004627D3 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewModel.swift; sourceTree = "<group>"; };
 		1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIKit+Ext.swift"; sourceTree = "<group>"; };
+		1F665A8F1CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveDataSourceType.swift; sourceTree = "<group>"; };
 		1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZundokoViewController.swift; sourceTree = "<group>"; };
 		1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZundokoViewController.xib; sourceTree = "<group>"; };
 		1F7987E31C9F6AE6003AFE72 /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Argo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F7987F31C9F6F5F003AFE72 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAPI.swift; sourceTree = "<group>"; };
 		1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Ext.swift"; sourceTree = "<group>"; };
+		1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewType.swift; sourceTree = "<group>"; };
 		1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PaginationViewController.storyboard; sourceTree = "<group>"; };
+		1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCollectionViewController.swift; sourceTree = "<group>"; };
+		1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveArrayViewControllerType.swift; sourceTree = "<group>"; };
 		1FE03ADB1BB79F1000D16C55 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE03ADC1BB79F1000D16C55 /* Haneke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Haneke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE03ADF1BB79F1000D16C55 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1FEE10A01BA9E440006E9335 /* LogSink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogSink.swift; sourceTree = "<group>"; };
+		1FE0DF7A1CAFF01100893311 /* UIBarButtonItem+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Ext.swift"; sourceTree = "<group>"; };
+		1FE0DF7C1CAFF55000893311 /* ReactiveArrayViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveArrayViewModel.swift; sourceTree = "<group>"; };
+		1FEE10A01BA9E440006E9335 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		1FF369F41BA50BFD00A49E30 /* IncrementalSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IncrementalSearchViewController.swift; sourceTree = "<group>"; };
+		48258F611CAA8673003BB383 /* ReactiveArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveArray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		48258F641CAA8BCC003BB383 /* ReactiveTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveTableViewController.swift; sourceTree = "<group>"; };
+		48258F701CAA9669003BB383 /* ReactiveArray.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReactiveArray.storyboard; sourceTree = "<group>"; };
 		48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionViewController.xib; sourceTree = "<group>"; };
 		486CF32F1B53B34D0056E591 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
@@ -133,6 +153,7 @@
 				1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */,
 				1FE03AE61BB79F1000D16C55 /* ReactiveCocoa.framework in Frameworks */,
 				1F12CAD01C9F95D6007D7F51 /* WebLinking.framework in Frameworks */,
+				48258F621CAA8673003BB383 /* ReactiveArray.framework in Frameworks */,
 				1F7987E41C9F6AE6003AFE72 /* Argo.framework in Frameworks */,
 				1F7987F41C9F6F5F003AFE72 /* Curry.framework in Frameworks */,
 			);
@@ -161,6 +182,7 @@
 		1F8517F81BA52E3C00C1FCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48258F611CAA8673003BB383 /* ReactiveArray.framework */,
 				1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */,
 				1F7987F31C9F6F5F003AFE72 /* Curry.framework */,
 				1F7987E31C9F6AE6003AFE72 /* Argo.framework */,
@@ -179,6 +201,7 @@
 				48EA63931BA939A9007F1251 /* ReactiveCocoa+Ext.swift */,
 				1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */,
 				1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */,
+				1FE0DF7A1CAFF01100893311 /* UIBarButtonItem+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -249,9 +272,23 @@
 		1FEE109F1BA9E440006E9335 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				1FEE10A01BA9E440006E9335 /* LogSink.swift */,
+				1FEE10A01BA9E440006E9335 /* Helpers.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		48258F6E1CAA8DF0003BB383 /* ReactiveArray */ = {
+			isa = PBXGroup;
+			children = (
+				48258F641CAA8BCC003BB383 /* ReactiveTableViewController.swift */,
+				1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */,
+				1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */,
+				48258F701CAA9669003BB383 /* ReactiveArray.storyboard */,
+				1FE0DF7C1CAFF55000893311 /* ReactiveArrayViewModel.swift */,
+				1F665A8F1CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift */,
+				1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */,
+			);
+			name = ReactiveArray;
 			sourceTree = "<group>";
 		};
 		486CF3311B53B4710056E591 /* Samples */ = {
@@ -264,6 +301,7 @@
 				1FC7EA251C9FE89B00C6B76C /* Action */,
 				1FC7EA241C9FE89500C6B76C /* Zundoko */,
 				1FC7EA231C9FE88E00C6B76C /* Pagination */,
+				48258F6E1CAA8DF0003BB383 /* ReactiveArray */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -421,6 +459,7 @@
 				48D914501B4FB4C400E70080 /* LaunchScreen.xib in Resources */,
 				48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */,
 				48D9144D1B4FB4C400E70080 /* Images.xcassets in Resources */,
+				48258F711CAA9669003BB383 /* ReactiveArray.storyboard in Resources */,
 				48EA638E1BA92F5D007F1251 /* TextFieldViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,15 +486,22 @@
 				487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */,
 				480F7B481BA9705100E10892 /* WhoToFollowViewController.swift in Sources */,
 				1FF369F51BA50BFD00A49E30 /* IncrementalSearchViewController.swift in Sources */,
+				48258F651CAA8BCC003BB383 /* ReactiveTableViewController.swift in Sources */,
 				48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */,
 				1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */,
 				1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */,
-				1FEE10A11BA9E440006E9335 /* LogSink.swift in Sources */,
+				1FEE10A11BA9E440006E9335 /* Helpers.swift in Sources */,
 				1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */,
 				1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */,
 				48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */,
+				1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
+				1FE0DF7D1CAFF55000893311 /* ReactiveArrayViewModel.swift in Sources */,
+				1FE0DF7B1CAFF01100893311 /* UIBarButtonItem+Ext.swift in Sources */,
+				1FD70D4B1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift in Sources */,
+				1F665A901CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift in Sources */,
 				486CF3301B53B34D0056E591 /* Catalog.swift in Sources */,
+				1FD70D471CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift in Sources */,
 				48EA63941BA939A9007F1251 /* ReactiveCocoa+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

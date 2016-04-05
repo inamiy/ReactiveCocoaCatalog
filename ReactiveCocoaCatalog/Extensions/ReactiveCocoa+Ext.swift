@@ -96,6 +96,26 @@ extension SignalProducer
     }
 }
 
+// MARK: GCD
+
+public func timer(interval: NSTimeInterval) -> SignalProducer<NSDate, NoError>
+{
+    return timer(interval, onScheduler: QueueScheduler.mainQueueScheduler)
+}
+
+public func scheduleAfterNow(seconds: NSTimeInterval, action: () -> ()) -> Disposable?
+{
+    return QueueScheduler.mainQueueScheduler.scheduleAfterNow(seconds, action: action)
+}
+
+extension QueueScheduler
+{
+    public func scheduleAfterNow(seconds: NSTimeInterval, action: () -> ()) -> Disposable?
+    {
+        return self.scheduleAfter(NSDate(timeIntervalSinceNow: seconds), action: action)
+    }
+}
+
 // MARK: Foundation
 
 extension RACCommand
@@ -113,5 +133,35 @@ extension NSObject
     {
         return self.rac_signalForSelector(selector).toSignalProducer()
             .triggerize()
+    }
+}
+
+// MARK: Objective-C Bridging
+
+private func defaultNSError(message: String, file: String, line: Int) -> NSError
+{
+    return Result<(), NSError>.error(message, file: file, line: line)
+}
+
+extension RACSignal
+{
+    /// Creates a Signal which will subscribe to the receiver immediately.
+    public func toSignal(file: String = #file, line: Int = #line) -> Signal<AnyObject?, NSError>
+    {
+        return Signal { observer in
+            let next = { obj in
+                observer.sendNext(obj)
+            }
+
+            let failed = { nsError in
+                observer.sendFailed(nsError ?? defaultNSError("Nil RACSignal error", file: file, line: line))
+            }
+
+            let completed = {
+                observer.sendCompleted()
+            }
+
+            return self.subscribeNext(next, error: failed, completed: completed)
+        }
     }
 }

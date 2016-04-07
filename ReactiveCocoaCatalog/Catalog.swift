@@ -13,7 +13,7 @@ struct Catalog
     let title: String?
     let description: String?
     let class_: UIViewController.Type
-    let storyboard: Storyboard?
+    let storyboard: StoryboardScene<UIViewController>?
     let selected: Bool
 
     static func allCatalogs() -> [Catalog]
@@ -58,7 +58,7 @@ struct Catalog
                 title: "Pagination",
                 description: "Pagination",
                 class_: PaginationViewController.self,
-                storyboard: Storyboard(
+                storyboard: StoryboardScene(
                     name: "PaginationViewController",
                     identifier: "PaginationViewController"
                 )
@@ -67,7 +67,7 @@ struct Catalog
                 title: "ReactiveArray (TableView)",
                 description: "ReactiveArray + TableView",
                 class_: ReactiveTableViewController.self,
-                storyboard: Storyboard(
+                storyboard: StoryboardScene(
                     name: "ReactiveArray",
                     identifier: "ReactiveTableViewController"
                 )
@@ -76,7 +76,7 @@ struct Catalog
                 title: "ReactiveArray (CollectionView)",
                 description: "ReactiveArray + CollectionView",
                 class_: ReactiveCollectionViewController.self,
-                storyboard: Storyboard(
+                storyboard: StoryboardScene(
                     name: "ReactiveArray",
                     identifier: "ReactiveCollectionViewController"
                 )
@@ -84,7 +84,7 @@ struct Catalog
         ]
     }
 
-    init(title: String?, description: String?, class_: UIViewController.Type, storyboard: Storyboard? = nil, selected: Bool = false)
+    init(title: String?, description: String?, class_: UIViewController.Type, storyboard: StoryboardScene<UIViewController>? = nil, selected: Bool = false)
     {
         self.title = title
         self.description = description
@@ -94,21 +94,27 @@ struct Catalog
     }
 }
 
-struct Storyboard
+struct StoryboardScene<VC: UIViewController>
 {
     let storyboardName: String
     let viewControllerIdentifier: String
+    let bundle: NSBundle?
 
-    init(name: String, identifier: String)
+    init(name: String, identifier: String, bundle: NSBundle? = nil)
     {
         self.storyboardName = name
         self.viewControllerIdentifier = identifier
+        self.bundle = bundle
     }
 
-    func instantiate() -> UIViewController
+    func instantiate() -> VC
     {
-        let storyboard = UIStoryboard(name: self.storyboardName, bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier(self.self.viewControllerIdentifier)
+        let storyboard = UIStoryboard(name: self.storyboardName, bundle: self.bundle)
+
+        guard let vc = storyboard.instantiateViewControllerWithIdentifier(self.viewControllerIdentifier) as? VC else {
+            fatalError("Couldn't cast to `\(VC.self)` while `StoryboardScene.instantiate()`.")
+        }
+
         return vc
     }
 }

@@ -46,7 +46,7 @@ struct Catalog
             ),
             Catalog(
                 title: "Action",
-                description: "Action Example",
+                description: "Action (CocoaAction & RACCommand) Example",
                 class_: ActionViewController.self
             ),
             Catalog(

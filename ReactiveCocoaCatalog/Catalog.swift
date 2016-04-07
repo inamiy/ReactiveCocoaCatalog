@@ -30,6 +30,11 @@ struct Catalog
                 class_: MultipleTextFieldViewController.self
             ),
             Catalog(
+                title: "Color Slider",
+                description: "RGB Slider example",
+                class_: ColorSliderViewController.self
+            ),
+            Catalog(
                 title: "Who To Follow",
                 description: "Suggestion box",
                 class_: WhoToFollowViewController.self
@@ -74,8 +79,7 @@ struct Catalog
                 storyboard: Storyboard(
                     name: "ReactiveArray",
                     identifier: "ReactiveCollectionViewController"
-                ),
-                selected: true
+                )
             ),
         ]
     }

@@ -16,7 +16,7 @@ extension UISearchBar: UISearchBarDelegate
     public var rac_textSignal: RACSignal
     {
         var signal = objc_getAssociatedObject(self, unsafeAddressOf(self)) as? RACSignal
-        
+
         if signal == nil,
             let delegate = self.delegate as? NSObject
         {
@@ -26,9 +26,9 @@ extension UISearchBar: UISearchBarDelegate
                     return tuple.second
                 }
         }
-        
+
         objc_setAssociatedObject(self, unsafeAddressOf(self), signal, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        
+
         return signal!
     }
 }

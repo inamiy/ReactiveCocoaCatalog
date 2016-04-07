@@ -40,7 +40,7 @@ final class ReactiveCollectionViewController: UICollectionViewController, Reacti
         super.viewDidLoad()
 
         // show toolbar
-        self.navigationController?.setToolbarHidden(false , animated: true)
+        self.navigationController?.setToolbarHidden(false, animated: true)
 
         self.setupSignalsForDemo()
 
@@ -51,7 +51,7 @@ final class ReactiveCollectionViewController: UICollectionViewController, Reacti
         // - http://stackoverflow.com/questions/22000433/rac-signalforselector-needs-empty-implementation
         self.itemsView.delegate = nil   // set nil to clear selector cache
         self.itemsView.delegate = self
-        
+
         self.playDemo()
     }
 }

@@ -75,7 +75,7 @@ class ZundokoViewController: UIViewController
         textView.text = (textView.text ?? "") + "\(self.count): \(message)\n"
 
         // scroll down to bottom
-        textView.scrollRangeToVisible(NSMakeRange(textView.text.characters.count - 1, 0))
+        textView.scrollRangeToVisible(NSRange(location: textView.text.characters.count - 1, length: 0))
     }
 
 }

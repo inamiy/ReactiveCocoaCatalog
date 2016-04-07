@@ -39,7 +39,7 @@ final class ReactiveTableViewController: UITableViewController, ReactiveArrayVie
         super.viewDidLoad()
 
         // show toolbar
-        self.navigationController?.setToolbarHidden(false , animated: true)
+        self.navigationController?.setToolbarHidden(false, animated: true)
 
         self.setupSignalsForDemo()
 

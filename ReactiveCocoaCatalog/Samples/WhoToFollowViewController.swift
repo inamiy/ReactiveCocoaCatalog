@@ -26,28 +26,28 @@ class WhoToFollowViewController: UIViewController
     @IBOutlet var user2Button: UIButton?
     @IBOutlet var user3Button: UIButton?
     @IBOutlet var refreshButton: UIButton?
-    
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         self._setupButtons()
     }
-    
+
     func _setupButtons()
     {
         let refreshProducer = self.refreshButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-            
+
         let fetchedUsersProducer = refreshProducer
             .beginWith("startup refresh")
             .ignoreCastError(APIError)
             .flatMap(.Merge) { _ in _randomUsersProducer() }
-        
+
         func bindButton(button: UIButton)
         {
             let buttonTapProducer = button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
                 .beginWith("startup userButton")
-            
+
             combineLatest(buttonTapProducer, fetchedUsersProducer.mapError { $0 as NSError })
                 .map { _, users -> GitHubAPI.User? in
                     let randomIndex = Int(arc4random_uniform(UInt32(users.count)))
@@ -56,21 +56,21 @@ class WhoToFollowViewController: UIViewController
                 .mergeWith(refreshProducer.map { _ in nil })
                 .beginWith(nil) // user = nil for emptying labels
                 .startWithNext { [weak button] user in
-                    
+
                     // update UI
                     button?.setTitle(user?.login, forState: .Normal)
                     button?.setImage(nil, forState: .Normal)
-                    
+
                     if let avatarURL = user?.avatarURL {
                         button?.hnk_setImageFromURL(avatarURL, state: .Normal)
                     }
                 }
         }
-        
+
         bindButton(self.user1Button!)
         bindButton(self.user2Button!)
         bindButton(self.user3Button!)
-        
+
     }
 }
 

@@ -23,38 +23,38 @@ extension BingRequest
 public struct BingSearchRequest: BingRequest
 {
     internal let query: String
-    
+
     public var method: HTTPMethod
     {
         return .GET
     }
-    
+
     public var path: String
     {
         return "/osjson.aspx"
     }
-    
+
     public var parameters: [String : AnyObject]
     {
         return ["query" : self.query]
     }
-    
+
     public init(query: String)
     {
         self.query = query
     }
-    
+
     public func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> BingSearchResponse?
     {
 //        print("response object = \(object)")
-        
+
         guard let arr = object as? [AnyObject] where arr.count == 2 else {
             return nil
         }
-        
+
         let query = arr[0] as? String ?? ""
         let suggestions = arr[1] as? [String] ?? []
-        
+
         return BingSearchResponse(query: query, suggestions: suggestions)
     }
 }
@@ -71,7 +71,7 @@ public struct BingAPI
     {
         return SignalProducer { observer, disposable in
             let request = BingSearchRequest(query: query)
-            
+
             Session.sendRequest(request) { result in
                 switch result {
                     case .Success(let response):

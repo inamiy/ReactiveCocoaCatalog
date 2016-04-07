@@ -16,28 +16,28 @@ private let _cellIdentifier = "IncrementalSearchCellIdentifier"
 class IncrementalSearchViewController: UITableViewController, UISearchBarDelegate
 {
     var searchController: UISearchController?
-    
+
     var bingSearchResponse: BingSearchResponse?
-    
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self
-        
+
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: _cellIdentifier)
         self.tableView.tableHeaderView = searchController.searchBar
-        
+
         // workaround for iOS8
         // http://useyourloaf.com/blog/2015/04/26/search-bar-not-showing-without-a-scope-bar.html
         if !NSProcessInfo().isOperatingSystemAtLeastVersion(NSOperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0)) {
             searchController.searchBar.sizeToFit()
         }
-        
+
         self.searchController = searchController
-        
+
         let producer = searchController.searchBar.rac_textSignal.toSignalProducer()
             .ignoreCastError(APIError)
             .throttle(0.15, onScheduler: QueueScheduler.mainQueueScheduler)
@@ -50,7 +50,7 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
                 }
             }
             .flatten(.Latest)
-        
+
         producer.startWithSignal { signal, disposable in
             signal.observeNext { [weak self] response in
                 print("onNext = \(response)")
@@ -59,25 +59,25 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
             }
         }
     }
-    
+
     // MARK: - UITableViewDataSource
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 1
     }
-    
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.bingSearchResponse?.suggestions.count ?? 0
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier(_cellIdentifier, forIndexPath: indexPath)
-        
+
         cell.textLabel?.text = self.bingSearchResponse?.suggestions[indexPath.row]
-        
+
         return cell
     }
 }

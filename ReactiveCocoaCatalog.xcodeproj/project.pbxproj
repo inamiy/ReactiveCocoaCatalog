@@ -375,6 +375,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 48D9145F1B4FB4C400E70080 /* Build configuration list for PBXNativeTarget "ReactiveCocoaCatalog" */;
 			buildPhases = (
+				1FC591381CB5E7A100CBD02E /* SwiftLint */,
 				48D9143A1B4FB4C400E70080 /* Sources */,
 				48D9143B1B4FB4C400E70080 /* Frameworks */,
 				48D9143C1B4FB4C400E70080 /* Resources */,
@@ -472,6 +473,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FC591381CB5E7A100CBD02E /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		48D9143A1B4FB4C400E70080 /* Sources */ = {

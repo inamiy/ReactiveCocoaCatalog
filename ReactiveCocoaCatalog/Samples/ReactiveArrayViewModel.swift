@@ -18,7 +18,7 @@ import ReactiveArray
 /// which conforms to both `UITableViewDataSource` and `UICollectionViewDataSource`.
 /// **For Demo Use Only.**
 ///
-/// - Note: 
+/// - Note:
 /// Abstracting with new ViewModel-protocol and work with other existing protocols
 /// e.g. `ReactiveDataSource` seems too difficult to implement, which is
 /// probably the limitation of Swift 2's `associatedtype`-based, non-generic protocol.

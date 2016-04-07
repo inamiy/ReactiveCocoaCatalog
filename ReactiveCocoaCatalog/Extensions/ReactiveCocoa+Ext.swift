@@ -83,13 +83,13 @@ extension SignalProducer
     {
         return lift(Signal.sampleFrom)(otherSignalProducer)
     }
-    
+
     /// - SeeAlso: `Rx.startWith` (renamed to not confuse with `startWithNext()`)
     public func beginWith(value: Value) -> SignalProducer<Value, Error>
     {
         return SignalProducer(value: value).concat(self)
     }
-    
+
     public func mergeWith(other: SignalProducer<Value, Error>) -> SignalProducer<Value, Error>
     {
         return SignalProducer<SignalProducer<Value, Error>, Error>(values: [self, other]).flatten(.Merge)

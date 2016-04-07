@@ -13,26 +13,26 @@ import ReactiveCocoa
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
 
     var window: UIWindow?
-    
+
     func _setupAppearance()
     {
         let font = UIFont(name: "AvenirNext-Medium", size: 16)!
-        
+
         UINavigationBar.appearance().titleTextAttributes = [ NSFontAttributeName : font ]
         UIBarButtonItem.appearance().setTitleTextAttributes([ NSFontAttributeName : font ], forState: .Normal)
     }
-    
+
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         self._setupAppearance()
-        
+
         let splitVC = self.window!.rootViewController as! UISplitViewController
         splitVC.delegate = self
-        
+
         let mainNavC = splitVC.viewControllers[0] as! UINavigationController
-        
+
         let mainVC = mainNavC.topViewController as! MasterViewController
-        
+
         // NOTE: use dispatch_after to check `splitVC.collapsed` after delegation is complete (for iPad)
         // FIXME: look for better solution
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1_000_000), dispatch_get_main_queue()) {
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
                 mainVC.showDetailViewControllerAtIndex(0)
             }
         }
-        
+
         return true
     }
 
@@ -66,9 +66,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool
     {
         return true
     }
 }
-

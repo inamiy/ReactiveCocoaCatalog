@@ -16,20 +16,20 @@ class TextFieldViewController: UIViewController
     @IBOutlet var throttleLabel: UILabel?
     @IBOutlet var debounceLabel: UILabel?   // TODO: implement when `debounce()` is ready
     @IBOutlet var textField: UITextField?
-    
+
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         let textProducer = self.textField!.rac_textSignal().toSignalProducer()
             .ignoreCastError(NoError)
-        
+
         let labelProperty = DynamicProperty(object: self.label, keyPath: "text")
         let throttleLabelProperty = DynamicProperty(object: self.throttleLabel, keyPath: "text")
-        
+
         labelProperty <~ textProducer
             .map { "Normal: \($0!)" }
-        
+
         throttleLabelProperty <~ textProducer
             .throttle(1, onScheduler: QueueScheduler.mainQueueScheduler)    // throttle for 1 sec
             .map { "Throttled: \($0!)" }

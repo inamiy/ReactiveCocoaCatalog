@@ -11,13 +11,13 @@ import Result
 import ReactiveCocoa
 import ReactiveArray
 
-/// - Note: 
-/// `Equatable` is required for evaluating appropriate `sectionIndex` in 
+/// - Note:
+/// `Equatable` is required for evaluating appropriate `sectionIndex` in
 /// `ReactiveDataSourceType.changedItemInfoSignal`.
 public protocol SectionType: Equatable
 {
     associatedtype Item: ItemType
-    
+
     var items: ReactiveArray<Item> { get }
 }
 

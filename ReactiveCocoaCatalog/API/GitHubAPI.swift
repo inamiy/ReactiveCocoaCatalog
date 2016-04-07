@@ -89,22 +89,22 @@ extension GitHubAPI
         typealias Response = [User]
 
         let since: Int
-        
+
         var method: HTTPMethod
         {
             return .GET
         }
-        
+
         var path: String
         {
             return "/users"
         }
-        
+
         var parameters: [String : AnyObject]
         {
             return ["since" : self.since]
         }
-        
+
         init(since: Int)
         {
             self.since = since

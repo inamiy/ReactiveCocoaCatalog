@@ -15,7 +15,7 @@ struct Catalog
     let class_: UIViewController.Type
     let storyboard: Storyboard?
     let selected: Bool
-    
+
     static func allCatalogs() -> [Catalog]
     {
         return [
@@ -79,7 +79,7 @@ struct Catalog
             ),
         ]
     }
-    
+
     init(title: String?, description: String?, class_: UIViewController.Type, storyboard: Storyboard? = nil, selected: Bool = false)
     {
         self.title = title

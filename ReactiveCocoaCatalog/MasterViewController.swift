@@ -11,11 +11,11 @@ import UIKit
 class MasterViewController: UITableViewController
 {
     let catalogs = Catalog.allCatalogs()
-    
+
     override func awakeFromNib()
     {
         super.awakeFromNib()
-        
+
         if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
@@ -25,7 +25,7 @@ class MasterViewController: UITableViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         // auto-select
         for i in 0..<self.catalogs.count {
             if self.catalogs[i].selected {
@@ -34,9 +34,9 @@ class MasterViewController: UITableViewController
             }
         }
     }
-    
+
     // MARK: - UITableViewDataSource
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int
     {
         return 1
@@ -49,26 +49,26 @@ class MasterViewController: UITableViewController
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
         let catalog = self.catalogs[indexPath.row]
         cell.textLabel?.text = catalog.title
         cell.detailTextLabel?.text = catalog.description
-        
+
         return cell
     }
-    
+
     // MARK: UITableViewDelegate
-    
+
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
     {
         self.showDetailViewControllerAtIndex(indexPath.row)
     }
-    
+
     func showDetailViewControllerAtIndex(index: Int)
     {
         let catalog = self.catalogs[index]
-        
+
         let newVC: UIViewController
         if let storyboard = catalog.storyboard {
             newVC = storyboard.instantiate()
@@ -78,10 +78,9 @@ class MasterViewController: UITableViewController
         }
         let newNavC = UINavigationController(rootViewController: newVC)
         self.splitViewController?.showDetailViewController(newNavC, sender: self)
-        
+
         newVC.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
         newVC.navigationItem.leftItemsSupplementBackButton = true
     }
 
 }
-

@@ -23,6 +23,8 @@
 		1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */; };
 		1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */; };
 		1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */; };
+		1FC5913A1CB5EA7B00CBD02E /* ColorSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC591391CB5EA7B00CBD02E /* ColorSliderViewController.swift */; };
+		1FC5913D1CB5EAC200CBD02E /* ColorSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC5913C1CB5EAC200CBD02E /* ColorSliderViewController.xib */; };
 		1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */; };
 		1FD70D471CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */; };
 		1FD70D4B1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */; };
@@ -106,6 +108,8 @@
 		1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAPI.swift; sourceTree = "<group>"; };
 		1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Ext.swift"; sourceTree = "<group>"; };
 		1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewType.swift; sourceTree = "<group>"; };
+		1FC591391CB5EA7B00CBD02E /* ColorSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSliderViewController.swift; sourceTree = "<group>"; };
+		1FC5913C1CB5EAC200CBD02E /* ColorSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorSliderViewController.xib; sourceTree = "<group>"; };
 		1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PaginationViewController.storyboard; sourceTree = "<group>"; };
 		1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCollectionViewController.swift; sourceTree = "<group>"; };
 		1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveArrayViewControllerType.swift; sourceTree = "<group>"; };
@@ -206,6 +210,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1FC5913B1CB5EA8000CBD02E /* ColorSlider */ = {
+			isa = PBXGroup;
+			children = (
+				1FC591391CB5EA7B00CBD02E /* ColorSliderViewController.swift */,
+				1FC5913C1CB5EAC200CBD02E /* ColorSliderViewController.xib */,
+			);
+			name = ColorSlider;
+			sourceTree = "<group>";
+		};
 		1FC7EA231C9FE88E00C6B76C /* Pagination */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +309,7 @@
 			children = (
 				1FC7EA291C9FE8BD00C6B76C /* TextField (throttle) */,
 				1FC7EA281C9FE8AE00C6B76C /* Multiple TextField (login) */,
+				1FC5913B1CB5EA8000CBD02E /* ColorSlider */,
 				1FC7EA271C9FE8A600C6B76C /* Who to Follow */,
 				1FC7EA261C9FE89F00C6B76C /* Incremental Search */,
 				1FC7EA251C9FE89B00C6B76C /* Action */,
@@ -453,6 +467,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				48D9144B1B4FB4C400E70080 /* Main.storyboard in Resources */,
+				1FC5913D1CB5EAC200CBD02E /* ColorSliderViewController.xib in Resources */,
 				487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */,
 				48EA63921BA938A5007F1251 /* MultipleTextFieldViewController.xib in Resources */,
 				1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */,
@@ -501,6 +516,7 @@
 				1F28635C1C9F85DA004627D3 /* APIKit+Ext.swift in Sources */,
 				48375AAA1B54B2F200BDA6F3 /* ActionViewController.swift in Sources */,
 				1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */,
+				1FC5913A1CB5EA7B00CBD02E /* ColorSliderViewController.swift in Sources */,
 				487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */,
 				480F7B481BA9705100E10892 /* WhoToFollowViewController.swift in Sources */,
 				1FF369F51BA50BFD00A49E30 /* IncrementalSearchViewController.swift in Sources */,

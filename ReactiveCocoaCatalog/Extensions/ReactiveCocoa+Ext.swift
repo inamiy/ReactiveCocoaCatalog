@@ -14,12 +14,14 @@ import ReactiveCocoa
 extension Signal
 {
     /// Ignores `(error: Error)` & cast ErrorType to `Error2`.
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func ignoreCastError<Error2: ErrorType>(_: Error2.Type) -> Signal<Value, Error2>
     {
         return self.flatMapError { _ in SignalProducer<Value, Error2>.empty }
     }
 
     /// Converts error to single nil value, i.e. from `.Failed` to `.Next(nil)` + `.Complete`.
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func errorToNilValue() -> Signal<Value?, NoError>
     {
         return self
@@ -29,6 +31,7 @@ extension Signal
 
     /// Converts to `Signal<(), NoError>` (ignoring value & error),
     /// useful as a trigger signal for `sampleOn`, `takeUntil`, `skipUntil`.
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func triggerize() -> Signal<(), NoError>
     {
         return self
@@ -38,12 +41,14 @@ extension Signal
 
     /// Zips `self` with `otherSignal`, using `self` as a sampler.
     /// - Warning: `zip` may fail if `self` (as sampler) emits faster than `otherSignal` on 1st value.
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func sampleFrom<Value2>(otherSignal: Signal<Value2, Error>) -> Signal<(Value, Value2), Error>
     {
         return zip(self, otherSignal.sampleOn(self.triggerize()))
     }
 
     /// Zips `self` with `otherSignalProducer`, using `self` as a sampler.
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func sampleFrom<Value2>(otherSignalProducer: SignalProducer<Value2, Error>) -> Signal<(Value, Value2), Error>
     {
         return Signal<(Value, Value2), Error> { observer in
@@ -56,6 +61,7 @@ extension Signal
         }
     }
 
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func mergeWith(other: Signal<Value, Error>) -> Signal<Value, Error>
     {
         return Signal { observer in
@@ -70,12 +76,14 @@ extension Signal
 extension SignalProducer
 {
     /// Ignores `(error: Error)` & cast ErrorType to `Error2`.
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func ignoreCastError<Error2: ErrorType>(_: Error2.Type) -> SignalProducer<Value, Error2>
     {
         return lift { $0.ignoreCastError(Error2) }
     }
 
     /// Converts error to single nil value, i.e. `.Failed` to `.Next(nil)` + `.Complete`.
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func errorToNilValue() -> SignalProducer<Value?, NoError>
     {
         return lift { $0.errorToNilValue() }
@@ -83,26 +91,56 @@ extension SignalProducer
 
     /// Converts to `SignalProducer<(), NoError>` (ignoring value & error),
     /// useful as a trigger signal for `sampleOn`, `takeUntil`, `skipUntil`.
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func triggerize() -> SignalProducer<(), NoError>
     {
         return lift { $0.triggerize() }
     }
 
     /// Zips `self` with `otherSignalProducer`, using `self` as a sampler.
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func sampleFrom<Value2>(otherSignalProducer: SignalProducer<Value2, Error>) -> SignalProducer<(Value, Value2), Error>
     {
         return lift(Signal.sampleFrom)(otherSignalProducer)
     }
 
     /// - SeeAlso: `Rx.startWith` (renamed to not confuse with `startWithNext()`)
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func beginWith(value: Value) -> SignalProducer<Value, Error>
     {
         return SignalProducer(value: value).concat(self)
     }
 
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func mergeWith(other: SignalProducer<Value, Error>) -> SignalProducer<Value, Error>
     {
         return SignalProducer<SignalProducer<Value, Error>, Error>(values: [self, other]).flatten(.Merge)
+    }
+
+    /// Repeats `self` forever.
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
+    public func forever() -> SignalProducer<Value, Error>
+    {
+        return SignalProducer { observer, disposable in
+            let serialDisposable = SerialDisposable()
+            disposable.addDisposable(serialDisposable)
+
+            func iterate() {
+                self.startWithSignal { signal, signalDisposable in
+                    serialDisposable.innerDisposable = signalDisposable
+
+                    signal.observe { event in
+                        if case .Completed = event {
+                            iterate()
+                        } else {
+                            observer.action(event)
+                        }
+                    }
+                }
+            }
+
+            iterate()
+        }
     }
 }
 

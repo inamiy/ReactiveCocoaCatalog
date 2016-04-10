@@ -22,3 +22,6 @@
 [submodule "Carthage/Checkouts/ReactiveArray"]
 	path = Carthage/Checkouts/ReactiveArray
 	url = https://github.com/inamiy/ReactiveArray.git
+[submodule "Carthage/Checkouts/FontAwesome.swift"]
+	path = Carthage/Checkouts/FontAwesome.swift
+	url = https://github.com/thii/FontAwesome.swift.git

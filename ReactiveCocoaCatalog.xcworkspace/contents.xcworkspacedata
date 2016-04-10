@@ -28,6 +28,9 @@
       <FileRef
          location = "group:Carthage/Checkouts/HanekeSwift/Haneke.xcodeproj">
       </FileRef>
+      <FileRef
+         location = "group:Carthage/Checkouts/FontAwesome.swift/FontAwesome.xcodeproj">
+      </FileRef>
    </Group>
    <FileRef
       location = "group:ReactiveCocoaCatalog.xcodeproj">

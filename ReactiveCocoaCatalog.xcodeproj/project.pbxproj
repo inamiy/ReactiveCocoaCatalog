@@ -13,6 +13,12 @@
 		1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863571C9F76C6004627D3 /* PaginationViewController.swift */; };
 		1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */; };
 		1F28635C1C9F85DA004627D3 /* APIKit+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */; };
+		1F28A0971CA2220B00287194 /* MenuTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F28A0941CA2220B00287194 /* MenuTabBarController.swift */; };
+		1F28A09B1CA222B600287194 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F28A09A1CA222B600287194 /* MenuManager.swift */; };
+		1F2D33BA1CB8D565005E38E6 /* MenuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D33B91CB8D565005E38E6 /* MenuType.swift */; };
+		1F2D33BC1CB8DA3F005E38E6 /* MenuId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D33BB1CB8DA3F005E38E6 /* MenuId.swift */; };
+		1F2D33BE1CB8DA99005E38E6 /* MenuBadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D33BD1CB8DA99005E38E6 /* MenuBadgeScene.swift */; };
+		1F55495A1CB57C2F002E3B32 /* MenuSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5549591CB57C2F002E3B32 /* MenuSettingsViewController.swift */; };
 		1F665A901CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665A8F1CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift */; };
 		1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */; };
 		1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */; };
@@ -28,6 +34,9 @@
 		1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */; };
 		1FD70D471CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */; };
 		1FD70D4B1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */; };
+		1FDACD121CB5760C00806794 /* MenuBadge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FDACD111CB5760C00806794 /* MenuBadge.storyboard */; };
+		1FDACD141CB5784600806794 /* MenuCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDACD131CB5784600806794 /* MenuCustomViewController.swift */; };
+		1FDB70B01CB8ED79000A0462 /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB70AF1CB8ED79000A0462 /* BadgeManager.swift */; };
 		1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; };
 		1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADB1BB79F1000D16C55 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FE03ADC1BB79F1000D16C55 /* Haneke.framework */; };
@@ -48,6 +57,8 @@
 		48375AAA1B54B2F200BDA6F3 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */; };
 		48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */; };
 		486CF3301B53B34D0056E591 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CF32F1B53B34D0056E591 /* Catalog.swift */; };
+		487750711CA27C4B00B56E7B /* Prelude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487750701CA27C4B00B56E7B /* Prelude.swift */; };
+		487750731CA28DD200B56E7B /* SequenceType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487750721CA28DD200B56E7B /* SequenceType+Ext.swift */; };
 		487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */; };
 		487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */; };
 		48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D914431B4FB4C400E70080 /* AppDelegate.swift */; };
@@ -56,6 +67,8 @@
 		48D9144D1B4FB4C400E70080 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48D9144C1B4FB4C400E70080 /* Images.xcassets */; };
 		48D914501B4FB4C400E70080 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48D9144E1B4FB4C400E70080 /* LaunchScreen.xib */; };
 		48D9145C1B4FB4C400E70080 /* ReactiveCocoaCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D9145B1B4FB4C400E70080 /* ReactiveCocoaCatalogTests.swift */; };
+		48DCFA0D1CB7D445001D00EA /* FontAwesome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DCFA0C1CB7D445001D00EA /* FontAwesome.framework */; };
+		48DCFA0E1CB7D445001D00EA /* FontAwesome.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48DCFA0C1CB7D445001D00EA /* FontAwesome.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63891BA92F5D007F1251 /* TextFieldViewController.swift */; };
 		48EA638E1BA92F5D007F1251 /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48EA638A1BA92F5D007F1251 /* TextFieldViewController.xib */; };
 		48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EA63871BA92F5D007F1251 /* MultipleTextFieldViewController.swift */; };
@@ -85,6 +98,7 @@
 				1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */,
 				1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */,
 				1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */,
+				48DCFA0E1CB7D445001D00EA /* FontAwesome.framework in Embed Frameworks */,
 				48258F631CAA8673003BB383 /* ReactiveArray.framework in Embed Frameworks */,
 				1F7987E51C9F6AE6003AFE72 /* Argo.framework in Embed Frameworks */,
 				1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */,
@@ -100,6 +114,12 @@
 		1F2863571C9F76C6004627D3 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewModel.swift; sourceTree = "<group>"; };
 		1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIKit+Ext.swift"; sourceTree = "<group>"; };
+		1F28A0941CA2220B00287194 /* MenuTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTabBarController.swift; sourceTree = "<group>"; };
+		1F28A09A1CA222B600287194 /* MenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
+		1F2D33B91CB8D565005E38E6 /* MenuType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuType.swift; sourceTree = "<group>"; };
+		1F2D33BB1CB8DA3F005E38E6 /* MenuId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuId.swift; sourceTree = "<group>"; };
+		1F2D33BD1CB8DA99005E38E6 /* MenuBadgeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBadgeScene.swift; sourceTree = "<group>"; };
+		1F5549591CB57C2F002E3B32 /* MenuSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettingsViewController.swift; sourceTree = "<group>"; };
 		1F665A8F1CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveDataSourceType.swift; sourceTree = "<group>"; };
 		1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZundokoViewController.swift; sourceTree = "<group>"; };
 		1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZundokoViewController.xib; sourceTree = "<group>"; };
@@ -113,6 +133,9 @@
 		1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PaginationViewController.storyboard; sourceTree = "<group>"; };
 		1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCollectionViewController.swift; sourceTree = "<group>"; };
 		1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveArrayViewControllerType.swift; sourceTree = "<group>"; };
+		1FDACD111CB5760C00806794 /* MenuBadge.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuBadge.storyboard; sourceTree = "<group>"; };
+		1FDACD131CB5784600806794 /* MenuCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCustomViewController.swift; sourceTree = "<group>"; };
+		1FDB70AF1CB8ED79000A0462 /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeManager.swift; sourceTree = "<group>"; };
 		1FE03ADB1BB79F1000D16C55 /* APIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = APIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE03ADC1BB79F1000D16C55 /* Haneke.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Haneke.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveCocoa.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +150,8 @@
 		48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionViewController.xib; sourceTree = "<group>"; };
 		486CF32F1B53B34D0056E591 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
+		487750701CA27C4B00B56E7B /* Prelude.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prelude.swift; sourceTree = "<group>"; };
+		487750721CA28DD200B56E7B /* SequenceType+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+Ext.swift"; sourceTree = "<group>"; };
 		487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoToFollowViewController.swift; sourceTree = "<group>"; };
 		487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhoToFollowViewController.xib; sourceTree = "<group>"; };
@@ -140,6 +165,7 @@
 		48D914551B4FB4C400E70080 /* ReactiveCocoaCatalogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveCocoaCatalogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D9145A1B4FB4C400E70080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48D9145B1B4FB4C400E70080 /* ReactiveCocoaCatalogTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveCocoaCatalogTests.swift; sourceTree = "<group>"; };
+		48DCFA0C1CB7D445001D00EA /* FontAwesome.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FontAwesome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48EA63871BA92F5D007F1251 /* MultipleTextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleTextFieldViewController.swift; sourceTree = "<group>"; };
 		48EA63881BA92F5D007F1251 /* MultipleTextFieldViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultipleTextFieldViewController.xib; sourceTree = "<group>"; };
 		48EA63891BA92F5D007F1251 /* TextFieldViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +183,7 @@
 				1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */,
 				1FE03AE61BB79F1000D16C55 /* ReactiveCocoa.framework in Frameworks */,
 				1F12CAD01C9F95D6007D7F51 /* WebLinking.framework in Frameworks */,
+				48DCFA0D1CB7D445001D00EA /* FontAwesome.framework in Frameworks */,
 				48258F621CAA8673003BB383 /* ReactiveArray.framework in Frameworks */,
 				1F7987E41C9F6AE6003AFE72 /* Argo.framework in Frameworks */,
 				1F7987F41C9F6F5F003AFE72 /* Curry.framework in Frameworks */,
@@ -173,6 +200,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F28A0991CA2221000287194 /* MenuBadge */ = {
+			isa = PBXGroup;
+			children = (
+				1FDACD111CB5760C00806794 /* MenuBadge.storyboard */,
+				1F2D33BD1CB8DA99005E38E6 /* MenuBadgeScene.swift */,
+				1F28A0941CA2220B00287194 /* MenuTabBarController.swift */,
+				1F5549591CB57C2F002E3B32 /* MenuSettingsViewController.swift */,
+				1FDACD131CB5784600806794 /* MenuCustomViewController.swift */,
+				1F28A09A1CA222B600287194 /* MenuManager.swift */,
+				1FDB70AF1CB8ED79000A0462 /* BadgeManager.swift */,
+				1F2D33B91CB8D565005E38E6 /* MenuType.swift */,
+				1F2D33BB1CB8DA3F005E38E6 /* MenuId.swift */,
+			);
+			name = MenuBadge;
+			sourceTree = "<group>";
+		};
 		1F8517E91BA5176C00C1FCB0 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -186,6 +229,7 @@
 		1F8517F81BA52E3C00C1FCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				48DCFA0C1CB7D445001D00EA /* FontAwesome.framework */,
 				48258F611CAA8673003BB383 /* ReactiveArray.framework */,
 				1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */,
 				1F7987F31C9F6F5F003AFE72 /* Curry.framework */,
@@ -203,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				48EA63931BA939A9007F1251 /* ReactiveCocoa+Ext.swift */,
+				487750721CA28DD200B56E7B /* SequenceType+Ext.swift */,
 				1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */,
 				1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */,
 				1FE0DF7A1CAFF01100893311 /* UIBarButtonItem+Ext.swift */,
@@ -286,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				1FEE10A01BA9E440006E9335 /* Helpers.swift */,
+				487750701CA27C4B00B56E7B /* Prelude.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -316,6 +362,7 @@
 				1FC7EA241C9FE89500C6B76C /* Zundoko */,
 				1FC7EA231C9FE88E00C6B76C /* Pagination */,
 				48258F6E1CAA8DF0003BB383 /* ReactiveArray */,
+				1F28A0991CA2221000287194 /* MenuBadge */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -469,6 +516,7 @@
 				48D9144B1B4FB4C400E70080 /* Main.storyboard in Resources */,
 				1FC5913D1CB5EAC200CBD02E /* ColorSliderViewController.xib in Resources */,
 				487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */,
+				1FDACD121CB5760C00806794 /* MenuBadge.storyboard in Resources */,
 				48EA63921BA938A5007F1251 /* MultipleTextFieldViewController.xib in Resources */,
 				1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */,
 				1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */,
@@ -511,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F28A0971CA2220B00287194 /* MenuTabBarController.swift in Sources */,
 				48D914461B4FB4C400E70080 /* MasterViewController.swift in Sources */,
 				1F20D65F1C9F90CC00DC0153 /* PaginationRequestType.swift in Sources */,
 				1F28635C1C9F85DA004627D3 /* APIKit+Ext.swift in Sources */,
@@ -522,21 +571,30 @@
 				1FF369F51BA50BFD00A49E30 /* IncrementalSearchViewController.swift in Sources */,
 				48258F651CAA8BCC003BB383 /* ReactiveTableViewController.swift in Sources */,
 				48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */,
+				487750731CA28DD200B56E7B /* SequenceType+Ext.swift in Sources */,
 				1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */,
 				1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */,
+				1FDACD141CB5784600806794 /* MenuCustomViewController.swift in Sources */,
 				1FEE10A11BA9E440006E9335 /* Helpers.swift in Sources */,
+				1F2D33BC1CB8DA3F005E38E6 /* MenuId.swift in Sources */,
+				1F28A09B1CA222B600287194 /* MenuManager.swift in Sources */,
 				1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */,
 				1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */,
+				1F2D33BE1CB8DA99005E38E6 /* MenuBadgeScene.swift in Sources */,
+				1F2D33BA1CB8D565005E38E6 /* MenuType.swift in Sources */,
 				48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */,
 				1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */,
+				1FDB70B01CB8ED79000A0462 /* BadgeManager.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
 				1FE0DF7D1CAFF55000893311 /* ReactiveArrayViewModel.swift in Sources */,
 				1FE0DF7B1CAFF01100893311 /* UIBarButtonItem+Ext.swift in Sources */,
 				1FD70D4B1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift in Sources */,
 				1F665A901CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift in Sources */,
 				486CF3301B53B34D0056E591 /* Catalog.swift in Sources */,
+				1F55495A1CB57C2F002E3B32 /* MenuSettingsViewController.swift in Sources */,
 				1FD70D471CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift in Sources */,
 				48EA63941BA939A9007F1251 /* ReactiveCocoa+Ext.swift in Sources */,
+				487750711CA27C4B00B56E7B /* Prelude.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

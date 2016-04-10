@@ -81,6 +81,16 @@ struct Catalog
                     identifier: "ReactiveCollectionViewController"
                 )
             ),
+            Catalog(
+                title: "MenuBadge",
+                description: "Tab + Badge",
+                class_: MenuTabBarController.self,
+                storyboard: StoryboardScene(
+                    name: "MenuBadge",
+                    identifier: "MenuTabBarController"
+                ),
+                selected: true
+            ),
         ]
     }
 
@@ -94,7 +104,13 @@ struct Catalog
     }
 }
 
-struct StoryboardScene<VC: UIViewController>
+protocol Instantiateable
+{
+    associatedtype VC: UIViewController
+    func instantiate() -> VC
+}
+
+struct StoryboardScene<VC: UIViewController>: Instantiateable
 {
     let storyboardName: String
     let viewControllerIdentifier: String

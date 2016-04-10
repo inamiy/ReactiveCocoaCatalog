@@ -55,6 +55,16 @@ extension Signal
             return d
         }
     }
+
+    public func mergeWith(other: Signal<Value, Error>) -> Signal<Value, Error>
+    {
+        return Signal { observer in
+            let d = CompositeDisposable()
+            d += self.observe(observer)
+            d += other.observe(observer)
+            return d
+        }
+    }
 }
 
 extension SignalProducer
@@ -164,4 +174,21 @@ extension RACSignal
             return self.subscribeNext(next, error: failed, completed: completed)
         }
     }
+}
+
+extension RACCompoundDisposable
+{
+    /// For easy handling of `rac_deallocDisposable` in Swift.
+    public func addDisposable(disposable: Disposable?)
+    {
+        self.addDisposable(RACDisposable {
+            disposable?.dispose()
+        })
+    }
+}
+
+/// For easy handling of `rac_deallocDisposable` in Swift.
+public func += (lhs: RACCompoundDisposable, rhs: Disposable?)
+{
+    return lhs.addDisposable(rhs)
 }

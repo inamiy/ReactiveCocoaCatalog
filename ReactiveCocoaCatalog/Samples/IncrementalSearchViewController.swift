@@ -32,7 +32,8 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
 
         // workaround for iOS8
         // http://useyourloaf.com/blog/2015/04/26/search-bar-not-showing-without-a-scope-bar.html
-        if !NSProcessInfo().isOperatingSystemAtLeastVersion(NSOperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0)) {
+        if !NSProcessInfo().isOperatingSystemAtLeastVersion(NSOperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0))
+        {
             searchController.searchBar.sizeToFit()
         }
 
@@ -57,6 +58,18 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
                 self?.bingSearchResponse = response
                 self?.tableView.reloadData()
             }
+        }
+    }
+
+    override func viewDidLayoutSubviews()
+    {
+        super.viewDidLayoutSubviews()
+
+        // Workaround for UISearchController activated at wrong x-position
+        // inside UISplitViewController (in iOS 9.3).
+        // (Caveat: This is a hotfix and not perfect)
+        if !(self.searchController?.searchBar.superview is UITableView) {
+            self.searchController?.searchBar.superview?.frame.origin.x = 0
         }
     }
 

@@ -40,7 +40,7 @@ final class ReactiveCollectionViewController: UICollectionViewController, Reacti
         super.viewDidLoad()
 
         // show toolbar
-        self.navigationController?.setToolbarHidden(false, animated: true)
+        self.navigationController?.setToolbarHidden(false, animated: false)
 
         self.setupSignalsForDemo()
 

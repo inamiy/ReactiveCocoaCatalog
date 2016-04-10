@@ -20,9 +20,6 @@ final class MenuTabBarController: UITabBarController
 
     let menuManager = MenuManager()
 
-    private let _compositeDisposable = CompositeDisposable()
-    private var _scopedDisposable: ScopedDisposable?
-
     // NOTE: CocoaAction must be retained to bind to UI
     var menuAction: CocoaAction?
     var badgeAction: CocoaAction?

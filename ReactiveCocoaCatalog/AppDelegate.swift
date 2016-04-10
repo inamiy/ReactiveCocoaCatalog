@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
         let splitVC = self.window!.rootViewController as! UISplitViewController
         splitVC.delegate = self
+        splitVC.preferredDisplayMode = .AllVisible
 
         let mainNavC = splitVC.viewControllers[0] as! UINavigationController
 

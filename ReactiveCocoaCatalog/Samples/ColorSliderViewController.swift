@@ -31,19 +31,19 @@ final class ColorSliderViewController: UIViewController
         let red = rSlider!.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
             .map { ($0 as! UISlider).value }
             .beginWith(self.rSlider!.value) // use current value first for `combineLatest`
-            .map(CGFloat.init)
+            .map(CGFloat.init(_:))
             .ignoreCastError(NoError)
 
         let green = gSlider!.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
             .map { ($0 as! UISlider).value }
             .beginWith(self.gSlider!.value)
-            .map(CGFloat.init)
+            .map(CGFloat.init(_:))
             .ignoreCastError(NoError)
 
         let blue = bSlider!.rac_signalForControlEvents(.ValueChanged).toSignalProducer()
             .map { ($0 as! UISlider).value }
             .beginWith(self.bSlider!.value)
-            .map(CGFloat.init)
+            .map(CGFloat.init(_:))
             .ignoreCastError(NoError)
 
         let rgb = combineLatest(red, green, blue)

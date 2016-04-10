@@ -88,8 +88,7 @@ struct Catalog
                 storyboard: StoryboardScene(
                     name: "MenuBadge",
                     identifier: "MenuTabBarController"
-                ),
-                selected: true
+                )
             ),
         ]
     }

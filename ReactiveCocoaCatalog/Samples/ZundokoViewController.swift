@@ -27,9 +27,14 @@ enum Zundoko
 ///
 class ZundokoViewController: UIViewController
 {
-    @IBOutlet var textView: UITextView?
+    @IBOutlet weak var textView: UITextView?
+
+    @IBOutlet weak var zunButton: UIButton?
+    @IBOutlet weak var dokoButton: UIButton?
 
     var count = 0
+
+    deinit { logDeinit(self) }
 
     override func viewDidLoad()
     {
@@ -46,8 +51,22 @@ class ZundokoViewController: UIViewController
 
     private func _setupProducers()
     {
-        timer(_interval, onScheduler: QueueScheduler.mainQueueScheduler)
+        let d = self.rac_deallocDisposable
+
+        // Manual chanting of "Zun".
+        let zun = zunButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
+            .map { _ in Zundoko.Zun }
+            .ignoreCastError(NoError)
+
+        // Manual chanting of "Doko".
+        let doko = dokoButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
+            .map { _ in Zundoko.Doko }
+            .ignoreCastError(NoError)
+
+        d += timer(_interval, onScheduler: QueueScheduler.mainQueueScheduler)
             .map { _ in arc4random_uniform(2) == 0 ? Zundoko.Zun : .Doko }
+            .mergeWith(zun)
+            .mergeWith(doko)
             .on(next: { [weak self] zundoko in
                 self?._printAll(zundoko)
             })
@@ -56,14 +75,16 @@ class ZundokoViewController: UIViewController
             .concat(
                 // take a deep breath
                 SignalProducer.empty
-                    .delay(_interval, onScheduler: QueueScheduler.mainQueueScheduler)
+                    .delay(min(_interval, 1), onScheduler: QueueScheduler.mainQueueScheduler)
             )
             .on(completed: { [weak self] in
                 // "Ki-yo-shi!!!"
                 self?._printAll("\n＿人人 人人 人人＿\n" + "＞ Ki-yo-shi!!! ＜\n" + "￣Y^Y^Y^Y^Y^Y￣")
             })
-            .times(2) // one more set
-            .start()
+            .forever()  // Kiyoshi forever
+            .startWithInterrupted {
+                print("Kiyoshi forever!!!") // called when forever-timer is safely disposed
+            }
     }
 
     private func _printAll(message: Any)

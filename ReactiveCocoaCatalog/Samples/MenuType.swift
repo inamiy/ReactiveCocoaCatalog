@@ -33,17 +33,9 @@ extension MenuType
     /// but after `viewController.init()` (too early to access to **unowned viewModel**).
     func bindToTabBarItem()
     {
-        // tabBarItem.title <~ self.title
-        DynamicProperty(object: self.viewController.tabBarItem, keyPath: "title")
-            <~ self.title.producer.map { $0 as AnyObject? }
-
-        // tabBarItem.image <~ self.image
-        DynamicProperty(object: self.viewController.tabBarItem, keyPath: "image")
-            <~ self.tabImage.producer.map { $0 as AnyObject? }
-
-        // tabBarItem.badgeValue <~ self.badge
-        DynamicProperty(object: self.viewController.tabBarItem, keyPath: "badgeValue")
-            <~ self.badge.producer.map { $0.rawValue }
+        self.viewController.tabBarItem.rex_title <~ self.title.producer.map { $0 }
+        self.viewController.tabBarItem.rex_image <~ self.tabImage.producer.map { $0 }
+        self.viewController.tabBarItem.rex_badgeValue <~ self.badge.producer.map { $0.rawValue }
     }
 }
 

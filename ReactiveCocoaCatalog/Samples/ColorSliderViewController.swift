@@ -9,6 +9,7 @@
 import UIKit
 import Result
 import ReactiveCocoa
+import Rex
 
 final class ColorSliderViewController: UIViewController
 {
@@ -49,19 +50,18 @@ final class ColorSliderViewController: UIViewController
         let rgb = combineLatest(red, green, blue)
             .map { r, g, b in UIColor(red: r, green: g, blue: b, alpha: 1) }
             .on(event: logSink("rgb"))
-            as SignalProducer<AnyObject?, NoError>
 
-        DynamicProperty(object: self.colorView, keyPath: "backgroundColor") <~ rgb
+        self.colorView!.rex_backgroundColor <~ rgb.map { $0 }
 
-        DynamicProperty(object: self.rLabel, keyPath: "text") <~ red.map(_sliderValueToString)
-        DynamicProperty(object: self.gLabel, keyPath: "text") <~ green.map(_sliderValueToString)
-        DynamicProperty(object: self.bLabel, keyPath: "text") <~ blue.map(_sliderValueToString)
+        self.rLabel!.rex_text <~ red.map(_sliderValueToString)
+        self.gLabel!.rex_text <~ green.map(_sliderValueToString)
+        self.bLabel!.rex_text <~ blue.map(_sliderValueToString)
     }
 }
 
 // MARK: Helpers
 
-private func _sliderValueToString(value: CGFloat) -> AnyObject?
+private func _sliderValueToString(value: CGFloat) -> String
 {
     let uint8 = UInt8(round(value * 255))
     let hex = String(format: "%X", uint8)

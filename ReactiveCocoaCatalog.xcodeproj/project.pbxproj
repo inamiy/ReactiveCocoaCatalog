@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1F12CAD01C9F95D6007D7F51 /* WebLinking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */; };
 		1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F18AFC41CBBDBA800B82A3A /* Rex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F18AFC31CBBDBA800B82A3A /* Rex.framework */; };
+		1F18AFC51CBBDBA800B82A3A /* Rex.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F18AFC31CBBDBA800B82A3A /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F20D65F1C9F90CC00DC0153 /* PaginationRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */; };
 		1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863571C9F76C6004627D3 /* PaginationViewController.swift */; };
 		1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */; };
@@ -54,6 +56,7 @@
 		48258F631CAA8673003BB383 /* ReactiveArray.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48258F611CAA8673003BB383 /* ReactiveArray.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48258F651CAA8BCC003BB383 /* ReactiveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48258F641CAA8BCC003BB383 /* ReactiveTableViewController.swift */; };
 		48258F711CAA9669003BB383 /* ReactiveArray.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48258F701CAA9669003BB383 /* ReactiveArray.storyboard */; };
+		482A1CFF1CBD1D2100FE6610 /* Rex+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A1CFE1CBD1D2100FE6610 /* Rex+Ext.swift */; };
 		48375AAA1B54B2F200BDA6F3 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */; };
 		48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */; };
 		486CF3301B53B34D0056E591 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CF32F1B53B34D0056E591 /* Catalog.swift */; };
@@ -101,6 +104,7 @@
 				48DCFA0E1CB7D445001D00EA /* FontAwesome.framework in Embed Frameworks */,
 				48258F631CAA8673003BB383 /* ReactiveArray.framework in Embed Frameworks */,
 				1F7987E51C9F6AE6003AFE72 /* Argo.framework in Embed Frameworks */,
+				1F18AFC51CBBDBA800B82A3A /* Rex.framework in Embed Frameworks */,
 				1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -110,6 +114,7 @@
 
 /* Begin PBXFileReference section */
 		1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebLinking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F18AFC31CBBDBA800B82A3A /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Rex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationRequestType.swift; sourceTree = "<group>"; };
 		1F2863571C9F76C6004627D3 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewModel.swift; sourceTree = "<group>"; };
@@ -147,6 +152,7 @@
 		48258F611CAA8673003BB383 /* ReactiveArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveArray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48258F641CAA8BCC003BB383 /* ReactiveTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveTableViewController.swift; sourceTree = "<group>"; };
 		48258F701CAA9669003BB383 /* ReactiveArray.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReactiveArray.storyboard; sourceTree = "<group>"; };
+		482A1CFE1CBD1D2100FE6610 /* Rex+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rex+Ext.swift"; sourceTree = "<group>"; };
 		48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionViewController.xib; sourceTree = "<group>"; };
 		486CF32F1B53B34D0056E591 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 				48DCFA0D1CB7D445001D00EA /* FontAwesome.framework in Frameworks */,
 				48258F621CAA8673003BB383 /* ReactiveArray.framework in Frameworks */,
 				1F7987E41C9F6AE6003AFE72 /* Argo.framework in Frameworks */,
+				1F18AFC41CBBDBA800B82A3A /* Rex.framework in Frameworks */,
 				1F7987F41C9F6F5F003AFE72 /* Curry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,6 +236,7 @@
 		1F8517F81BA52E3C00C1FCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F18AFC31CBBDBA800B82A3A /* Rex.framework */,
 				48DCFA0C1CB7D445001D00EA /* FontAwesome.framework */,
 				48258F611CAA8673003BB383 /* ReactiveArray.framework */,
 				1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */,
@@ -247,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				48EA63931BA939A9007F1251 /* ReactiveCocoa+Ext.swift */,
+				482A1CFE1CBD1D2100FE6610 /* Rex+Ext.swift */,
 				487750721CA28DD200B56E7B /* SequenceType+Ext.swift */,
 				1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */,
 				1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */,
@@ -571,6 +580,7 @@
 				1FF369F51BA50BFD00A49E30 /* IncrementalSearchViewController.swift in Sources */,
 				48258F651CAA8BCC003BB383 /* ReactiveTableViewController.swift in Sources */,
 				48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */,
+				482A1CFF1CBD1D2100FE6610 /* Rex+Ext.swift in Sources */,
 				487750731CA28DD200B56E7B /* SequenceType+Ext.swift in Sources */,
 				1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */,
 				1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */,

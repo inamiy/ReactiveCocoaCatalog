@@ -9,6 +9,7 @@
 import UIKit
 import Result
 import ReactiveCocoa
+import Rex
 
 class TextFieldViewController: UIViewController
 {
@@ -24,13 +25,10 @@ class TextFieldViewController: UIViewController
         let textProducer = self.textField!.rac_textSignal().toSignalProducer()
             .ignoreCastError(NoError)
 
-        let labelProperty = DynamicProperty(object: self.label, keyPath: "text")
-        let throttleLabelProperty = DynamicProperty(object: self.throttleLabel, keyPath: "text")
-
-        labelProperty <~ textProducer
+        self.label!.rex_text <~ textProducer
             .map { "Normal: \($0!)" }
 
-        throttleLabelProperty <~ textProducer
+        self.throttleLabel!.rex_text <~ textProducer
             .throttle(1, onScheduler: QueueScheduler.mainQueueScheduler)    // throttle for 1 sec
             .map { "Throttled: \($0!)" }
     }

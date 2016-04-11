@@ -25,3 +25,6 @@
 [submodule "Carthage/Checkouts/FontAwesome.swift"]
 	path = Carthage/Checkouts/FontAwesome.swift
 	url = https://github.com/thii/FontAwesome.swift.git
+[submodule "Carthage/Checkouts/Rex"]
+	path = Carthage/Checkouts/Rex
+	url = https://github.com/neilpa/Rex.git

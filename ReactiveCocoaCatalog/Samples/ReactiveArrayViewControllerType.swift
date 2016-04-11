@@ -9,6 +9,7 @@
 import UIKit
 import Result
 import ReactiveCocoa
+import Rex
 import ReactiveArray
 
 /// Abstract interface for ReactiveArray demos.
@@ -176,10 +177,9 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
             .on(event: logSink("sectionOrItem"))
 
         // Update `decrementButtonItem.enabled`.
-        DynamicProperty(object: decrementButtonItem, keyPath: "enabled")
+        decrementButtonItem.rex_enabled
             <~ count
                 .map { $0 > 1 }
-                as SignalProducer<AnyObject?, NoError>
 
         //
         // Update `viewModel.sectionOrItem`.
@@ -192,10 +192,9 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
             <~ combineLatest(sectionOrItem, count)
 
         // Update `sectionOrItemButtonItem.title`.
-        DynamicProperty(object: sectionOrItemButtonItem, keyPath: "title")
+        sectionOrItemButtonItem.rex_title
             <~ self.viewModel.sectionOrItem.producer
                 .map { "\($0.0.rawValue) \($0.1)" }     // e.g. "Section 1"
-                as SignalProducer<AnyObject?, NoError>
 
         // Update `tableView` sections.
         self.viewModel.changedSectionInfoSignal

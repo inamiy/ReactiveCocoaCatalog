@@ -55,14 +55,10 @@ final class MenuTabBarController: UITabBarController
 
         let tabVCsChanged = self.menuManager.tabViewControllersProperty.signal
 
-        let tabVCs = DynamicProperty(object: self, keyPath: "viewControllers")
-        tabVCs <~ tabVCsChanged
-            .map { $0 as AnyObject? }
+        self.rex_viewControllers <~ tabVCsChanged.map { $0 }
 
         // Always select last tab (= `MenuId.Settings`) on change.
-        tabVCsChanged.observeNext { [weak self] vcs in
-            self?.selectedIndex = vcs.count - 1
-        }
+        self.rex_selectedIndex <~ tabVCsChanged.map { $0.count - 1 }
 
         // Trigger Menu API manually so that random viewControllers will be set.
         self.menuManager.menuAction.apply(0.0).start()

@@ -9,6 +9,7 @@
 import UIKit
 import Result
 import ReactiveCocoa
+import Rex
 
 private let MIN_PASSWORD_LENGTH = 4
 
@@ -56,7 +57,7 @@ class MultipleTextFieldViewController: UIViewController
 
         // create button-enabling stream via any textField change
         let buttonEnablingProducer = combinedProducer
-            .map { username, email, password, password2 -> NSNumber in
+            .map { username, email, password, password2 -> Bool in
 
                 // validation
                 let buttonEnabled = username.characters.count > 0 && email.characters.count > 0 && password.characters.count >= MIN_PASSWORD_LENGTH && password == password2
@@ -83,14 +84,14 @@ class MultipleTextFieldViewController: UIViewController
             }
 
         // bind messageLabel
-        let disposable = DynamicProperty(object: self.messageLabel, keyPath: "text")
-            <~ errorMessagingProducer.map { "\($0)" as AnyObject }
+        let d1 = self.messageLabel!.rex_text
+            <~ errorMessagingProducer
 
         // bind okButton enabled
-        let disposable2 = DynamicProperty(object: self.okButton, keyPath: "enabled")
-            <~ buttonEnablingProducer.map { $0 as AnyObject }
+        let d2 = self.okButton!.rex_enabled
+            <~ buttonEnablingProducer
 
-        let compositeDisposable = CompositeDisposable([disposable, disposable2])
+        let compositeDisposable = CompositeDisposable([d1, d2])
 
         // UI button tap: unbind all
         self.okButton?.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()

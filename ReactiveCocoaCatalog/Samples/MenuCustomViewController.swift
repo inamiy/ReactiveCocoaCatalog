@@ -32,16 +32,16 @@ final class MenuCustomViewController: UIViewController
 
         mainLabel.font = UIFont.fontAwesomeOfSize(mainLabel.font.pointSize)
 
-        DynamicProperty(object: mainLabel, keyPath: "text")
+        mainLabel.rex_text
             <~ menu.title.producer
-                .map { [unowned menu] title -> AnyObject? in
+                .map { [unowned menu] title -> String in
                     let fontAwesome = menu.menuId.fontAwesome
                     var title2 = String.fontAwesomeIconWithName(fontAwesome)
                     title2.appendContentsOf(" \(title)")
                     return title2
                 }
 
-        DynamicProperty(object: subLabel, keyPath: "text")
+        subLabel.rex_text
             <~ menu.badge.producer
                 .map { "Badge: \($0)" }
 

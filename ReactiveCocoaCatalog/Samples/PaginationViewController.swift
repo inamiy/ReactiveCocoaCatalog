@@ -9,6 +9,7 @@
 import UIKit
 import Result
 import ReactiveCocoa
+import Rex
 import APIKit
 import Argo
 
@@ -38,13 +39,18 @@ class PaginationViewController: UITableViewController
             .start(self.viewModel.refreshPipe.1)
 
         let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: nil)
-        refreshButtonItem.rac_command = RACCommand.triggerCommand()
+//        refreshButtonItem.rac_command = RACCommand.triggerCommand()
         self.navigationItem.rightBarButtonItem = refreshButtonItem
 
-        refreshButtonItem.rac_command.executionSignals.toSignalProducer()
-            .triggerize()
-            .start(self.viewModel.refreshPipe.1)
+        let refreshAction = triggerAction()
 
+        refreshButtonItem.rex_action
+            <~ SignalProducer<CocoaAction, NoError>(value: CocoaAction(refreshAction, input: nil))
+
+        refreshAction.values
+            .observe(self.viewModel.refreshPipe.1)
+
+        // NOTE: Requires KVO (DynamicProperty), not `rex_contentOffset`.
         DynamicProperty(object: self.tableView, keyPath: "contentOffset").signal
             .flatMap(.Merge) { [weak self] _ -> SignalProducer<(), NoError> in
                 self?.tableView._reachedBottom == true ? .init(value: ()) : .empty

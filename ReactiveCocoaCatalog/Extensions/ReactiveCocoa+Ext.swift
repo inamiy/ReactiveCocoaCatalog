@@ -164,6 +164,14 @@ extension QueueScheduler
     }
 }
 
+// MARK: Action
+
+/// Helper for attaching trigger action to UI components where Input = sender = AnyObject?.
+func triggerAction() -> Action<AnyObject?, (), NoError>
+{
+    return .init({ _ in .init(value: ()) })
+}
+
 // MARK: Foundation
 
 extension RACCommand

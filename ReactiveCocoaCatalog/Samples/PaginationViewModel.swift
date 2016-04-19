@@ -14,8 +14,8 @@ import Argo
 
 final class PaginationViewModel<Req: PaginationRequestType>
 {
-    let refreshPipe = Signal<(), NoError>.pipe()
-    let loadNextPipe = Signal<(), NoError>.pipe()
+    let refreshObserver: Observer<(), NoError>
+    let loadNextObserver: Observer<(), NoError>
 
     let items: AnyProperty<[Req.Response.Item]>
     private let _items = MutableProperty<[Req.Response.Item]>([])
@@ -36,13 +36,12 @@ final class PaginationViewModel<Req: PaginationRequestType>
         self.lastLoaded = AnyProperty(self._lastLoaded)
         self.loading = AnyProperty(self._loading)
 
-        self._setupSignals()
-    }
+        let refreshPipe = Signal<(), NoError>.pipe()
+        self.refreshObserver = refreshPipe.1
 
-    deinit { logDeinit(self) }
+        let loadNextPipe = Signal<(), NoError>.pipe()
+        self.loadNextObserver = loadNextPipe.1
 
-    private func _setupSignals()
-    {
         print(#function)
 
         let refreshRequest = refreshPipe.0
@@ -101,4 +100,6 @@ final class PaginationViewModel<Req: PaginationRequestType>
             .on(event: logSink("_lastLoaded"))
 
     }
+
+    deinit { logDeinit(self) }
 }

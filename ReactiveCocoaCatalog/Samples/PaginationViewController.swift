@@ -35,9 +35,6 @@ class PaginationViewController: UITableViewController
     {
         super.viewDidLoad()
 
-        self.racc_hookSelector(#selector(viewWillAppear(_:)))
-            .start(self.viewModel.refreshPipe.1)
-
         let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: nil)
 //        refreshButtonItem.rac_command = RACCommand.triggerCommand()
         self.navigationItem.rightBarButtonItem = refreshButtonItem
@@ -48,29 +45,25 @@ class PaginationViewController: UITableViewController
             <~ SignalProducer<CocoaAction, NoError>(value: CocoaAction(refreshAction, input: nil))
 
         refreshAction.values
-            .observe(self.viewModel.refreshPipe.1)
+            .observe(self.viewModel.refreshObserver)
 
         // NOTE: Requires KVO (DynamicProperty), not `rex_contentOffset`.
         DynamicProperty(object: self.tableView, keyPath: "contentOffset").signal
             .flatMap(.Merge) { [weak self] _ -> SignalProducer<(), NoError> in
                 self?.tableView._reachedBottom == true ? .init(value: ()) : .empty
             }
-            .observe(self.viewModel.loadNextPipe.1)
+            .observe(self.viewModel.loadNextObserver)
 
-        self.viewModel.loading.producer
-            .startWithNext { [weak self] loading in
-                if loading {
-                    self?.indicatorView?.startAnimating()
-                }
-                else {
-                    self?.indicatorView?.stopAnimating()
-                }
-            }
+        self.indicatorView!.rex_animating
+            <~ self.viewModel.loading.producer
 
         self.viewModel.items.producer
             .startWithNext { [weak self] repositories in
                 self?.tableView.reloadData()
             }
+
+        // Trigger refresh manually.
+        self.viewModel.refreshObserver.sendNext()
     }
 }
 

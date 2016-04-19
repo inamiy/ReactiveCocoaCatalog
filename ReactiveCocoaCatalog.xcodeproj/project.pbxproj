@@ -11,6 +11,7 @@
 		1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F18AFC41CBBDBA800B82A3A /* Rex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F18AFC31CBBDBA800B82A3A /* Rex.framework */; };
 		1F18AFC51CBBDBA800B82A3A /* Rex.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F18AFC31CBBDBA800B82A3A /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F1BB5991CBEB21E00CE03B8 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BB5981CBEB21E00CE03B8 /* FlickrAPI.swift */; };
 		1F20D65F1C9F90CC00DC0153 /* PaginationRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */; };
 		1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863571C9F76C6004627D3 /* PaginationViewController.swift */; };
 		1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */; };
@@ -21,6 +22,8 @@
 		1F2D33BC1CB8DA3F005E38E6 /* MenuId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D33BB1CB8DA3F005E38E6 /* MenuId.swift */; };
 		1F2D33BE1CB8DA99005E38E6 /* MenuBadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D33BD1CB8DA99005E38E6 /* MenuBadgeScene.swift */; };
 		1F55495A1CB57C2F002E3B32 /* MenuSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5549591CB57C2F002E3B32 /* MenuSettingsViewController.swift */; };
+		1F60F0AC1CC23B4E00D02CA9 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */; };
+		1F60F0AD1CC23B4E00D02CA9 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F665A901CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F665A8F1CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift */; };
 		1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */; };
 		1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */; };
@@ -30,6 +33,11 @@
 		1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7987F31C9F6F5F003AFE72 /* Curry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */; };
 		1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */; };
+		1F8CF17D1CC5C5F90047C2D2 /* PhotosLike.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F8CF1781CC5C5F90047C2D2 /* PhotosLike.storyboard */; };
+		1F8CF17E1CC5C5F90047C2D2 /* PhotosDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CF1791CC5C5F90047C2D2 /* PhotosDetailViewController.swift */; };
+		1F8CF17F1CC5C5F90047C2D2 /* PhotosLikeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CF17A1CC5C5F90047C2D2 /* PhotosLikeManager.swift */; };
+		1F8CF1801CC5C5F90047C2D2 /* PhotosLikeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CF17B1CC5C5F90047C2D2 /* PhotosLikeScene.swift */; };
+		1F8CF1811CC5C5F90047C2D2 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CF17C1CC5C5F90047C2D2 /* PhotosViewController.swift */; };
 		1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */; };
 		1FC5913A1CB5EA7B00CBD02E /* ColorSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC591391CB5EA7B00CBD02E /* ColorSliderViewController.swift */; };
 		1FC5913D1CB5EAC200CBD02E /* ColorSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC5913C1CB5EAC200CBD02E /* ColorSliderViewController.xib */; };
@@ -96,6 +104,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1F60F0AD1CC23B4E00D02CA9 /* Cartography.framework in Embed Frameworks */,
 				1FE03AE31BB79F1000D16C55 /* Haneke.framework in Embed Frameworks */,
 				1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */,
 				1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */,
@@ -115,6 +124,7 @@
 /* Begin PBXFileReference section */
 		1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebLinking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F18AFC31CBBDBA800B82A3A /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Rex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F1BB5981CBEB21E00CE03B8 /* FlickrAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationRequestType.swift; sourceTree = "<group>"; };
 		1F2863571C9F76C6004627D3 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewModel.swift; sourceTree = "<group>"; };
@@ -125,6 +135,7 @@
 		1F2D33BB1CB8DA3F005E38E6 /* MenuId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuId.swift; sourceTree = "<group>"; };
 		1F2D33BD1CB8DA99005E38E6 /* MenuBadgeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBadgeScene.swift; sourceTree = "<group>"; };
 		1F5549591CB57C2F002E3B32 /* MenuSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettingsViewController.swift; sourceTree = "<group>"; };
+		1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F665A8F1CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveDataSourceType.swift; sourceTree = "<group>"; };
 		1F721D6B1C952F290022EC57 /* ZundokoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZundokoViewController.swift; sourceTree = "<group>"; };
 		1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZundokoViewController.xib; sourceTree = "<group>"; };
@@ -132,6 +143,11 @@
 		1F7987F31C9F6F5F003AFE72 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAPI.swift; sourceTree = "<group>"; };
 		1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Ext.swift"; sourceTree = "<group>"; };
+		1F8CF1781CC5C5F90047C2D2 /* PhotosLike.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotosLike.storyboard; sourceTree = "<group>"; };
+		1F8CF1791CC5C5F90047C2D2 /* PhotosDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosDetailViewController.swift; sourceTree = "<group>"; };
+		1F8CF17A1CC5C5F90047C2D2 /* PhotosLikeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosLikeManager.swift; sourceTree = "<group>"; };
+		1F8CF17B1CC5C5F90047C2D2 /* PhotosLikeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosLikeScene.swift; sourceTree = "<group>"; };
+		1F8CF17C1CC5C5F90047C2D2 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewType.swift; sourceTree = "<group>"; };
 		1FC591391CB5EA7B00CBD02E /* ColorSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSliderViewController.swift; sourceTree = "<group>"; };
 		1FC5913C1CB5EAC200CBD02E /* ColorSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorSliderViewController.xib; sourceTree = "<group>"; };
@@ -184,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F60F0AC1CC23B4E00D02CA9 /* Cartography.framework in Frameworks */,
 				1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */,
 				1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */,
 				1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */,
@@ -207,6 +224,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F1BB5971CBEABEB00CE03B8 /* PhotosLike */ = {
+			isa = PBXGroup;
+			children = (
+				1F8CF1781CC5C5F90047C2D2 /* PhotosLike.storyboard */,
+				1F8CF17B1CC5C5F90047C2D2 /* PhotosLikeScene.swift */,
+				1F8CF17C1CC5C5F90047C2D2 /* PhotosViewController.swift */,
+				1F8CF1791CC5C5F90047C2D2 /* PhotosDetailViewController.swift */,
+				1F8CF17A1CC5C5F90047C2D2 /* PhotosLikeManager.swift */,
+			);
+			name = PhotosLike;
+			sourceTree = "<group>";
+		};
 		1F28A0991CA2221000287194 /* MenuBadge */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +258,7 @@
 				1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */,
 				1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */,
 				487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */,
+				1F1BB5981CBEB21E00CE03B8 /* FlickrAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -236,6 +266,7 @@
 		1F8517F81BA52E3C00C1FCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */,
 				1F18AFC31CBBDBA800B82A3A /* Rex.framework */,
 				48DCFA0C1CB7D445001D00EA /* FontAwesome.framework */,
 				48258F611CAA8673003BB383 /* ReactiveArray.framework */,
@@ -372,6 +403,7 @@
 				1FC7EA231C9FE88E00C6B76C /* Pagination */,
 				48258F6E1CAA8DF0003BB383 /* ReactiveArray */,
 				1F28A0991CA2221000287194 /* MenuBadge */,
+				1F1BB5971CBEABEB00CE03B8 /* PhotosLike */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -528,6 +560,7 @@
 				1FDACD121CB5760C00806794 /* MenuBadge.storyboard in Resources */,
 				48EA63921BA938A5007F1251 /* MultipleTextFieldViewController.xib in Resources */,
 				1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */,
+				1F8CF17D1CC5C5F90047C2D2 /* PhotosLike.storyboard in Resources */,
 				1F721D6E1C952F290022EC57 /* ZundokoViewController.xib in Resources */,
 				48D914501B4FB4C400E70080 /* LaunchScreen.xib in Resources */,
 				48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */,
@@ -589,15 +622,19 @@
 				1F2D33BC1CB8DA3F005E38E6 /* MenuId.swift in Sources */,
 				1F28A09B1CA222B600287194 /* MenuManager.swift in Sources */,
 				1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */,
+				1F8CF17E1CC5C5F90047C2D2 /* PhotosDetailViewController.swift in Sources */,
 				1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */,
 				1F2D33BE1CB8DA99005E38E6 /* MenuBadgeScene.swift in Sources */,
 				1F2D33BA1CB8D565005E38E6 /* MenuType.swift in Sources */,
+				1F8CF17F1CC5C5F90047C2D2 /* PhotosLikeManager.swift in Sources */,
 				48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */,
 				1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */,
 				1FDB70B01CB8ED79000A0462 /* BadgeManager.swift in Sources */,
+				1F8CF1801CC5C5F90047C2D2 /* PhotosLikeScene.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
 				1FE0DF7D1CAFF55000893311 /* ReactiveArrayViewModel.swift in Sources */,
 				1FE0DF7B1CAFF01100893311 /* UIBarButtonItem+Ext.swift in Sources */,
+				1F8CF1811CC5C5F90047C2D2 /* PhotosViewController.swift in Sources */,
 				1FD70D4B1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift in Sources */,
 				1F665A901CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift in Sources */,
 				486CF3301B53B34D0056E591 /* Catalog.swift in Sources */,
@@ -605,6 +642,7 @@
 				1FD70D471CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift in Sources */,
 				48EA63941BA939A9007F1251 /* ReactiveCocoa+Ext.swift in Sources */,
 				487750711CA27C4B00B56E7B /* Prelude.swift in Sources */,
+				1F1BB5991CBEB21E00CE03B8 /* FlickrAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

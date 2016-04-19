@@ -71,6 +71,24 @@ extension Signal
             return d
         }
     }
+
+    public func animate(duration duration: NSTimeInterval, options: UIViewAnimationOptions = [.AllowUserInteraction]) -> Signal<Value, Error>
+    {
+        return Signal<Value, Error> { observer in
+            return self.observe { (event: Event<Value, Error>) in
+                switch event {
+                    case let .Next(value):
+                        UIView.animateWithDuration(duration, delay: 0, options: options, animations: {
+                            observer.sendNext(value)
+                        }, completion: { finished in
+                            observer.sendCompleted()
+                        })
+                    default:
+                        observer.sendCompleted()
+                }
+            }
+        }
+    }
 }
 
 extension SignalProducer
@@ -142,9 +160,13 @@ extension SignalProducer
             iterate()
         }
     }
+    public func animate(duration duration: NSTimeInterval, options: UIViewAnimationOptions = [.AllowUserInteraction]) -> SignalProducer<Value, Error>
+    {
+        return lift { $0.animate(duration: duration, options: options) }
+    }
 }
 
-// MARK: GCD
+// MARK: Scheduler / GCD
 
 public func timer(interval: NSTimeInterval) -> SignalProducer<NSDate, NoError>
 {
@@ -161,6 +183,22 @@ extension QueueScheduler
     public func scheduleAfterNow(seconds: NSTimeInterval, action: () -> ()) -> Disposable?
     {
         return self.scheduleAfter(NSDate(timeIntervalSinceNow: seconds), action: action)
+    }
+}
+
+extension Signal
+{
+    public func delay(interval: NSTimeInterval) -> Signal<Value, Error>
+    {
+        return self.delay(interval, onScheduler: QueueScheduler.mainQueueScheduler)
+    }
+}
+
+extension SignalProducer
+{
+    public func delay(interval: NSTimeInterval) -> SignalProducer<Value, Error>
+    {
+        return lift { $0.delay(interval) }
     }
 }
 
@@ -189,6 +227,43 @@ extension NSObject
     {
         return self.rac_signalForSelector(selector).toSignalProducer()
             .triggerize()
+    }
+}
+
+extension NSData
+{
+    /// Synchronous fetching of remote data.
+    static func racc_downloadDataProducer(url: NSURL) -> SignalProducer<NSData?, NoError>
+    {
+        return SignalProducer { observer, disposable in
+            let data = NSData(contentsOfURL: url)
+            observer.sendNext(data)
+            observer.sendCompleted()
+        }
+    }
+}
+
+extension NSCache
+{
+    /// Synchronous cache loading.
+    func racc_objectProducer<T: AnyObject>(key key: AnyObject) -> SignalProducer<T?, NoError>
+    {
+        return SignalProducer { [weak self] observer, disposable in
+            observer.sendNext(self?.objectForKey(key) as? T)
+            observer.sendCompleted()
+        }
+    }
+}
+
+// MARK: UIKit
+
+extension UIImage
+{
+    /// Synchronous fetching of remote image.
+    static func racc_downloadImageProducer(url: NSURL) -> SignalProducer<UIImage?, NoError>
+    {
+        return NSData.racc_downloadDataProducer(url)
+            .map { $0.flatMap(UIImage.init) }
     }
 }
 

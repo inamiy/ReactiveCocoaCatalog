@@ -90,6 +90,16 @@ struct Catalog
                     identifier: "MenuTabBarController"
                 )
             ),
+            Catalog(
+                title: "PhotosLike",
+                description: "Photo Gallery + Like buttons",
+                class_: PhotosViewController.self,
+                storyboard: StoryboardScene(
+                    name: "PhotosLike",
+                    identifier: "PhotosViewController"
+                ),
+                selected: true
+            ),
         ]
     }
 

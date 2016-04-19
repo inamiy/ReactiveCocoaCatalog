@@ -1,4 +1,5 @@
 github "thoughtbot/Argo" "v2.3.0"
+github "robb/Cartography" "0.6.0"
 github "thoughtbot/Curry" "v2.0.0"
 github "thii/FontAwesome.swift" "0.7.1"
 github "Haneke/HanekeSwift" "v0.10.1"

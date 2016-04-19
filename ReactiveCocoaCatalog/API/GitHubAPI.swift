@@ -29,16 +29,6 @@ extension GitHubRequestType
     }
 }
 
-/// - Note: Can be `extension RequestType`.
-extension GitHubRequestType where Response: Decodable, Response.DecodedType == Response
-{
-    /// Automatic decoding.
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> Response?
-    {
-        return decode(object)
-    }
-}
-
 /// - Warning: CAN NOT be `extension RequestType` with error "Segmentation fault: 11".
 extension GitHubRequestType where Response: SequenceType, Response.Generator.Element: Decodable, Response.Generator.Element.DecodedType == Response.Generator.Element
 {

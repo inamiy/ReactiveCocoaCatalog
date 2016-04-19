@@ -30,6 +30,7 @@ final class BadgeManager
         }
     }
 
+    /// - FIXME: This should be created NOT from current `_badges`-dictionary but from combined MutableProperties of badges.
     var mergedSignal: Signal<(MenuId, Badge), NoError>
     {
         var mergedSignal: Signal<(MenuId, Badge), NoError> = .never

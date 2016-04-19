@@ -9,6 +9,9 @@
 import Foundation
 import ReactiveCocoa
 import APIKit
+import Argo
+
+// MARK: APIKit + ReactiveCocoa
 
 extension Session
 {
@@ -29,5 +32,16 @@ extension Session
                 task?.cancel()
             }
         }
+    }
+}
+
+// MARK: APIKit + Argo
+
+extension RequestType where Response: Decodable, Response.DecodedType == Response
+{
+    /// Automatic decoding.
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> Response?
+    {
+        return decode(object)
     }
 }

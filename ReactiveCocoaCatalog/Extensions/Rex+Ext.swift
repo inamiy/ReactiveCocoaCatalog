@@ -72,3 +72,12 @@ extension UITabBarController {
         return associatedProperty(self, key: &selectedIndexKey, initial: { $0.selectedIndex }, setter: { $0.selectedIndex = $1 })
     }
 }
+
+private var animatingKey: UInt8 = 0
+
+extension UIActivityIndicatorView
+{
+    public var rex_animating: MutableProperty<Bool> {
+        return associatedProperty(self, key: &animatingKey, initial: { $0.stopAnimating(); return false }, setter: { $1 ? $0.startAnimating() : $0.stopAnimating() })
+    }
+}

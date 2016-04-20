@@ -20,6 +20,7 @@ import Rex
 final class GameCommandViewController: UIViewController
 {
     @IBOutlet var buttons: [UIButton]?
+    @IBOutlet weak var effectLabel: UILabel?
 
     override func viewDidLoad()
     {
@@ -52,8 +53,9 @@ final class GameCommandViewController: UIViewController
             .ignoreNil()
             .take(1)
             .forever()
-            .startWithNext { (supermove: SuperMove) in
-                print("\n＿人人 人人 人人＿\n" + "＞ \(supermove) ＜\n" + "￣Y^Y^Y^Y^Y^Y￣")
+            .startWithNext { [unowned self] command in
+                print("\n＿人人 人人 人人＿\n" + "＞ \(command) ＜\n" + "￣Y^Y^Y^Y^Y^Y￣")
+                _zoomOut(self.effectLabel!, text: "\(command)")
             }
     }
 }
@@ -100,5 +102,19 @@ enum SuperMove: String
         }
 
         return nil
+    }
+}
+
+// MARK: Helpers
+
+private func _zoomOut(label: UILabel, text: String)
+{
+    label.text = "\(text)"
+    label.alpha = 1
+    label.transform = CGAffineTransformIdentity
+
+    UIView.animateWithDuration(0.5) {
+        label.alpha = 0
+        label.transform = CGAffineTransformMakeScale(3, 3)
     }
 }

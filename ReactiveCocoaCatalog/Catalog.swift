@@ -55,6 +55,16 @@ struct Catalog
                 class_: ZundokoViewController.self
             ),
             Catalog(
+                title: "GameCommand",
+                description: "⬇️↘️➡️👊 → Hadouken!!💥",
+                class_: GameCommandViewController.self,
+                storyboard: StoryboardScene(
+                    name: "GameCommand",
+                    identifier: "GameCommandViewController"
+                ),
+                selected: true
+            ),
+            Catalog(
                 title: "Pagination",
                 description: "Pagination",
                 class_: PaginationViewController.self,
@@ -97,8 +107,7 @@ struct Catalog
                 storyboard: StoryboardScene(
                     name: "PhotosLike",
                     identifier: "PhotosViewController"
-                ),
-                selected: true
+                )
             ),
         ]
     }

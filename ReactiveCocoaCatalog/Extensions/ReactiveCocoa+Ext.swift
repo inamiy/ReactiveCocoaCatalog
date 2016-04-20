@@ -148,10 +148,11 @@ extension SignalProducer
                     serialDisposable.innerDisposable = signalDisposable
 
                     signal.observe { event in
-                        if case .Completed = event {
-                            iterate()
-                        } else {
-                            observer.action(event)
+                        switch event {
+                            case .Failed, .Completed: // NOTE: not for .Interrupted
+                                iterate()
+                            default:
+                                observer.action(event)
                         }
                     }
                 }

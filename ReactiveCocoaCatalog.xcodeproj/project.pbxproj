@@ -13,6 +13,7 @@
 		1F18AFC51CBBDBA800B82A3A /* Rex.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F18AFC31CBBDBA800B82A3A /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F1BB5991CBEB21E00CE03B8 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BB5981CBEB21E00CE03B8 /* FlickrAPI.swift */; };
 		1F20D65F1C9F90CC00DC0153 /* PaginationRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */; };
+		1F24E0491CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24E0481CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift */; };
 		1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863571C9F76C6004627D3 /* PaginationViewController.swift */; };
 		1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */; };
 		1F28635C1C9F85DA004627D3 /* APIKit+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */; };
@@ -128,6 +129,7 @@
 		1F18AFC31CBBDBA800B82A3A /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Rex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1BB5981CBEB21E00CE03B8 /* FlickrAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationRequestType.swift; sourceTree = "<group>"; };
+		1F24E0481CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReactiveCocoa+SampleFrom.swift"; sourceTree = "<group>"; };
 		1F2863571C9F76C6004627D3 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewModel.swift; sourceTree = "<group>"; };
 		1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIKit+Ext.swift"; sourceTree = "<group>"; };
@@ -290,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				48EA63931BA939A9007F1251 /* ReactiveCocoa+Ext.swift */,
+				1F24E0481CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift */,
 				482A1CFE1CBD1D2100FE6610 /* Rex+Ext.swift */,
 				487750721CA28DD200B56E7B /* SequenceType+Ext.swift */,
 				1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */,
@@ -646,6 +649,7 @@
 				48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */,
 				1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */,
 				1FDB70B01CB8ED79000A0462 /* BadgeManager.swift in Sources */,
+				1F24E0491CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift in Sources */,
 				1F8CF1801CC5C5F90047C2D2 /* PhotosLikeScene.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
 				1FE0DF7D1CAFF55000893311 /* ReactiveArrayViewModel.swift in Sources */,

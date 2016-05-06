@@ -11,7 +11,7 @@ import ReactiveCocoa
 
 // MARK: Swift
 
-extension Signal
+extension SignalType
 {
     /// Ignores `(error: Error)` & cast ErrorType to `Error2`.
     @warn_unused_result(message="Did you forget to call `observe` on the signal?")
@@ -37,28 +37,6 @@ extension Signal
         return self
             .ignoreCastError(NoError)
             .map { _ in () }
-    }
-
-    /// Zips `self` with `otherSignal`, using `self` as a sampler.
-    /// - Warning: `zip` may fail if `self` (as sampler) emits faster than `otherSignal` on 1st value.
-    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
-    public func sampleFrom<Value2>(otherSignal: Signal<Value2, Error>) -> Signal<(Value, Value2), Error>
-    {
-        return zip(self, otherSignal.sampleOn(self.triggerize()))
-    }
-
-    /// Zips `self` with `otherSignalProducer`, using `self` as a sampler.
-    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
-    public func sampleFrom<Value2>(otherSignalProducer: SignalProducer<Value2, Error>) -> Signal<(Value, Value2), Error>
-    {
-        return Signal<(Value, Value2), Error> { observer in
-            let d = SerialDisposable()
-            otherSignalProducer.startWithSignal { signal, disposable in
-                self.sampleFrom(signal).observe(observer)
-                d.innerDisposable = disposable
-            }
-            return d
-        }
     }
 
     @warn_unused_result(message="Did you forget to call `observe` on the signal?")
@@ -91,7 +69,7 @@ extension Signal
     }
 }
 
-extension SignalProducer
+extension SignalProducerType
 {
     /// Ignores `(error: Error)` & cast ErrorType to `Error2`.
     @warn_unused_result(message="Did you forget to call `start` on the producer?")
@@ -115,24 +93,17 @@ extension SignalProducer
         return lift { $0.triggerize() }
     }
 
-    /// Zips `self` with `otherSignalProducer`, using `self` as a sampler.
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func sampleFrom<Value2>(otherSignalProducer: SignalProducer<Value2, Error>) -> SignalProducer<(Value, Value2), Error>
-    {
-        return lift(Signal.sampleFrom)(otherSignalProducer)
-    }
-
     /// - SeeAlso: `Rx.startWith` (renamed to not confuse with `startWithNext()`)
     @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func beginWith(value: Value) -> SignalProducer<Value, Error>
     {
-        return SignalProducer(value: value).concat(self)
+        return SignalProducer(value: value).concat(self.producer)
     }
 
     @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func mergeWith(other: SignalProducer<Value, Error>) -> SignalProducer<Value, Error>
     {
-        return SignalProducer<SignalProducer<Value, Error>, Error>(values: [self, other]).flatten(.Merge)
+        return SignalProducer<SignalProducer<Value, Error>, Error>(values: [self.producer, other]).flatten(.Merge)
     }
 
     /// Repeats `self` forever.
@@ -187,7 +158,7 @@ extension QueueScheduler
     }
 }
 
-extension Signal
+extension SignalType
 {
     public func delay(interval: NSTimeInterval) -> Signal<Value, Error>
     {
@@ -195,7 +166,7 @@ extension Signal
     }
 }
 
-extension SignalProducer
+extension SignalProducerType
 {
     public func delay(interval: NSTimeInterval) -> SignalProducer<Value, Error>
     {

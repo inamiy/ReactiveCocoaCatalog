@@ -46,8 +46,7 @@ final class MenuCustomViewController: UIViewController
                 .map { "Badge: \($0)" }
 
         BadgeManager.badges[menu.menuId]
-            <~ updateButton.rac_signalForControlEvents(.TouchUpInside)
-                .toSignalProducer()
+            <~ updateButton.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
                 .ignoreCastError(NoError)
                 .map { _ in Badge(rawValue: Badge.randomBadgeString()) }
     }

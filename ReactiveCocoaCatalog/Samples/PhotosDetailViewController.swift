@@ -55,8 +55,7 @@ final class PhotosDetailViewController: UIViewController
 
         // Send change to `PhotosLikeManager` on `likeButton` tap.
         PhotosLikeManager.likes[photo.imageURL]
-            <~ self.likeButton!.rac_signalForControlEvents(.TouchUpInside)
-                .toSignalProducer()
+            <~ self.likeButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
                 .triggerize()
                 .sampleFrom(PhotosLikeManager.likes[photo.imageURL].producer)
                 .map { $1.inverse }

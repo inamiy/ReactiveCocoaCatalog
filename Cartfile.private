@@ -1,6 +1,6 @@
 github "antitypical/Result"
 github "ReactiveCocoa/ReactiveCocoa"
-github "neilpa/Rex"
+github "RACCommunity/Rex"
 github "inamiy/ReactiveArray" "3fce4d2"
 #github "Wolox/ReactiveArray"
 github "ishkawa/APIKit"

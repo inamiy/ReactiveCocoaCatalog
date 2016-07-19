@@ -34,7 +34,7 @@ public struct BingSearchRequest: BingRequest
         return "/osjson.aspx"
     }
 
-    public var parameters: [String : AnyObject]
+    public var queryParameters: [String : AnyObject]?
     {
         return ["query" : self.query]
     }
@@ -44,12 +44,12 @@ public struct BingSearchRequest: BingRequest
         self.query = query
     }
 
-    public func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> BingSearchResponse?
+    public func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> BingSearchResponse
     {
 //        print("response object = \(object)")
 
         guard let arr = object as? [AnyObject] where arr.count == 2 else {
-            return nil
+            throw ResponseError.UnexpectedObject(object)
         }
 
         let query = arr[0] as? String ?? ""
@@ -67,7 +67,7 @@ public struct BingSearchResponse
 
 public struct BingAPI
 {
-    public static func searchProducer(query: String) -> SignalProducer<BingSearchResponse, APIError>
+    public static func searchProducer(query: String) -> SignalProducer<BingSearchResponse, SessionTaskError>
     {
         return SignalProducer { observer, disposable in
             let request = BingSearchRequest(query: query)

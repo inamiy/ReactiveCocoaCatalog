@@ -15,7 +15,7 @@ import Argo
 
 extension Session
 {
-    static func responseProducer<Req: RequestType>(request: Req) -> SignalProducer<Req.Response, APIError>
+    static func responseProducer<Req: RequestType>(request: Req) -> SignalProducer<Req.Response, SessionTaskError>
     {
         return SignalProducer { observer, disposable in
             let task = Session.sendRequest(request) { result in
@@ -40,8 +40,8 @@ extension Session
 extension RequestType where Response: Decodable, Response.DecodedType == Response
 {
     /// Automatic decoding.
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> Response?
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response
     {
-        return decode(object)
+        return try decode(object).dematerialize()
     }
 }

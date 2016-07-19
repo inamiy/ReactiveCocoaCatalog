@@ -40,7 +40,7 @@ class WhoToFollowViewController: UIViewController
 
         let fetchedUsersProducer = refreshProducer
             .beginWith("startup refresh")
-            .ignoreCastError(APIError)
+            .ignoreCastError(SessionTaskError)
             .flatMap(.Merge) { _ in _randomUsersProducer() }
 
         func bindButton(button: UIButton)
@@ -55,6 +55,7 @@ class WhoToFollowViewController: UIViewController
                 }
                 .mergeWith(refreshProducer.map { _ in nil })
                 .beginWith(nil) // user = nil for emptying labels
+                .ignoreError()
                 .startWithNext { [weak button] user in
 
                     // update UI
@@ -74,7 +75,7 @@ class WhoToFollowViewController: UIViewController
     }
 }
 
-private func _randomUsersProducer(since: Int = Int(arc4random_uniform(500))) -> SignalProducer<[GitHubAPI.User], APIError>
+private func _randomUsersProducer(since: Int = Int(arc4random_uniform(500))) -> SignalProducer<[GitHubAPI.User], SessionTaskError>
 {
     let request = GitHubAPI.UsersRequest(since: since)
     return Session.responseProducer(request)

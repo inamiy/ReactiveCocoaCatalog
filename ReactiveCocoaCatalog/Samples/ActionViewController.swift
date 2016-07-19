@@ -65,7 +65,7 @@ final class ActionViewController: UIViewController
         _setupLoggingForAction("action1", action1)
         _setupLoggingForAction("action2", action2)
 
-        let combinedProducer: SignalProducer<String, NoError> =
+        let combinedProducer: SignalProducer<String?, NoError> =
             combineLatest(
                 action1.executing.producer.map { "action1.executing = \($0)" },
                 action1.enabled.producer.map { "action1.enabled   = \($0)" },

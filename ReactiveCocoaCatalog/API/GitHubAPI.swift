@@ -33,20 +33,20 @@ extension GitHubRequestType
 extension GitHubRequestType where Response: SequenceType, Response.Generator.Element: Decodable, Response.Generator.Element.DecodedType == Response.Generator.Element
 {
     /// Automatic decoding (array).
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> [Response.Generator.Element]?
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> [Response.Generator.Element]
     {
-        return decode(object)
+        return try decode(object).dematerialize()
     }
 }
 
 extension GitHubRequestType where Response: PaginationResponseType, Response.Item: Decodable, Response.Item.DecodedType == Response.Item
 {
     /// Automatic decoding (for PaginationResponse).
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> Response?
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response
     {
         var previousPage: Int?
         if let previousURI = URLResponse.findLink(relation: "prev")?.uri,
-            let queryItems = NSURLComponents(string: previousURI)?.queryItems {
+            queryItems = NSURLComponents(string: previousURI)?.queryItems {
                 previousPage = queryItems
                     .filter { $0.name == "page" }
                     .first
@@ -56,7 +56,7 @@ extension GitHubRequestType where Response: PaginationResponseType, Response.Ite
 
         var nextPage: Int?
         if let nextURI = URLResponse.findLink(relation: "next")?.uri,
-            let queryItems = NSURLComponents(string: nextURI)?.queryItems {
+            queryItems = NSURLComponents(string: nextURI)?.queryItems {
                 nextPage = queryItems
                     .filter { $0.name == "page" }
                     .first
@@ -64,9 +64,9 @@ extension GitHubRequestType where Response: PaginationResponseType, Response.Ite
                     .flatMap { Int($0) }
         }
 
-        let items: [Response.Item]? = decodeWithRootKey("items", object)
-
-        return items.map { Response(items: $0, previousPage: previousPage, nextPage: nextPage) }
+        return try (JSON(object) <|| "items")
+            .map { Response(items: $0, previousPage: previousPage, nextPage: nextPage) }
+            .dematerialize()
     }
 }
 
@@ -90,7 +90,7 @@ extension GitHubAPI
             return "/users"
         }
 
-        var parameters: [String : AnyObject]
+        var queryParameters: [String : AnyObject]?
         {
             return ["since" : self.since]
         }
@@ -144,7 +144,7 @@ extension GitHubAPI
             return "/search/repositories"
         }
 
-        var parameters: [String: AnyObject]
+        var queryParameters: [String: AnyObject]?
         {
             return ["q": query, "page": page]
         }

@@ -205,9 +205,9 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
             .observeNext(_updateItems(self.itemsView))
 
         // Delete item (or section) via `didSelectItem`.
-        self.rac_signalForSelector(protocolSelectorForDidSelectItem.0, fromProtocol: protocolSelectorForDidSelectItem.1)
-            .toSignalProducer()
+        self.rac_signalForSelector(protocolSelectorForDidSelectItem.0, fromProtocol: protocolSelectorForDidSelectItem.1).toSignalProducer()
             .on(event: logSink("didSelectRow"))
+            .ignoreError()
             .startWithNext { [weak self] racTuple in
                 let racTuple = racTuple as! RACTuple
                 let indexPath = racTuple.second as! NSIndexPath

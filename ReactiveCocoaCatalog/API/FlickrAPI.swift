@@ -33,9 +33,9 @@ extension FlickrRequestType
 extension FlickrRequestType where Response: SequenceType, Response.Generator.Element: Decodable, Response.Generator.Element.DecodedType == Response.Generator.Element
 {
     /// Automatic decoding (array).
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> [Response.Generator.Element]?
+    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> [Response.Generator.Element]
     {
-        return decode(object)
+        return try decode(object).dematerialize()
     }
 }
 
@@ -61,7 +61,7 @@ extension FlickrAPI
             return "/" // "/users"
         }
 
-        var parameters: [String : AnyObject]
+        var queryParameters: [String : AnyObject]?
         {
             return [
                 "tags": self.tags,
@@ -79,9 +79,9 @@ extension FlickrAPI
             self.page = page
         }
 
-        func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) -> Response?
+        func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response
         {
-            return decode(object)
+            return try decode(object).dematerialize()
         }
 
         func requestWithPage(page: Int) -> PhotosSearchRequest

@@ -53,8 +53,7 @@ final class MenuSettingsViewController: UITableViewController
         }
 
         // `tableView.didSelectRow()` handling
-        self.rac_signalForSelector(Selector._didSelectRow.0, fromProtocol: Selector._didSelectRow.1)
-            .toSignalProducer()
+        self.rac_signalForSelector(Selector._didSelectRow.0, fromProtocol: Selector._didSelectRow.1).toSignalProducer()
             .on(event: logSink("didSelectRow"))
             .ignoreCastError(NoError)
             .sampleFrom(self.menu!.menusProperty.producer)

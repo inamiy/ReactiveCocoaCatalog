@@ -40,17 +40,17 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
         self.searchController = searchController
 
         let producer = searchController.searchBar.rac_textSignal.toSignalProducer()
-            .ignoreCastError(APIError)
+            .ignoreCastError(SessionTaskError)
             .throttle(0.15, onScheduler: QueueScheduler.mainQueueScheduler)
-            .map { value -> SignalProducer<BingSearchResponse, APIError> in
+            .flatMap(.Latest) { value -> SignalProducer<BingSearchResponse, SessionTaskError> in
                 if let str = value as? String {
                     return BingAPI.searchProducer(str)
                 }
                 else {
-                    return SignalProducer<BingSearchResponse, APIError>.empty
+                    return SignalProducer<BingSearchResponse, SessionTaskError>.empty
                 }
             }
-            .flatten(.Latest)
+            .ignoreError()
 
         producer.startWithSignal { signal, disposable in
             signal.observeNext { [weak self] response in

@@ -42,7 +42,8 @@ struct Catalog
             Catalog(
                 title: "Incremental Search",
                 description: "throttle + flatten(.Latest)",
-                class_: IncrementalSearchViewController.self
+                class_: IncrementalSearchViewController.self,
+                selected: true
             ),
             Catalog(
                 title: "Action",
@@ -61,8 +62,7 @@ struct Catalog
                 storyboard: StoryboardScene(
                     name: "GameCommand",
                     identifier: "GameCommandViewController"
-                ),
-                selected: true
+                )
             ),
             Catalog(
                 title: "Pagination",

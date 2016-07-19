@@ -71,7 +71,7 @@ final class PaginationViewModel<Req: PaginationRequestType>
             .on(event: logSink("request"))
 
         let response = request
-            .promoteErrors(APIError)
+            .promoteErrors(SessionTaskError)
             .flatMap(.Merge) { Session.responseProducer($0) }
             .on(event: logSink("response"))
 

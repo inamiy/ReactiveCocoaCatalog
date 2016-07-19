@@ -53,6 +53,7 @@ final class GameCommandViewController: UIViewController
             .ignoreNil()
             .take(1)
             .forever()
+            .ignoreError()
             .startWithNext { [unowned self] command in
                 print("\n＿人人 人人 人人＿\n" + "＞ \(command) ＜\n" + "￣Y^Y^Y^Y^Y^Y￣")
                 _zoomOut(self.effectLabel!, text: "\(command)")

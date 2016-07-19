@@ -66,7 +66,7 @@ class MultipleTextFieldViewController: UIViewController
 
         // create error-messaging stream via any textField change
         let errorMessagingProducer = combinedProducer
-            .map { username, email, password, password2 -> String in
+            .map { username, email, password, password2 -> String? in
                 switch (username, email, password, password2) {
                     case ("", "", "", ""):
                         return ""
@@ -95,6 +95,7 @@ class MultipleTextFieldViewController: UIViewController
 
         // UI button tap: unbind all
         self.okButton?.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
+            .ignoreError()
             .startWithNext { _ in
                 if compositeDisposable.disposed {
                     print("Already unbinded.")

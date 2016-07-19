@@ -82,8 +82,8 @@ final class PhotosViewController: UICollectionViewController
             }
 
         // Create `detailVC` on `didSelectItemAtIndexPath()`.
-        self.rac_signalForSelector(Selector._didSelectRow.0, fromProtocol: Selector._didSelectRow.1)
-            .toSignalProducer()
+        self.rac_signalForSelector(Selector._didSelectRow.0, fromProtocol: Selector._didSelectRow.1).toSignalProducer()
+            .ignoreError()
             .startWithNext { [unowned self] racTuple in
                 let racTuple = racTuple as! RACTuple
                 let indexPath = racTuple.second as! NSIndexPath
@@ -197,8 +197,7 @@ extension PhotosViewController //: UICollectionViewDataSource
 
         // Send change to `PhotosLikeManager` on `likeButton` tap.
         PhotosLikeManager.likes[photo.imageURL]
-            <~ cell.likeButton!.rac_signalForControlEvents(.TouchUpInside)
-                .toSignalProducer()
+            <~ cell.likeButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
                 .triggerize()
                 .sampleFrom(PhotosLikeManager.likes[photo.imageURL].producer)
                 .map { $1.inverse }

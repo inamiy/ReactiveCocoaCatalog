@@ -42,8 +42,7 @@ struct Catalog
             Catalog(
                 title: "Incremental Search",
                 description: "throttle + flatten(.Latest)",
-                class_: IncrementalSearchViewController.self,
-                selected: true
+                class_: IncrementalSearchViewController.self
             ),
             Catalog(
                 title: "Action",
@@ -108,6 +107,16 @@ struct Catalog
                     name: "PhotosLike",
                     identifier: "PhotosViewController"
                 )
+            ),
+            Catalog(
+                title: "Automaton (StateMachine)",
+                description: "State machine example",
+                class_: AutomatonViewController.self,
+                storyboard: StoryboardScene(
+                    name: "Automaton",
+                    identifier: "AutomatonViewController"
+                ),
+                selected: true
             ),
         ]
     }

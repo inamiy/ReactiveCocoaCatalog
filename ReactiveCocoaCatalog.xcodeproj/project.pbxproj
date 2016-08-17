@@ -70,11 +70,18 @@
 		48375AAA1B54B2F200BDA6F3 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */; };
 		48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */; };
 		4837D9DA1CC737E400BB1C35 /* GameCommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4837D9D91CC737E400BB1C35 /* GameCommandViewController.swift */; };
+		486888F61D3DF244008AF8C7 /* ReactiveAutomaton.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486888F51D3DF244008AF8C7 /* ReactiveAutomaton.framework */; };
+		486888F71D3DF244008AF8C7 /* ReactiveAutomaton.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 486888F51D3DF244008AF8C7 /* ReactiveAutomaton.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		486888FB1D3DF35F008AF8C7 /* Automaton.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 486888F81D3DF35F008AF8C7 /* Automaton.storyboard */; };
+		486888FC1D3DF35F008AF8C7 /* AutomatonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486888F91D3DF35F008AF8C7 /* AutomatonViewController.swift */; };
+		4868890C1D3E12E6008AF8C7 /* AutomatonFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4868890B1D3E12E6008AF8C7 /* AutomatonFixtures.swift */; };
 		486CF3301B53B34D0056E591 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CF32F1B53B34D0056E591 /* Catalog.swift */; };
 		487750711CA27C4B00B56E7B /* Prelude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487750701CA27C4B00B56E7B /* Prelude.swift */; };
 		487750731CA28DD200B56E7B /* SequenceType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487750721CA28DD200B56E7B /* SequenceType+Ext.swift */; };
 		487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */; };
 		487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */; };
+		489463581D51B4D300F9AF27 /* Pulsator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489463571D51B4D300F9AF27 /* Pulsator.framework */; };
+		489463591D51B4D300F9AF27 /* Pulsator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 489463571D51B4D300F9AF27 /* Pulsator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D914431B4FB4C400E70080 /* AppDelegate.swift */; };
 		48D914461B4FB4C400E70080 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D914451B4FB4C400E70080 /* MasterViewController.swift */; };
 		48D9144B1B4FB4C400E70080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48D914491B4FB4C400E70080 /* Main.storyboard */; };
@@ -109,9 +116,11 @@
 			files = (
 				1F60F0AD1CC23B4E00D02CA9 /* Cartography.framework in Embed Frameworks */,
 				1FE03AE31BB79F1000D16C55 /* Haneke.framework in Embed Frameworks */,
+				486888F71D3DF244008AF8C7 /* ReactiveAutomaton.framework in Embed Frameworks */,
 				1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */,
 				1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */,
 				1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */,
+				489463591D51B4D300F9AF27 /* Pulsator.framework in Embed Frameworks */,
 				1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */,
 				48DCFA0E1CB7D445001D00EA /* FontAwesome.framework in Embed Frameworks */,
 				48258F631CAA8673003BB383 /* ReactiveArray.framework in Embed Frameworks */,
@@ -177,12 +186,17 @@
 		48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionViewController.xib; sourceTree = "<group>"; };
 		4837D9D91CC737E400BB1C35 /* GameCommandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCommandViewController.swift; sourceTree = "<group>"; };
+		486888F51D3DF244008AF8C7 /* ReactiveAutomaton.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveAutomaton.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		486888F81D3DF35F008AF8C7 /* Automaton.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Automaton.storyboard; path = Samples/Automaton.storyboard; sourceTree = "<group>"; };
+		486888F91D3DF35F008AF8C7 /* AutomatonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutomatonViewController.swift; path = Samples/AutomatonViewController.swift; sourceTree = "<group>"; };
+		4868890B1D3E12E6008AF8C7 /* AutomatonFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutomatonFixtures.swift; path = Samples/AutomatonFixtures.swift; sourceTree = "<group>"; };
 		486CF32F1B53B34D0056E591 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		487750701CA27C4B00B56E7B /* Prelude.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prelude.swift; sourceTree = "<group>"; };
 		487750721CA28DD200B56E7B /* SequenceType+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+Ext.swift"; sourceTree = "<group>"; };
 		487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoToFollowViewController.swift; sourceTree = "<group>"; };
 		487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhoToFollowViewController.xib; sourceTree = "<group>"; };
+		489463571D51B4D300F9AF27 /* Pulsator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pulsator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D9143E1B4FB4C400E70080 /* ReactiveCocoaCatalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReactiveCocoaCatalog.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48D914421B4FB4C400E70080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		48D914431B4FB4C400E70080 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -208,9 +222,11 @@
 			files = (
 				1F60F0AC1CC23B4E00D02CA9 /* Cartography.framework in Frameworks */,
 				1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */,
+				486888F61D3DF244008AF8C7 /* ReactiveAutomaton.framework in Frameworks */,
 				1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */,
 				1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */,
 				1FE03AE61BB79F1000D16C55 /* ReactiveCocoa.framework in Frameworks */,
+				489463581D51B4D300F9AF27 /* Pulsator.framework in Frameworks */,
 				1F12CAD01C9F95D6007D7F51 /* WebLinking.framework in Frameworks */,
 				48DCFA0D1CB7D445001D00EA /* FontAwesome.framework in Frameworks */,
 				48258F621CAA8673003BB383 /* ReactiveArray.framework in Frameworks */,
@@ -272,6 +288,8 @@
 		1F8517F81BA52E3C00C1FCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				489463571D51B4D300F9AF27 /* Pulsator.framework */,
+				486888F51D3DF244008AF8C7 /* ReactiveAutomaton.framework */,
 				1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */,
 				1F18AFC31CBBDBA800B82A3A /* Rex.framework */,
 				48DCFA0C1CB7D445001D00EA /* FontAwesome.framework */,
@@ -406,6 +424,17 @@
 			name = GameCommand;
 			sourceTree = "<group>";
 		};
+		486888FE1D3DF369008AF8C7 /* Automaton */ = {
+			isa = PBXGroup;
+			children = (
+				486888F81D3DF35F008AF8C7 /* Automaton.storyboard */,
+				486888F91D3DF35F008AF8C7 /* AutomatonViewController.swift */,
+				4868890B1D3E12E6008AF8C7 /* AutomatonFixtures.swift */,
+			);
+			name = Automaton;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		486CF3311B53B4710056E591 /* Samples */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,6 +450,7 @@
 				48258F6E1CAA8DF0003BB383 /* ReactiveArray */,
 				1F28A0991CA2221000287194 /* MenuBadge */,
 				1F1BB5971CBEABEB00CE03B8 /* PhotosLike */,
+				486888FE1D3DF369008AF8C7 /* Automaton */,
 			);
 			path = Samples;
 			sourceTree = "<group>";
@@ -582,6 +612,7 @@
 				48D914501B4FB4C400E70080 /* LaunchScreen.xib in Resources */,
 				48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */,
 				482476AB1CC738F600DA143D /* GameCommand.storyboard in Resources */,
+				486888FB1D3DF35F008AF8C7 /* Automaton.storyboard in Resources */,
 				48D9144D1B4FB4C400E70080 /* Images.xcassets in Resources */,
 				48258F711CAA9669003BB383 /* ReactiveArray.storyboard in Resources */,
 				48EA638E1BA92F5D007F1251 /* TextFieldViewController.xib in Resources */,
@@ -636,6 +667,7 @@
 				487750731CA28DD200B56E7B /* SequenceType+Ext.swift in Sources */,
 				1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */,
 				1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */,
+				4868890C1D3E12E6008AF8C7 /* AutomatonFixtures.swift in Sources */,
 				1FDACD141CB5784600806794 /* MenuCustomViewController.swift in Sources */,
 				1FEE10A11BA9E440006E9335 /* Helpers.swift in Sources */,
 				1F2D33BC1CB8DA3F005E38E6 /* MenuId.swift in Sources */,
@@ -651,6 +683,7 @@
 				1FDB70B01CB8ED79000A0462 /* BadgeManager.swift in Sources */,
 				1F24E0491CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift in Sources */,
 				1F8CF1801CC5C5F90047C2D2 /* PhotosLikeScene.swift in Sources */,
+				486888FC1D3DF35F008AF8C7 /* AutomatonViewController.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
 				1FE0DF7D1CAFF55000893311 /* ReactiveArrayViewModel.swift in Sources */,
 				1FE0DF7B1CAFF01100893311 /* UIBarButtonItem+Ext.swift in Sources */,

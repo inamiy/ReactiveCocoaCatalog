@@ -11,9 +11,17 @@ import ReactiveCocoa
 
 // MARK: Swift
 
+public enum NoValue {}
+
 extension SignalType
 {
-    /// Ignores `(error: Error)` & cast ErrorType to `Error2`.
+    /// Ignores values & cast `Value` to `Value2`.
+    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
+    public func ignoreCastValue<Value2>(_: Value2.Type) -> Signal<Value2, Error> {
+        return self.flatMap(.Merge) { _ in SignalProducer<Value2, Error>.empty }
+    }
+
+    /// Ignores error & cast `Error` to `Error2`.
     @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func ignoreCastError<Error2: ErrorType>(_: Error2.Type) -> Signal<Value, Error2>
     {
@@ -71,7 +79,13 @@ extension SignalType
 
 extension SignalProducerType
 {
-    /// Ignores `(error: Error)` & cast ErrorType to `Error2`.
+    /// Ignores values & cast `Value` to `Value2`.
+    @warn_unused_result(message="Did you forget to call `start` on the producer?")
+    public func ignoreCastValue<Value2>(_: Value2.Type) -> SignalProducer<Value2, Error> {
+        return lift { $0.ignoreCastValue(Value2) }
+    }
+
+    /// Ignores error & cast `Error` to `Error2`.
     @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func ignoreCastError<Error2: ErrorType>(_: Error2.Type) -> SignalProducer<Value, Error2>
     {

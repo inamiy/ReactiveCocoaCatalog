@@ -81,3 +81,26 @@ extension UIActivityIndicatorView
         return associatedProperty(self, key: &animatingKey, initial: { $0.stopAnimating(); return false }, setter: { $1 ? $0.startAnimating() : $0.stopAnimating() })
     }
 }
+
+// MARK: CoreAnimation
+
+private var positionKey: UInt8 = 0
+private var hiddenKey: UInt8 = 0
+
+extension CALayer
+{
+    /// Wraps a layer's `position` value in a bindable property.
+    public var rex_position: MutableProperty<CGPoint> {
+        return associatedProperty(self, key: &positionKey, initial: { $0.position }, setter: { $0.position = $1 })
+    }
+
+    /// Wraps a layer's `hidden` state in a bindable property.
+    public var rex_hidden: MutableProperty<Bool> {
+        return associatedProperty(self, key: &hiddenKey, initial: { $0.hidden }, setter: { $0.hidden = $1 })
+    }
+
+    /// Wraps a layer's `backgroundColor` state in a bindable property.
+    public var rex_backgroundColor: MutableProperty<CGColor?> {
+        return associatedProperty(self, key: &backgroundColorKey, initial: { $0.backgroundColor }, setter: { $0.backgroundColor = $1 })
+    }
+}

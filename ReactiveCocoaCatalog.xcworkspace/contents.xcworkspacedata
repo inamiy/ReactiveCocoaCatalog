@@ -20,6 +20,9 @@
          location = "group:Carthage/Checkouts/ReactiveArray/ReactiveArray.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Carthage/Checkouts/ReactiveAutomaton/ReactiveAutomaton.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Carthage/Checkouts/APIKit/APIKit.xcodeproj">
       </FileRef>
       <FileRef
@@ -36,6 +39,9 @@
       </FileRef>
       <FileRef
          location = "group:Carthage/Checkouts/FontAwesome.swift/FontAwesome.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Carthage/Checkouts/Pulsator/Pulsator.xcodeproj">
       </FileRef>
    </Group>
    <FileRef

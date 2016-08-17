@@ -31,3 +31,9 @@
 [submodule "Carthage/Checkouts/Cartography"]
 	path = Carthage/Checkouts/Cartography
 	url = https://github.com/robb/Cartography.git
+[submodule "Carthage/Checkouts/ReactiveAutomaton"]
+	path = Carthage/Checkouts/ReactiveAutomaton
+	url = https://github.com/inamiy/ReactiveAutomaton.git
+[submodule "Carthage/Checkouts/Pulsator"]
+	path = Carthage/Checkouts/Pulsator
+	url = https://github.com/shu223/Pulsator.git

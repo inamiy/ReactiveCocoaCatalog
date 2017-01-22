@@ -8,8 +8,7 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
-import Rex
+import ReactiveSwift
 
 private let MIN_PASSWORD_LENGTH = 4
 
@@ -18,7 +17,7 @@ private let MIN_PASSWORD_LENGTH = 4
 /// iOS - ReactiveCocoaをかじってみた - Qiita
 /// http://qiita.com/paming/items/9ac189ab0fe5b25fe722
 ///
-class MultipleTextFieldViewController: UIViewController
+class MultipleTextFieldViewController: UIViewController, NibSceneProvider
 {
     @IBOutlet var usernameTextField: UITextField?
     @IBOutlet var emailTextField: UITextField?
@@ -39,21 +38,29 @@ class MultipleTextFieldViewController: UIViewController
     func _setupViews()
     {
         self.messageLabel?.text = ""
-        self.okButton?.enabled = false
+        self.okButton?.isEnabled = false
     }
 
     func _setupProducers()
     {
-        let usernameProducer = self.usernameTextField!.rac_textSignal().toSignalProducer().map { $0 as? String ?? "" }
-        let emailProducer = self.emailTextField!.rac_textSignal().toSignalProducer().map { $0 as? String ?? "" }
-        let passwordProducer = self.passwordTextField!.rac_textSignal().toSignalProducer().map { $0 as? String ?? "" }
-        let password2Producer = self.password2TextField!.rac_textSignal().toSignalProducer().map { $0 as? String ?? "" }
 
-        let combinedProducer = combineLatest(usernameProducer, emailProducer, passwordProducer, password2Producer)
-            .ignoreCastError(NoError)
+        let usernameProducer = SignalProducer(self.usernameTextField!.reactive.continuousTextValues)
+            .map { $0 ?? "" }
+            .prefix(value: "")
+        let emailProducer = SignalProducer(self.emailTextField!.reactive.continuousTextValues)
+            .map { $0 ?? "" }
+            .prefix(value: "")
+        let passwordProducer = SignalProducer(self.passwordTextField!.reactive.continuousTextValues)
+            .map { $0 ?? "" }
+            .prefix(value: "")
+        let password2Producer = SignalProducer(self.password2TextField!.reactive.continuousTextValues)
+            .map { $0 ?? "" }
+            .prefix(value: "")
+
+        let combinedProducer = SignalProducer.combineLatest(usernameProducer, emailProducer, passwordProducer, password2Producer)
 
         // logging
-        combinedProducer.startWithNext { print("combinedProducer = \($0)") }
+        combinedProducer.startWithValues { print("combinedProducer = \($0)") }
 
         // create button-enabling stream via any textField change
         let buttonEnablingProducer = combinedProducer
@@ -84,20 +91,19 @@ class MultipleTextFieldViewController: UIViewController
             }
 
         // bind messageLabel
-        let d1 = self.messageLabel!.rex_text
+        let d1 = self.messageLabel!.reactive.text
             <~ errorMessagingProducer
 
         // bind okButton enabled
-        let d2 = self.okButton!.rex_enabled
+        let d2 = self.okButton!.reactive.isEnabled
             <~ buttonEnablingProducer
 
         let compositeDisposable = CompositeDisposable([d1, d2])
 
         // UI button tap: unbind all
-        self.okButton?.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-            .ignoreError()
-            .startWithNext { _ in
-                if compositeDisposable.disposed {
+        self.okButton!.reactive.controlEvents(.touchUpInside)
+            .observeValues { _ in
+                if compositeDisposable.isDisposed {
                     print("Already unbinded.")
                 }
                 else {

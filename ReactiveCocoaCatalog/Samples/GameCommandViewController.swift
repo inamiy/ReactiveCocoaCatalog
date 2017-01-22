@@ -8,8 +8,7 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
-import Rex
+import ReactiveSwift
 
 ///
 /// Street Fighter Super-Move-Command example.
@@ -17,8 +16,10 @@ import Rex
 /// - SeeAlso:
 ///   - [Street Fighter - Wikipedia, the free encyclopedia](https://en.wikipedia.org/wiki/Street_Fighter)
 ///
-final class GameCommandViewController: UIViewController
+final class GameCommandViewController: UIViewController, StoryboardSceneProvider
 {
+    static let storyboardScene = StoryboardScene<GameCommandViewController>(name: "GameCommand")
+
     @IBOutlet var buttons: [UIButton]?
     @IBOutlet weak var effectLabel: UILabel?
 
@@ -26,38 +27,36 @@ final class GameCommandViewController: UIViewController
     {
         super.viewDidLoad()
 
-        let d = self.rac_deallocDisposable
-
         let buttonTaps = self.buttons!
-            .map {
-                $0.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-                    .map { $0 as? UIButton }
-                    .ignoreCastError(NoError)
-            }
+            .map { $0.reactive.controlEvents(.touchUpInside) }
 
         // NOTE: Commands are evaluated from button's title using easy IBOutletCollection.
-        let commands = SignalProducer<SignalProducer<UIButton?, NoError>, NoError>(values: buttonTaps).flatten(.Merge)
-            .map { GameCommand(rawValue: $0!.titleForState(.Normal)!) }
-            .ignoreNil()
+        let commands = SignalProducer<Signal<UIButton, NoError>, NoError>(buttonTaps).flatten(.merge)
+            .map { GameCommand(rawValue: $0.title(for: .normal)!) }
+            .skipNil()
             .on(event: logSink("commands"))
 
-        d += commands
+        let d = commands
             .promoteErrors(GameCommand.Error.self)
-            .flatMap(.Latest) {
+            .flatMap(.latest) {
                 SignalProducer(value: $0)
                     .concat(.never)
-                    .timeoutWithError(.Timeout, afterInterval: 1, onScheduler: QueueScheduler.mainQueueScheduler)
+                    .timeout(after: 1, raising: .timeout, on: QueueScheduler.main)
             }
             .scan([]) { $0 + [$1] }
-            .map { SuperMove(command: $0.map { $0.rawValue }.joinWithSeparator("")) }
-            .ignoreNil()
-            .take(1)
+            .map { SuperMove(command: $0.map { $0.rawValue }.joined(separator: "")) }
+            .skipNil()
+            .take(first: 1)
             .forever()
-            .ignoreError()
-            .startWithNext { [unowned self] command in
+            .ignoreCastError(NoError.self)
+            .startWithValues { [unowned self] command in
                 print("\n＿人人 人人 人人＿\n" + "＞ \(command) ＜\n" + "￣Y^Y^Y^Y^Y^Y￣")
-                _zoomOut(self.effectLabel!, text: "\(command)")
+                _zoomOut(label: self.effectLabel!, text: "\(command)")
             }
+
+        self.reactive.lifetime.ended.observeCompleted {
+            d.dispose()
+        }
     }
 }
 
@@ -68,15 +67,15 @@ enum GameCommand: String
 //    case ➡️, ↘️, ⬇️, ↙️, ⬅️, ↖️, ⬆️, ↗️, 👊, 👣 // Comment-Out: Can't do this 😡💢
 
     // NOTE: Mapped to Storyboard labels.
-    case Right = "➡️", DownRight = "↘️", Down = "⬇️", DownLeft = "↙️", Left = "⬅️", UpLeft = "↖️", Up = "⬆️", UpRight = "↗️"
-    case Punch = "👊", Kick = "👣"
+    case right = "➡️", downRight = "↘️", down = "⬇️", downLeft = "↙️", left = "⬅️", upLeft = "↖️", up = "⬆️", upRight = "↗️"
+    case punch = "👊", kick = "👣"
 }
 
 extension GameCommand
 {
-    enum Error: ErrorType
+    enum Error: Swift.Error
     {
-        case Timeout
+        case timeout
     }
 }
 
@@ -85,12 +84,12 @@ extension GameCommand
 /// - SeeAlso: [Inputs - Street Fighter Wiki - Wikia](http://streetfighter.wikia.com/wiki/Inputs)
 enum SuperMove: String
 {
-    case Hadouken = "⬇️↘️➡️👊"
-    case Shoryuken = "➡️⬇️↘️👊"
-    case TatsumakiSenpukyaku = "⬇️↙️⬅️👣" // a.k.a "Hurricane Kick"
-    case ScrewPileDriver = "➡️↘️⬇️↙️⬅️↖️⬆️↗️👊"   // a.k.a. "Spinning Pile Driver"
+    case hadouken = "⬇️↘️➡️👊"
+    case shoryuken = "➡️⬇️↘️👊"
+    case tatsumakiSenpukyaku = "⬇️↙️⬅️👣" // a.k.a "Hurricane Kick"
+    case screwPileDriver = "➡️↘️⬇️↙️⬅️↖️⬆️↗️👊"   // a.k.a. "Spinning Pile Driver"
 
-    static let allValues = [Hadouken, Shoryuken, TatsumakiSenpukyaku, ScrewPileDriver]
+    static let allValues = [hadouken, shoryuken, tatsumakiSenpukyaku, screwPileDriver]
 
     /// - Returns: Preferred `SuperMove` evaluated from `command` **suffix**.
     init?(command: String)
@@ -112,10 +111,10 @@ private func _zoomOut(label: UILabel, text: String)
 {
     label.text = "\(text)"
     label.alpha = 1
-    label.transform = CGAffineTransformIdentity
+    label.transform = CGAffineTransform.identity
 
-    UIView.animateWithDuration(0.5) {
+    UIView.animate(withDuration: 0.5) {
         label.alpha = 0
-        label.transform = CGAffineTransformMakeScale(3, 3)
+        label.transform = CGAffineTransform(scaleX: 3, y: 3)
     }
 }

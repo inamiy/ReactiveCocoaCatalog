@@ -7,13 +7,14 @@
 //
 
 import UIKit
-import ReactiveCocoa
+import Result
+import ReactiveSwift
 import APIKit
 import Argo
 
 private let _cellIdentifier = "IncrementalSearchCellIdentifier"
 
-class IncrementalSearchViewController: UITableViewController, UISearchBarDelegate
+class IncrementalSearchViewController: UITableViewController, UISearchBarDelegate, NibSceneProvider
 {
     var searchController: UISearchController?
 
@@ -25,39 +26,35 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
 
         let searchController = UISearchController(searchResultsController: nil)
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
 
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: _cellIdentifier)
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: _cellIdentifier)
         self.tableView.tableHeaderView = searchController.searchBar
 
         // workaround for iOS8
         // http://useyourloaf.com/blog/2015/04/26/search-bar-not-showing-without-a-scope-bar.html
-        if !NSProcessInfo().isOperatingSystemAtLeastVersion(NSOperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0))
+        if !ProcessInfo().isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 9, minorVersion: 0, patchVersion: 0))
         {
             searchController.searchBar.sizeToFit()
         }
 
         self.searchController = searchController
 
-        let producer = searchController.searchBar.rac_textSignal.toSignalProducer()
-            .ignoreCastError(SessionTaskError)
-            .throttle(0.15, onScheduler: QueueScheduler.mainQueueScheduler)
-            .flatMap(.Latest) { value -> SignalProducer<BingSearchResponse, SessionTaskError> in
-                if let str = value as? String {
-                    return BingAPI.searchProducer(str)
+        let producer = searchController.searchBar.reactive.continuousTextValues
+            .throttle(0.15, on: QueueScheduler.main)
+            .flatMap(.latest) { value -> SignalProducer<BingSearchResponse, NoError> in
+                if let str = value {
+                    return BingAPI.searchProducer(query: str)
+                        .ignoreCastError(NoError.self)
                 }
                 else {
-                    return SignalProducer<BingSearchResponse, SessionTaskError>.empty
+                    return .empty
                 }
             }
-            .ignoreError()
 
-        producer.startWithSignal { signal, disposable in
-            signal.observeNext { [weak self] response in
-                print("onNext = \(response)")
-                self?.bingSearchResponse = response
-                self?.tableView.reloadData()
-            }
+        producer.observeValues { [weak self] response in
+            print("onNext = \(response)")
+            self?.bingSearchResponse = response
+            self?.tableView.reloadData()
         }
     }
 
@@ -75,19 +72,19 @@ class IncrementalSearchViewController: UITableViewController, UISearchBarDelegat
 
     // MARK: - UITableViewDataSource
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.bingSearchResponse?.suggestions.count ?? 0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(_cellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: _cellIdentifier, for: indexPath)
 
         cell.textLabel?.text = self.bingSearchResponse?.suggestions[indexPath.row]
 

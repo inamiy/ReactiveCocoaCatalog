@@ -37,3 +37,15 @@
 [submodule "Carthage/Checkouts/Pulsator"]
 	path = Carthage/Checkouts/Pulsator
 	url = https://github.com/shu223/Pulsator.git
+[submodule "Carthage/Checkouts/ReactiveSwift"]
+	path = Carthage/Checkouts/ReactiveSwift
+	url = https://github.com/ReactiveCocoa/ReactiveSwift.git
+[submodule "Carthage/Checkouts/Runes"]
+	path = Carthage/Checkouts/Runes
+	url = https://github.com/thoughtbot/Runes.git
+[submodule "Carthage/Checkouts/ReactiveObjC"]
+	path = Carthage/Checkouts/ReactiveObjC
+	url = https://github.com/ReactiveCocoa/ReactiveObjC.git
+[submodule "Carthage/Checkouts/ReactiveObjCBridge"]
+	path = Carthage/Checkouts/ReactiveObjCBridge
+	url = https://github.com/ReactiveCocoa/ReactiveObjCBridge.git

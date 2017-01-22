@@ -8,7 +8,7 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import FontAwesome
 
 /// Transient menu protocol managed by `MenuManager`.
@@ -33,27 +33,27 @@ extension MenuType
     /// but after `viewController.init()` (too early to access to **unowned viewModel**).
     func bindToTabBarItem()
     {
-        self.viewController.tabBarItem.rex_title <~ self.title.producer.map { $0 }
-        self.viewController.tabBarItem.rex_image <~ self.tabImage.producer.map { $0 }
-        self.viewController.tabBarItem.rex_badgeValue <~ self.badge.producer.map { $0.rawValue }
+        self.viewController.tabBarItem.reactive.title <~ self.title.producer.map { $0 }
+        self.viewController.tabBarItem.reactive.image <~ self.tabImage.producer.map { $0 }
+        self.viewController.tabBarItem.reactive.badgeValue <~ self.badge.producer.map { $0.rawValue }
     }
 }
 
 /// ViewModel for `MenuSettingsViewController`, managed by `MenuManager`.
 final class SettingsMenu: MenuType
 {
-    let menuId = MenuId.Settings
+    let menuId = MenuId.settings
     let viewController: UIViewController
 
-    let title = MutableProperty<String>("\(MenuId.Settings)")
+    let title = MutableProperty<String>("\(MenuId.settings)")
     let tabImage: MutableProperty<UIImage?>
-    let badge = MutableProperty<Badge>(.None)
+    let badge = MutableProperty<Badge>(.none)
 
     let menusProperty = MutableProperty<[MenuType]>([])
 
     init()
     {
-        let vc = MenuBadgeScene.settings.instantiate()
+        let vc = MenuSettingsViewController.storyboardScene.instantiate()
 
         self.viewController = vc
         self.tabImage = MutableProperty(self.menuId.tabImage)
@@ -72,11 +72,11 @@ final class CustomMenu: MenuType
 
     let title: MutableProperty<String>
     let tabImage: MutableProperty<UIImage?>
-    let badge = MutableProperty<Badge>(.None)
+    let badge = MutableProperty<Badge>(.none)
 
     init(menuId: MenuId)
     {
-        let vc = MenuBadgeScene.custom.instantiate()
+        let vc = MenuCustomViewController.storyboardScene.instantiate()
 
         self.menuId = menuId
         self.viewController = vc

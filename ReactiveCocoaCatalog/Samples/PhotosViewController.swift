@@ -8,8 +8,10 @@
 
 import UIKit
 import Result
+import ReactiveSwift
 import ReactiveCocoa
-import Rex
+import ReactiveObjC
+import ReactiveObjCBridge
 import APIKit
 import Cartography
 
@@ -25,39 +27,43 @@ private let _imageLoadingScheduler = QueueScheduler(name: "com.inamiy.ReactiveCo
 /// - Simple image loading
 /// - Memory-persistent "Like" flags across multiple viewControllers
 ///
-final class PhotosViewController: UICollectionViewController
+final class PhotosViewController: UICollectionViewController, StoryboardSceneProvider
 {
+    static let storyboardScene = StoryboardScene<PhotosViewController>(name: "PhotosLike")
+
+    typealias ImageCache = NSCache<NSURL, UIImage>
+
     /// - Warning: `@IBOutlet` is not possible when it is added inside recycling view.
     /// - Todo:  What is the best practice for footer loading indicator inside UICollectionView?
-    let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .White)
+    let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .white)
 
     let viewModel = PaginationViewModel(
         paginationRequest: FlickrAPI.PhotosSearchRequest(tags: ["landmark"], page: 1)
     )
 
-    let imageCache = NSCache()
-
-    deinit { logDeinit(self) }
+    let imageCache = ImageCache()
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        // Change UICollectionViewCell size on different device orientations
-        // http://stackoverflow.com/questions/13556554/change-uicollectionviewcell-size-on-different-device-orientations
-        self.racc_hookSelector(#selector(viewWillLayoutSubviews))
-            .startWithNext { [unowned self] in
-                self.collectionView?.collectionViewLayout.invalidateLayout()
+        //
+        // Change UICollectionViewCell size on frame change.
+        // (This is more convenient than overriding `shouldInvalidateLayout(forBoundsChange:)`)
+        //
+        // NOTE: Observing `viewWillLayoutSubviews` will cause infinite loop when nothing is displayed.
+        // http://stackoverflow.com/questions/29023473/uicollectionview-invalidate-layout-on-bounds-changes#comment56145257_29155201
+        //
+        self.view.reactive.values(forKeyPath: "frame")
+            .start { [weak self] event in
+                self?.collectionView?.collectionViewLayout.invalidateLayout()
             }
 
-        let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: nil)
+        let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem = refreshButtonItem
 
-        let refreshAction = triggerAction()
-
-        // Set CocoaAction to `refreshButtonItem`.
-        refreshButtonItem.rex_action
-            <~ SignalProducer(value: CocoaAction(refreshAction, input: nil))
+        let refreshAction = Action<(), (), NoError> { _ in .init(value: ()) }
+        refreshButtonItem.reactive.pressed = CocoaAction(refreshAction)
 
         // Send `refreshAction` values to `viewModel.refreshObserver`.
         refreshAction.values
@@ -65,50 +71,51 @@ final class PhotosViewController: UICollectionViewController
 
         // Send `contentOffset` to `viewModel.loadNextObserver`.
         // NOTE: Requires KVO, not `rex_contentOffset`.
-        self.collectionView!.rex_producerForKeyPath("contentOffset")
-            .flatMap(.Merge) { [weak self] (_: AnyObject) -> SignalProducer<(), NoError> in
-                self?.collectionView?._reachedBottom == true ? .init(value: ()) : .empty
+        self.collectionView!.reactive
+            .values(forKeyPath: #keyPath(UICollectionView.contentOffset))
+            .flatMap(.merge) { [weak self] _ -> SignalProducer<(), NoError> in
+                return (self?.collectionView?._reachedBottom ?? false) ? .init(value: ()) : .empty
             }
             .start(self.viewModel.loadNextObserver)
 
         // Send `viewModel.loading` to `indicatorView`.
-        self.indicatorView.rex_animating
+        self.indicatorView.reactive.isAnimating
             <~ self.viewModel.loading.producer
 
         // Call `collectionView.reloadData()` on `viewModel.items` change.
         self.viewModel.items.producer
-            .startWithNext { [weak self] repositories in
+            .startWithValues { [weak self] repositories in
                 self?.collectionView?.reloadData()
             }
 
         // Create `detailVC` on `didSelectItemAtIndexPath()`.
-        self.rac_signalForSelector(Selector._didSelectRow.0, fromProtocol: Selector._didSelectRow.1).toSignalProducer()
-            .ignoreError()
-            .startWithNext { [unowned self] racTuple in
+        bridgedSignalProducer(from: self.rac_signal(for: Selector._didSelectRow.0, from: Selector._didSelectRow.1))
+            .ignoreCastError(NoError.self)
+            .startWithValues { [unowned self] racTuple in
                 let racTuple = racTuple as! RACTuple
                 let indexPath = racTuple.second as! NSIndexPath
 
                 let photo: FlickrAPI.Photo = self.viewModel.items.value[indexPath.row]
 
-                let detailVC = PhotosLikeScene.detail.instantiate()
+                let detailVC = PhotosDetailViewController.storyboardScene.instantiate()
                 detailVC.photo = photo
 
                 // Send image to `detailVC.viewModel`.
                 detailVC.viewModel.imageProperty
-                    <~ self.imageCache._cacheOrDownloadImageProducer(photo.imageURL)
+                    <~ _cacheOrDownloadImageProducer(url: photo.imageURL, cache: self.imageCache)
                         .map { $0.0 }
 
-                self.showViewController(detailVC, sender: nil)
+                self.show(detailVC, sender: nil)
             }
 
         // Workaround for non-@IBOutlet `indicatorView` to show & hide at UICollectionView-footer,
         // even though UICollectionView itself doesn't provide `tableFooterView`-like property.
         self.viewModel.loading.signal
-            .observeNext { [unowned self] isOn in
+            .observeValues { [unowned self] isOn in
                 if isOn {
                     let reusableViews = self.collectionView!.subviews
                         .filter { $0 is LikeCollectionReusableView }
-                        .sort { $0.frame.origin.y > $1.frame.origin.y}
+                        .sorted { $0.frame.origin.y > $1.frame.origin.y}
 
                     // if footerView is available...
                     if let reusableView = reusableViews.first {
@@ -134,14 +141,14 @@ final class PhotosViewController: UICollectionViewController
                 }
             }
 
-        // Set delegate after calling `rac_signalForSelector(_:fromProtocol:)`.
+        // Set delegate after calling `rac_signal(for: _:from:)`.
         // - https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1121
         // - http://stackoverflow.com/questions/22000433/rac-signalforselector-needs-empty-implementation
         self.collectionView!.delegate = nil   // set nil to clear selector cache
         self.collectionView!.delegate = self
 
         // Trigger refresh manually.
-        self.viewModel.refreshObserver.sendNext()
+        self.viewModel.refreshObserver.send(value: ())
     }
 }
 
@@ -149,33 +156,31 @@ final class PhotosViewController: UICollectionViewController
 
 extension PhotosViewController //: UICollectionViewDataSource
 {
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         return self.viewModel.items.value.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(_cellIdentifier, forIndexPath: indexPath) as! LikeCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: _cellIdentifier, for: indexPath) as! LikeCollectionViewCell
 
         cell.alpha = 0.02   // almost invisible, clickable alpha
 
         let photo: FlickrAPI.Photo = self.viewModel.items.value[indexPath.row]
 
-        let prepareForReuse = cell.rac_prepareForReuseSignal.toSignal()
-            .triggerize()
-            .take(1)
+        let prepareForReuse = cell.reactive.prepareForReuse.take(first: 1)
 
         // Load image & set to `cell.imageView`.
-        self.imageCache._cacheOrDownloadImageProducer(photo.imageURL)
-            .takeUntil(prepareForReuse) // can interrupt downloading when out of screen
-            .startWithSignal { [unowned cell] signal, disposable in
+        _cacheOrDownloadImageProducer(url: photo.imageURL, cache: self.imageCache)
+            .take(until: prepareForReuse) // can interrupt downloading when out of screen
+            .startWithSignal { signal, disposable in
                 // Set image.
-                cell.imageView!.rex_image <~ signal.map { $0.0 }
+                cell.imageView!.reactive.image <~ signal.map { $0.0 }
 
                 // Set alpha.
-                cell.rex_alpha <~ signal
-                    .flatMap(.Merge) { _, usesCache -> SignalProducer<CGFloat, NoError> in
+                cell.reactive.alpha <~ signal
+                    .flatMap(.merge) { _, usesCache -> SignalProducer<CGFloat, NoError> in
                         // No animation (alpha = 1.0).
                         if usesCache {
                             return SignalProducer(value: 1.0)
@@ -184,31 +189,30 @@ extension PhotosViewController //: UICollectionViewDataSource
                         else {
                             return SignalProducer(value: 1.0)
                                 .animate(duration: 0.5)
-                                .beginWith(0.0)
+                                .prefix(value: 0.0)
                         }
                     }
             }
 
         // Update `likeButton.title`.
-        cell.likeButton!.rex_title
+        cell.likeButton!.reactive.title
             <~ PhotosLikeManager.likes[photo.imageURL].producer
                 .map { $0.rawValue }
-                .takeUntil(prepareForReuse)
+                .take(until: prepareForReuse)
 
         // Send change to `PhotosLikeManager` on `likeButton` tap.
         PhotosLikeManager.likes[photo.imageURL]
-            <~ cell.likeButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-                .triggerize()
-                .sampleFrom(PhotosLikeManager.likes[photo.imageURL].producer)
+            <~ cell.likeButton!.reactive.controlEvents(.touchUpInside)
+                .withLatest(from: PhotosLikeManager.likes[photo.imageURL].producer)
                 .map { $1.inverse }
-                .takeUntil(prepareForReuse)
+                .take(until: prepareForReuse)
 
         return cell
     }
 
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
     {
-        let reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: _footerIdentifier, forIndexPath: indexPath) as! LikeCollectionReusableView
+        let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: _footerIdentifier, for: indexPath) as! LikeCollectionReusableView
 
         return reusableView
     }
@@ -218,9 +222,9 @@ extension PhotosViewController //: UICollectionViewDataSource
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout
 {
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        func _preferredCellWidth(min min: CGFloat, containerWidth: CGFloat) -> CGFloat
+        func _preferredCellWidth(min: CGFloat, containerWidth: CGFloat) -> CGFloat
         {
             var width = containerWidth
             var i = 0
@@ -243,8 +247,8 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout
 extension Selector
 {
     // NOTE: needed to upcast to `Protocol` for some reason...
-    private static let _didSelectRow: (Selector, Protocol) = (
-        #selector(UICollectionViewDelegate.collectionView(_:didSelectItemAtIndexPath:)),
+    fileprivate static let _didSelectRow: (Selector, Protocol) = (
+        #selector(UICollectionViewDelegate.collectionView(_:didSelectItemAt:)),
         UICollectionViewDelegate.self
     )
 }
@@ -263,8 +267,8 @@ final class LikeCollectionViewCell: UICollectionViewCell
         super.prepareForReuse()
 
         self.imageView?.image = nil
-        for state in [UIControlState.Normal, .Highlighted, .Selected, .Disabled] {
-            self.likeButton?.setTitle(nil, forState: state)
+        for state in [UIControlState.normal, .highlighted, .selected, .disabled] {
+            self.likeButton?.setTitle(nil, for: state)
         }
     }
 }
@@ -273,7 +277,7 @@ final class LikeCollectionViewCell: UICollectionViewCell
 
 extension UIScrollView
 {
-    private var _reachedBottom: Bool
+    fileprivate var _reachedBottom: Bool
     {
         let visibleHeight = frame.height - contentInset.top - contentInset.bottom
         let y = contentOffset.y + contentInset.top
@@ -283,40 +287,42 @@ extension UIScrollView
     }
 }
 
-extension NSCache
+///
+/// Use NSCache image or download from internet.
+///
+/// - Note:
+/// Use non-main-scheduler only for downloading so that NSCache-loading remains synchronous
+/// and UIs (especially animating UICollectionViewCell's alpha) don't get _flickered_.
+///
+fileprivate func _cacheOrDownloadImageProducer(url: URL, cache: PhotosViewController.ImageCache) -> SignalProducer<(UIImage?, usesCache: Bool), NoError>
 {
-    ///
-    /// Use NSCache image or download from internet.
-    ///
-    /// - Note:
-    /// Use non-main-scheduler only for downloading so that NSCache-loading remains synchronous
-    /// and UIs (especially animating UICollectionViewCell's alpha) don't get _flickered_.
-    ///
-    private func _cacheOrDownloadImageProducer(url: NSURL) -> SignalProducer<(UIImage?, usesCache: Bool), NoError>
-    {
-        return self.racc_objectProducer(key: url)
-            .flatMap(.Merge) { [unowned self] (cachedImage: UIImage?) -> SignalProducer<(UIImage?, usesCache: Bool), NoError> in
-
-                // If NSCache image exists, use it.
-                if let cachedImage = cachedImage {
-                    return .init(value: (cachedImage, true))
-                }
-                // Otherwise, download from internet.
-                else {
-                    return UIImage.racc_downloadImageProducer(url)
-                        .startOn(_imageLoadingScheduler)
-                        .observeOn(QueueScheduler.mainQueueScheduler)
-                        .on(
-                            event: logSink("downloadImage"),
-                            next: { [unowned self] image in
-                                if let image = image {
-                                    // Set image to NSCache.
-                                    self.setObject(image, forKey: url)
-                                }
-                            }
-                        )
-                        .map { ($0, false) }
-                }
-            }
+    let cacheObjectProducer = SignalProducer<UIImage?, NoError> { [weak cache] observer, disposable in
+        observer.send(value: cache?.object(forKey: url as NSURL))
+        observer.sendCompleted()
     }
+
+    return cacheObjectProducer
+        .flatMap(.merge) { [unowned cache] (cachedImage: UIImage?) -> SignalProducer<(UIImage?, usesCache: Bool), NoError> in
+
+            // If NSCache image exists, use it.
+            if let cachedImage = cachedImage {
+                return .init(value: (cachedImage, true))
+            }
+            // Otherwise, download from internet.
+            else {
+                return UIImage.racc_downloadImageProducer(url: url)
+                    .start(on: _imageLoadingScheduler)
+                    .observe(on: QueueScheduler.main)
+                    .on(
+                        event: logSink("downloadImage"),
+                        value: { [unowned cache] image in
+                            if let image = image {
+                                // Set image to NSCache.
+                                cache.setObject(image, forKey: url as NSURL)
+                            }
+                        }
+                    )
+                    .map { ($0, false) }
+            }
+        }
 }

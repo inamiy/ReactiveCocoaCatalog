@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ReactiveCocoa
+import ReactiveSwift
 import APIKit
 import Argo
 
@@ -15,20 +15,20 @@ import Argo
 
 extension Session
 {
-    static func responseProducer<Req: RequestType>(request: Req) -> SignalProducer<Req.Response, SessionTaskError>
+    static func responseProducer<Req: Request>(_ request: Req) -> SignalProducer<Req.Response, SessionTaskError>
     {
         return SignalProducer { observer, disposable in
-            let task = Session.sendRequest(request) { result in
+            let task = Session.send(request) { result in
                 switch result {
-                    case .Success(let response):
-                        observer.sendNext(response)
+                    case .success(let response):
+                        observer.send(value: response)
                         observer.sendCompleted()
-                    case .Failure(let error):
-                        observer.sendFailed(error)
+                    case .failure(let error):
+                        observer.send(error: error)
                 }
             }
 
-            disposable.addDisposable {
+            disposable.add {
                 task?.cancel()
             }
         }
@@ -37,10 +37,10 @@ extension Session
 
 // MARK: APIKit + Argo
 
-extension RequestType where Response: Decodable, Response.DecodedType == Response
+extension Request where Response: Decodable, Response.DecodedType == Response
 {
     /// Automatic decoding.
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response
     {
         return try decode(object).dematerialize()
     }

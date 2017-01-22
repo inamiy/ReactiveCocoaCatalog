@@ -11,10 +11,16 @@
          location = "group:Carthage/Checkouts/Curry/Curry.xcodeproj">
       </FileRef>
       <FileRef
+         location = "group:Carthage/Checkouts/ReactiveSwift/ReactiveSwift.xcodeproj">
+      </FileRef>
+      <FileRef
          location = "group:Carthage/Checkouts/ReactiveCocoa/ReactiveCocoa.xcodeproj">
       </FileRef>
       <FileRef
-         location = "group:Carthage/Checkouts/Rex/Rex.xcodeproj">
+         location = "group:Carthage/Checkouts/ReactiveObjC/ReactiveObjC.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Carthage/Checkouts/ReactiveObjCBridge/ReactiveObjCBridge.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Carthage/Checkouts/ReactiveArray/ReactiveArray.xcodeproj">
@@ -27,6 +33,9 @@
       </FileRef>
       <FileRef
          location = "group:Carthage/Checkouts/Argo/Argo.xcodeproj">
+      </FileRef>
+      <FileRef
+         location = "group:Carthage/Checkouts/Runes/Runes.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:Carthage/Checkouts/WebLinking.swift/WebLinking.xcodeproj">

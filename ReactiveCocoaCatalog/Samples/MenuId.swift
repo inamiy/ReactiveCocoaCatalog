@@ -8,38 +8,38 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import FontAwesome
 
 enum MenuId: Int
 {
-    case Friends    = 0
-    case Chats      = 1
-    case Home       = 2
-    case Settings   = 3
+    case friends    = 0
+    case chats      = 1
+    case home       = 2
+    case settings   = 3
 
-    case Profile    = 10
-    case Help       = 11
+    case profile    = 10
+    case help       = 11
 
     static let allMenuIds = [0...3, 10...11].flatMap { $0.flatMap { MenuId(rawValue: $0) } }
 
     var fontAwesome: FontAwesome
     {
         switch self {
-            case .Friends:  return .Users
-            case .Chats:    return .Comment
-            case .Home:     return .Home
-            case .Settings: return .Gear
-            case .Profile:  return .User
-            case .Help:     return .Question
+            case .friends:  return .users
+            case .chats:    return .comment
+            case .home:     return .home
+            case .settings: return .gear
+            case .profile:  return .user
+            case .help:     return .question
         }
     }
 
     var tabImage: UIImage
     {
-        return UIImage.fontAwesomeIconWithName(
-            self.fontAwesome,
-            textColor: UIColor.blackColor(),
+        return UIImage.fontAwesomeIcon(
+            name: self.fontAwesome,
+            textColor: UIColor.black,
             size: CGSize(width: 40, height: 40)
         )
     }

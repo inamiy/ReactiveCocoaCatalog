@@ -8,8 +8,9 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
-import Rex
+import ReactiveSwift
+import ReactiveObjC
+import ReactiveObjCBridge
 import ReactiveArray
 
 /// Abstract interface for ReactiveArray demos.
@@ -41,36 +42,35 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
     func setupSignalsForDemo()
     {
         guard let insertButtonItem = self.insertButtonItem,
-            replaceButtonItem = self.replaceButtonItem,
-            removeButtonItem = self.removeButtonItem,
-            decrementButtonItem = self.decrementButtonItem,
-            incrementButtonItem = self.incrementButtonItem,
-            sectionOrItemButtonItem = self.sectionOrItemButtonItem else
+            let replaceButtonItem = self.replaceButtonItem,
+            let removeButtonItem = self.removeButtonItem,
+            let decrementButtonItem = self.decrementButtonItem,
+            let incrementButtonItem = self.incrementButtonItem,
+            let sectionOrItemButtonItem = self.sectionOrItemButtonItem else
         {
             assertionFailure("Storyboard UIs are not ready.")
             return
         }
 
-        insertButtonItem.rac_signal.toSignalProducer()
-            .triggerize()
-            .sampleFrom(self.viewModel.sectionOrItem.producer)
+        insertButtonItem.reactive.defaultPressed
+            .withLatest(from: self.viewModel.sectionOrItem.producer)
             .map { $1 }
             .on(event: logSink("insertButtonItem"))
-            .startWithNext { [unowned self] mode, insertCount in
+            .observeValues { [unowned self] mode, insertCount in
                 guard insertCount > 0 else { return }
 
                 switch mode {
-                    case .Section:
+                    case .section:
                         for _ in 1...insertCount {
                             let sectionCount = self.viewModel.sections.observableCount.value
                             let randomSection = Section.randomData()
 
                             self.viewModel.sections.insert(
                                 randomSection,
-                                atIndex: random(sectionCount + 1)
+                                at: random(sectionCount + 1)
                             )
                         }
-                    case .Item:
+                    case .item:
                         let sectionCount = self.viewModel.sections.observableCount.value
                         guard sectionCount > 0 else { break }
 
@@ -80,22 +80,21 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
 
                             section.items.insert(
                                 Item.randomData(),
-                                atIndex: random(itemCount + 1)
+                                at: random(itemCount + 1)
                             )
                         }
                 }
             }
 
-        replaceButtonItem.rac_signal.toSignalProducer()
-            .triggerize()
-            .sampleFrom(self.viewModel.sectionOrItem.producer)
+        replaceButtonItem.reactive.defaultPressed
+            .withLatest(from: self.viewModel.sectionOrItem.producer)
             .map { $1 }
             .on(event: logSink("replaceButtonItem"))
-            .startWithNext { [unowned self] mode, replaceCount in
+            .observeValues { [unowned self] mode, replaceCount in
                 guard replaceCount > 0 else { return }
 
                 switch mode {
-                    case .Section:
+                    case .section:
                         for _ in 1...replaceCount {
                             let sectionCount = self.viewModel.sections.observableCount.value
                             guard sectionCount > 0 else { break }
@@ -104,10 +103,10 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
 
                             self.viewModel.sections.update(
                                 randomSection,
-                                atIndex: random(sectionCount)
+                                at: random(sectionCount)
                             )
                         }
-                    case .Item:
+                    case .item:
                         let sectionCount = self.viewModel.sections.observableCount.value
                         guard sectionCount > 0 else { break }
 
@@ -118,29 +117,28 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
 
                             section.items.update(
                                 Item.randomData(),
-                                atIndex: random(itemCount)
+                                at: random(itemCount)
                             )
                         }
                 }
             }
 
-        removeButtonItem.rac_signal.toSignalProducer()
-            .triggerize()
-            .sampleFrom(self.viewModel.sectionOrItem.producer)
+        removeButtonItem.reactive.defaultPressed
+            .withLatest(from: self.viewModel.sectionOrItem.producer)
             .map { $1 }
             .on(event: logSink("removeButtonItem"))
-            .startWithNext { [unowned self] mode, removeCount in
+            .observeValues { [unowned self] mode, removeCount in
                 guard removeCount > 0 else { return }
 
                 switch mode {
-                    case .Section:
+                    case .section:
                         for _ in 1...removeCount {
                             let sectionCount = self.viewModel.sections.observableCount.value
                             guard sectionCount > 0 else { break }
 
-                            self.viewModel.sections.removeAtIndex(random(sectionCount))
+                            self.viewModel.sections.remove(at: random(sectionCount))
                         }
-                    case .Item:
+                    case .item:
                         let sectionCount = self.viewModel.sections.observableCount.value
                         guard sectionCount > 0 else { break }
 
@@ -149,36 +147,36 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
                             let itemCount = section.items.observableCount.value
                             guard itemCount > 0 else { break }
 
-                            section.items.removeAtIndex(random(itemCount))
+                            section.items.remove(at: random(itemCount))
                         }
                 }
             }
 
-        let decrement = decrementButtonItem.rac_signal.toSignalProducer()
-            .triggerize()
+        let decrement = decrementButtonItem.reactive.defaultPressed
             .map { _ in -1 }
             .on(event: logSink("decrement"))
 
-        let increment = incrementButtonItem.rac_signal.toSignalProducer()
-            .triggerize()
+        let increment = incrementButtonItem.reactive.defaultPressed
             .map { _ in 1 }
             .on(event: logSink("increment"))
 
-        let count = decrement.mergeWith(increment)
-            .sampleFrom(self.viewModel.sectionOrItem.producer)
+        let count = decrement.merge(with: increment)
+            .withLatest(from: self.viewModel.sectionOrItem.producer)
             .map { max($1.1 + $0, 1) }
-            .beginWith(1)
 
-        let sectionOrItem = sectionOrItemButtonItem.rac_signal.toSignalProducer()
-            .triggerize()
-            .sampleFrom(self.viewModel.sectionOrItem.producer)
+        let countProducer = SignalProducer(count)
+            .prefix(value: 1)
+
+        let sectionOrItem = sectionOrItemButtonItem.reactive.defaultPressed
+            .withLatest(from: self.viewModel.sectionOrItem.producer)
             .map { $1.0.inverse }
-            .beginWith(.Section)
+
+        let sectionOrItemProducer = SignalProducer(sectionOrItem)
+            .prefix(value: .section)
             .on(event: logSink("sectionOrItem"))
 
-        // Update `decrementButtonItem.enabled`.
-        decrementButtonItem.rex_enabled
-            <~ count
+        decrementButtonItem.reactive.isEnabled
+            <~ countProducer
                 .map { $0 > 1 }
 
         //
@@ -189,46 +187,49 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
         // so bind to it at last usage of `count`.
         //
         self.viewModel.sectionOrItem
-            <~ combineLatest(sectionOrItem, count)
+            <~ SignalProducer.combineLatest(sectionOrItemProducer, countProducer)
 
-        // Update `sectionOrItemButtonItem.title`.
-        sectionOrItemButtonItem.rex_title
+        sectionOrItemButtonItem.reactive.title
             <~ self.viewModel.sectionOrItem.producer
                 .map { "\($0.0.rawValue) \($0.1)" }     // e.g. "Section 1"
 
         // Update `tableView` sections.
         self.viewModel.changedSectionInfoSignal
-            .observeNext(_updateSections(self.itemsView))
+            .observeValues(_updateSections(itemsView: self.itemsView))
 
         // Update `tableView` rows.
         self.viewModel.changedItemInfoSignal
-            .observeNext(_updateItems(self.itemsView))
+            .observeValues(_updateItems(itemsView: self.itemsView))
 
         // Delete item (or section) via `didSelectItem`.
-        self.rac_signalForSelector(protocolSelectorForDidSelectItem.0, fromProtocol: protocolSelectorForDidSelectItem.1).toSignalProducer()
+        bridgedSignalProducer(from: self.rac_signal(for: protocolSelectorForDidSelectItem.0, from: protocolSelectorForDidSelectItem.1))
             .on(event: logSink("didSelectRow"))
-            .ignoreError()
-            .startWithNext { [weak self] racTuple in
+            .ignoreCastError(NoError.self)
+            .startWithValues { [weak self] racTuple in
                 let racTuple = racTuple as! RACTuple
                 let indexPath = racTuple.second as! NSIndexPath
 
-                if self?.viewModel.sections[indexPath.section].items.count < 2 {
+                guard let items = self?.viewModel.sections[indexPath.section].items else {
+                    return
+                }
+
+                if items.count < 2 {
                     // delete section if last item
-                    self?.viewModel.sections.removeAtIndex(indexPath.section)
+                    self?.viewModel.sections.remove(at: indexPath.section)
                 }
                 else {
                     // delete item
-                    self?.viewModel.sections[indexPath.section].items.removeAtIndex(indexPath.item)
+                    self?.viewModel.sections[indexPath.section].items.remove(at: indexPath.item)
                 }
         }
     }
 
     func playDemo()
     {
-        func delay(timeInterval: NSTimeInterval) -> SignalProducer<(), NoError>
+        func delay(_ timeInterval: TimeInterval) -> SignalProducer<(), NoError>
         {
             return SignalProducer.empty
-                .delay(timeInterval, onScheduler: QueueScheduler.mainQueueScheduler)
+                .delay(timeInterval, on: QueueScheduler.main)
         }
 
         let t0 = 0.2    // initial delay
@@ -258,7 +259,7 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
                         Item(title: "title 0-1"),
                         Item(title: "title 0-2")
                     ]),
-                    atIndex: 0
+                    at: 0
                 )
             })
             .concat(delay(dt))
@@ -271,7 +272,7 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
                     Section(title: "Section 0b", items: [
                         Item(title: "title 0-0b")
                     ]),
-                    atIndex: 0
+                    at: 0
                 )
             })
             .concat(delay(dt))
@@ -280,7 +281,7 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
 
                 print("*** sections.removeAtIndex ***")
 
-                self.viewModel.sections.removeAtIndex(0)
+                self.viewModel.sections.remove(at: 0)
             })
             .concat(delay(dt))
             .on(completed: {
@@ -305,7 +306,7 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
 
                 section.items.insert(
                     Item(title: "title 1-1.5"),
-                    atIndex: 2
+                    at: 2
                 )
             })
             .concat(delay(dt))
@@ -319,7 +320,7 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
 
                 section.items.update(
                     Item(title: "title 1-1.25"),
-                    atIndex: 2
+                    at: 2
                 )
             })
             .concat(delay(dt))
@@ -331,7 +332,7 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
 
                 print("*** items.removeAtIndex ***")
 
-                section.items.removeAtIndex(2)
+                section.items.remove(at: 2)
             })
             .on(completed: {
                 print("demo play end")
@@ -342,36 +343,36 @@ extension ReactiveArrayViewControllerType where Self: UIViewController
 
 // MARK: Helpers
 
-private func _updateSections<ItemsView: ItemsViewType, Section: SectionType>(itemsView: ItemsView) -> ChangedSectionInfo<Section> -> ()
+private func _updateSections<ItemsView: ItemsViewType, Section: SectionType>(itemsView: ItemsView) -> (ChangedSectionInfo<Section>) -> ()
 {
     return { [unowned itemsView] info in
         switch info.sectionOperation {
-            case .Append:
+            case .append:
                 let index = info.sectionCount - 1
-                itemsView.insertSections([index], animationStyle: .Fade)
-            case let .Insert(_, index):
-                itemsView.insertSections([index], animationStyle: .Fade)
-            case let .Update(_, index):
-                itemsView.reloadSections([index], animationStyle: .Fade)
-            case let .RemoveElement(index):
-                itemsView.deleteSections([index], animationStyle: .Fade)
+                itemsView.insertSections([index], animationStyle: .fade)
+            case let .insert(_, index):
+                itemsView.insertSections([index], animationStyle: .fade)
+            case let .update(_, index):
+                itemsView.reloadSections([index], animationStyle: .fade)
+            case let .remove(index):
+                itemsView.deleteSections([index], animationStyle: .fade)
         }
     }
 }
 
-private func _updateItems<ItemsView: ItemsViewType, Item: ItemType>(itemsView: ItemsView) -> ChangedItemInfo<Item> -> ()
+private func _updateItems<ItemsView: ItemsViewType, Item: ItemType>(itemsView: ItemsView) -> (ChangedItemInfo<Item>) -> ()
 {
     return { [unowned itemsView] info in
         switch info.itemOperation {
-            case .Append:
+            case .append:
                 let index = info.itemCount - 1
-                itemsView.insertItemsAtIndexPaths([(info.sectionIndex, index)], animationStyle: .Right)
-            case let .Insert(_, index):
-                itemsView.insertItemsAtIndexPaths([(info.sectionIndex, index)], animationStyle: .Right)
-            case let .Update(_, index):
-                itemsView.reloadItemsAtIndexPaths([(info.sectionIndex, index)], animationStyle: .Right)
-            case let .RemoveElement(index):
-                itemsView.deleteItemsAtIndexPaths([(info.sectionIndex, index)], animationStyle: .Right)
+                itemsView.insertItems(at: [IndexPath(row: index, section: info.sectionIndex)], animationStyle: .right)
+            case let .insert(_, index):
+                itemsView.insertItems(at: [IndexPath(row: index, section: info.sectionIndex)], animationStyle: .right)
+            case let .update(_, index):
+                itemsView.reloadItems(at: [IndexPath(row: index, section: info.sectionIndex)], animationStyle: .right)
+            case let .remove(index):
+                itemsView.deleteItems(at: [IndexPath(row: index, section: info.sectionIndex)], animationStyle: .right)
         }
     }
 }

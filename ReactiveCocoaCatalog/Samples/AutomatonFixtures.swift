@@ -8,30 +8,26 @@
 
 import Foundation
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import ReactiveAutomaton
 
-enum AutomatonState: String, CustomStringConvertible
+enum AutomatonState: String
 {
-    case LoggedOut = "LoggedOut"
-    case LoggingIn = "LoggingIn"
-    case LoggedIn = "LoggedIn"
-    case LoggingOut = "LoggingOut"
-
-    var description: String { return self.rawValue }
+    case loggedOut
+    case loggingIn
+    case loggedIn
+    case loggingOut
 }
 
 /// - Note:
 /// `LoginOK` and `LogoutOK` should only be used internally
 /// (but Swift can't make them as `private case`)
-enum AutomatonInput: String, CustomStringConvertible
+enum AutomatonInput: String
 {
-    case Login = "Login"
-    case LoginOK = "LoginOK"
-    case Logout = "Logout"
-    case LogoutOK = "LogoutOK"
+    case login
+    case loginOK
+    case logout
+    case logoutOK
 
-    case ForceLogout = "ForceLogout"
-
-    var description: String { return self.rawValue }
+    case forceLogout
 }

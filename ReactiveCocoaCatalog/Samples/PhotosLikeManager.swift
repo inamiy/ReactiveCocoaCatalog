@@ -8,7 +8,7 @@
 
 import Foundation
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 
 /// Singleton class for on-memory "likes" persistence.
 final class PhotosLikeManager
@@ -16,15 +16,15 @@ final class PhotosLikeManager
     // Singleton.
     static let likes = PhotosLikeManager()
 
-    private var _likes: [NSURL : MutableProperty<Like>] = [:]
+    private var _likes: [URL : MutableProperty<Like>] = [:]
 
-    subscript(url: NSURL) -> MutableProperty<Like>
+    subscript(url: URL) -> MutableProperty<Like>
     {
         if let property = self._likes[url] {
             return property
         }
         else {
-            let property = MutableProperty<Like>(.None)
+            let property = MutableProperty<Like>(.none)
             self._likes[url] = property
             return property
         }
@@ -35,22 +35,22 @@ final class PhotosLikeManager
 
 enum Like: String
 {
-    case None = "☆"
-    case Liked = "★"
+    case none = "☆"
+    case liked = "★"
 
     var detailText: String
     {
         switch self {
-            case .None: return "☆ Like?"
-            case .Liked: return "★ Liked!"
+            case .none: return "☆ Like?"
+            case .liked: return "★ Liked!"
         }
     }
 
     var inverse: Like
     {
         switch self {
-            case .None: return .Liked
-            case .Liked: return .None
+            case .none: return .liked
+            case .liked: return .none
         }
     }
 }

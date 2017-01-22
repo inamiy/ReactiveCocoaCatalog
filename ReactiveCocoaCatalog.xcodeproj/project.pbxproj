@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F07C5591DBFC7BD00434B1B /* ReactiveObjCBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F07C5581DBFC7BD00434B1B /* ReactiveObjCBridge.framework */; };
+		1F07C55A1DBFC7BD00434B1B /* ReactiveObjCBridge.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F07C5581DBFC7BD00434B1B /* ReactiveObjCBridge.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F07C55C1DBFC7E100434B1B /* ReactiveObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F07C55B1DBFC7E100434B1B /* ReactiveObjC.framework */; };
+		1F07C55D1DBFC7E100434B1B /* ReactiveObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F07C55B1DBFC7E100434B1B /* ReactiveObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F0D0F1A1DC4E87E0083700F /* BindingTarget+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0D0F191DC4E87E0083700F /* BindingTarget+Ext.swift */; };
 		1F12CAD01C9F95D6007D7F51 /* WebLinking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */; };
 		1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1F18AFC41CBBDBA800B82A3A /* Rex.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F18AFC31CBBDBA800B82A3A /* Rex.framework */; };
-		1F18AFC51CBBDBA800B82A3A /* Rex.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F18AFC31CBBDBA800B82A3A /* Rex.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F1BB5991CBEB21E00CE03B8 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BB5981CBEB21E00CE03B8 /* FlickrAPI.swift */; };
 		1F20D65F1C9F90CC00DC0153 /* PaginationRequestType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */; };
-		1F24E0491CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F24E0481CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift */; };
 		1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863571C9F76C6004627D3 /* PaginationViewController.swift */; };
 		1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */; };
 		1F28635C1C9F85DA004627D3 /* APIKit+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */; };
@@ -21,7 +23,6 @@
 		1F28A09B1CA222B600287194 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F28A09A1CA222B600287194 /* MenuManager.swift */; };
 		1F2D33BA1CB8D565005E38E6 /* MenuType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D33B91CB8D565005E38E6 /* MenuType.swift */; };
 		1F2D33BC1CB8DA3F005E38E6 /* MenuId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D33BB1CB8DA3F005E38E6 /* MenuId.swift */; };
-		1F2D33BE1CB8DA99005E38E6 /* MenuBadgeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2D33BD1CB8DA99005E38E6 /* MenuBadgeScene.swift */; };
 		1F55495A1CB57C2F002E3B32 /* MenuSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5549591CB57C2F002E3B32 /* MenuSettingsViewController.swift */; };
 		1F60F0AC1CC23B4E00D02CA9 /* Cartography.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */; };
 		1F60F0AD1CC23B4E00D02CA9 /* Cartography.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -32,19 +33,22 @@
 		1F7987E51C9F6AE6003AFE72 /* Argo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7987E31C9F6AE6003AFE72 /* Argo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F7987F41C9F6F5F003AFE72 /* Curry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7987F31C9F6F5F003AFE72 /* Curry.framework */; };
 		1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7987F31C9F6F5F003AFE72 /* Curry.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F81E9831DB05FE00005AB26 /* Runes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F81E9821DB05FE00005AB26 /* Runes.framework */; };
+		1F81E9841DB05FE00005AB26 /* Runes.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1F81E9821DB05FE00005AB26 /* Runes.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F8517EB1BA5179400C1FCB0 /* BingAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */; };
-		1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */; };
 		1F8CF17D1CC5C5F90047C2D2 /* PhotosLike.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F8CF1781CC5C5F90047C2D2 /* PhotosLike.storyboard */; };
 		1F8CF17E1CC5C5F90047C2D2 /* PhotosDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CF1791CC5C5F90047C2D2 /* PhotosDetailViewController.swift */; };
 		1F8CF17F1CC5C5F90047C2D2 /* PhotosLikeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CF17A1CC5C5F90047C2D2 /* PhotosLikeManager.swift */; };
-		1F8CF1801CC5C5F90047C2D2 /* PhotosLikeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CF17B1CC5C5F90047C2D2 /* PhotosLikeScene.swift */; };
 		1F8CF1811CC5C5F90047C2D2 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8CF17C1CC5C5F90047C2D2 /* PhotosViewController.swift */; };
 		1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */; };
+		1FAD0A3D1E34039A00507682 /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAD0A3C1E34039A00507682 /* Scene.swift */; };
 		1FC5913A1CB5EA7B00CBD02E /* ColorSliderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FC591391CB5EA7B00CBD02E /* ColorSliderViewController.swift */; };
 		1FC5913D1CB5EAC200CBD02E /* ColorSliderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FC5913C1CB5EAC200CBD02E /* ColorSliderViewController.xib */; };
 		1FC7EA2B1C9FEE2600C6B76C /* PaginationViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */; };
 		1FD70D471CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */; };
 		1FD70D4B1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */; };
+		1FDAA8611DBFA5D4009D5ACA /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDAA8601DBFA5D4009D5ACA /* ReactiveSwift.framework */; };
+		1FDAA8621DBFA5D4009D5ACA /* ReactiveSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FDAA8601DBFA5D4009D5ACA /* ReactiveSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FDACD121CB5760C00806794 /* MenuBadge.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FDACD111CB5760C00806794 /* MenuBadge.storyboard */; };
 		1FDACD141CB5784600806794 /* MenuCustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDACD131CB5784600806794 /* MenuCustomViewController.swift */; };
 		1FDB70B01CB8ED79000A0462 /* BadgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDB70AF1CB8ED79000A0462 /* BadgeManager.swift */; };
@@ -66,7 +70,6 @@
 		48258F631CAA8673003BB383 /* ReactiveArray.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 48258F611CAA8673003BB383 /* ReactiveArray.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		48258F651CAA8BCC003BB383 /* ReactiveTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48258F641CAA8BCC003BB383 /* ReactiveTableViewController.swift */; };
 		48258F711CAA9669003BB383 /* ReactiveArray.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48258F701CAA9669003BB383 /* ReactiveArray.storyboard */; };
-		482A1CFF1CBD1D2100FE6610 /* Rex+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482A1CFE1CBD1D2100FE6610 /* Rex+Ext.swift */; };
 		48375AAA1B54B2F200BDA6F3 /* ActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */; };
 		48375AAB1B54B2F200BDA6F3 /* ActionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */; };
 		4837D9DA1CC737E400BB1C35 /* GameCommandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4837D9D91CC737E400BB1C35 /* GameCommandViewController.swift */; };
@@ -77,7 +80,7 @@
 		4868890C1D3E12E6008AF8C7 /* AutomatonFixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4868890B1D3E12E6008AF8C7 /* AutomatonFixtures.swift */; };
 		486CF3301B53B34D0056E591 /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486CF32F1B53B34D0056E591 /* Catalog.swift */; };
 		487750711CA27C4B00B56E7B /* Prelude.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487750701CA27C4B00B56E7B /* Prelude.swift */; };
-		487750731CA28DD200B56E7B /* SequenceType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487750721CA28DD200B56E7B /* SequenceType+Ext.swift */; };
+		487750731CA28DD200B56E7B /* Sequence+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487750721CA28DD200B56E7B /* Sequence+Ext.swift */; };
 		487B465D1BA9698C00C1DAD6 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */; };
 		487B46761BA96A1D00C1DAD6 /* WhoToFollowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */; };
 		489463581D51B4D300F9AF27 /* Pulsator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 489463571D51B4D300F9AF27 /* Pulsator.framework */; };
@@ -116,16 +119,19 @@
 			files = (
 				1F60F0AD1CC23B4E00D02CA9 /* Cartography.framework in Embed Frameworks */,
 				1FE03AE31BB79F1000D16C55 /* Haneke.framework in Embed Frameworks */,
+				1FDAA8621DBFA5D4009D5ACA /* ReactiveSwift.framework in Embed Frameworks */,
 				486888F71D3DF244008AF8C7 /* ReactiveAutomaton.framework in Embed Frameworks */,
 				1FE03AE11BB79F1000D16C55 /* APIKit.framework in Embed Frameworks */,
 				1FE03AE91BB79F1000D16C55 /* Result.framework in Embed Frameworks */,
+				1F07C55A1DBFC7BD00434B1B /* ReactiveObjCBridge.framework in Embed Frameworks */,
 				1FE03AE71BB79F1000D16C55 /* ReactiveCocoa.framework in Embed Frameworks */,
+				1F81E9841DB05FE00005AB26 /* Runes.framework in Embed Frameworks */,
 				489463591D51B4D300F9AF27 /* Pulsator.framework in Embed Frameworks */,
 				1F12CAD11C9F95D6007D7F51 /* WebLinking.framework in Embed Frameworks */,
 				48DCFA0E1CB7D445001D00EA /* FontAwesome.framework in Embed Frameworks */,
+				1F07C55D1DBFC7E100434B1B /* ReactiveObjC.framework in Embed Frameworks */,
 				48258F631CAA8673003BB383 /* ReactiveArray.framework in Embed Frameworks */,
 				1F7987E51C9F6AE6003AFE72 /* Argo.framework in Embed Frameworks */,
-				1F18AFC51CBBDBA800B82A3A /* Rex.framework in Embed Frameworks */,
 				1F7987F51C9F6F5F003AFE72 /* Curry.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -134,11 +140,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F07C5581DBFC7BD00434B1B /* ReactiveObjCBridge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveObjCBridge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F07C55B1DBFC7E100434B1B /* ReactiveObjC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveObjC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F0D0F191DC4E87E0083700F /* BindingTarget+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BindingTarget+Ext.swift"; sourceTree = "<group>"; };
 		1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebLinking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F18AFC31CBBDBA800B82A3A /* Rex.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Rex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F1BB5981CBEB21E00CE03B8 /* FlickrAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		1F20D65E1C9F90CC00DC0153 /* PaginationRequestType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationRequestType.swift; sourceTree = "<group>"; };
-		1F24E0481CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ReactiveCocoa+SampleFrom.swift"; sourceTree = "<group>"; };
 		1F2863571C9F76C6004627D3 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		1F2863591C9F7C85004627D3 /* PaginationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewModel.swift; sourceTree = "<group>"; };
 		1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "APIKit+Ext.swift"; sourceTree = "<group>"; };
@@ -146,7 +153,6 @@
 		1F28A09A1CA222B600287194 /* MenuManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 		1F2D33B91CB8D565005E38E6 /* MenuType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuType.swift; sourceTree = "<group>"; };
 		1F2D33BB1CB8DA3F005E38E6 /* MenuId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuId.swift; sourceTree = "<group>"; };
-		1F2D33BD1CB8DA99005E38E6 /* MenuBadgeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBadgeScene.swift; sourceTree = "<group>"; };
 		1F5549591CB57C2F002E3B32 /* MenuSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuSettingsViewController.swift; sourceTree = "<group>"; };
 		1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Cartography.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F665A8F1CB1A50F00DBCDC2 /* ReactiveDataSourceType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveDataSourceType.swift; sourceTree = "<group>"; };
@@ -154,19 +160,20 @@
 		1F721D6C1C952F290022EC57 /* ZundokoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZundokoViewController.xib; sourceTree = "<group>"; };
 		1F7987E31C9F6AE6003AFE72 /* Argo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Argo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F7987F31C9F6F5F003AFE72 /* Curry.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Curry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F81E9821DB05FE00005AB26 /* Runes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Runes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F8517EA1BA5179400C1FCB0 /* BingAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BingAPI.swift; sourceTree = "<group>"; };
-		1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Ext.swift"; sourceTree = "<group>"; };
 		1F8CF1781CC5C5F90047C2D2 /* PhotosLike.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PhotosLike.storyboard; sourceTree = "<group>"; };
 		1F8CF1791CC5C5F90047C2D2 /* PhotosDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosDetailViewController.swift; sourceTree = "<group>"; };
 		1F8CF17A1CC5C5F90047C2D2 /* PhotosLikeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosLikeManager.swift; sourceTree = "<group>"; };
-		1F8CF17B1CC5C5F90047C2D2 /* PhotosLikeScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosLikeScene.swift; sourceTree = "<group>"; };
 		1F8CF17C1CC5C5F90047C2D2 /* PhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		1F99E6AD1CB3FE5000C44598 /* ItemsViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemsViewType.swift; sourceTree = "<group>"; };
+		1FAD0A3C1E34039A00507682 /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Scene.swift; path = ../Scene.swift; sourceTree = "<group>"; };
 		1FC591391CB5EA7B00CBD02E /* ColorSliderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSliderViewController.swift; sourceTree = "<group>"; };
 		1FC5913C1CB5EAC200CBD02E /* ColorSliderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ColorSliderViewController.xib; sourceTree = "<group>"; };
 		1FC7EA2A1C9FEE2600C6B76C /* PaginationViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PaginationViewController.storyboard; sourceTree = "<group>"; };
 		1FD70D461CB2B5FD00F8AFC2 /* ReactiveCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveCollectionViewController.swift; sourceTree = "<group>"; };
 		1FD70D4A1CB2C34300F8AFC2 /* ReactiveArrayViewControllerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveArrayViewControllerType.swift; sourceTree = "<group>"; };
+		1FDAA8601DBFA5D4009D5ACA /* ReactiveSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FDACD111CB5760C00806794 /* MenuBadge.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MenuBadge.storyboard; sourceTree = "<group>"; };
 		1FDACD131CB5784600806794 /* MenuCustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCustomViewController.swift; sourceTree = "<group>"; };
 		1FDB70AF1CB8ED79000A0462 /* BadgeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeManager.swift; sourceTree = "<group>"; };
@@ -182,7 +189,6 @@
 		48258F611CAA8673003BB383 /* ReactiveArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ReactiveArray.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48258F641CAA8BCC003BB383 /* ReactiveTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveTableViewController.swift; sourceTree = "<group>"; };
 		48258F701CAA9669003BB383 /* ReactiveArray.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReactiveArray.storyboard; sourceTree = "<group>"; };
-		482A1CFE1CBD1D2100FE6610 /* Rex+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Rex+Ext.swift"; sourceTree = "<group>"; };
 		48375AA81B54B2F200BDA6F3 /* ActionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionViewController.swift; sourceTree = "<group>"; };
 		48375AA91B54B2F200BDA6F3 /* ActionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActionViewController.xib; sourceTree = "<group>"; };
 		4837D9D91CC737E400BB1C35 /* GameCommandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCommandViewController.swift; sourceTree = "<group>"; };
@@ -192,7 +198,7 @@
 		4868890B1D3E12E6008AF8C7 /* AutomatonFixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutomatonFixtures.swift; path = Samples/AutomatonFixtures.swift; sourceTree = "<group>"; };
 		486CF32F1B53B34D0056E591 /* Catalog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
 		487750701CA27C4B00B56E7B /* Prelude.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prelude.swift; sourceTree = "<group>"; };
-		487750721CA28DD200B56E7B /* SequenceType+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SequenceType+Ext.swift"; sourceTree = "<group>"; };
+		487750721CA28DD200B56E7B /* Sequence+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+Ext.swift"; sourceTree = "<group>"; };
 		487B465C1BA9698C00C1DAD6 /* GitHubAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
 		487B46731BA96A1D00C1DAD6 /* WhoToFollowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhoToFollowViewController.swift; sourceTree = "<group>"; };
 		487B46741BA96A1D00C1DAD6 /* WhoToFollowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WhoToFollowViewController.xib; sourceTree = "<group>"; };
@@ -222,16 +228,19 @@
 			files = (
 				1F60F0AC1CC23B4E00D02CA9 /* Cartography.framework in Frameworks */,
 				1FE03AE21BB79F1000D16C55 /* Haneke.framework in Frameworks */,
+				1FDAA8611DBFA5D4009D5ACA /* ReactiveSwift.framework in Frameworks */,
 				486888F61D3DF244008AF8C7 /* ReactiveAutomaton.framework in Frameworks */,
 				1FE03AE01BB79F1000D16C55 /* APIKit.framework in Frameworks */,
 				1FE03AE81BB79F1000D16C55 /* Result.framework in Frameworks */,
+				1F07C5591DBFC7BD00434B1B /* ReactiveObjCBridge.framework in Frameworks */,
 				1FE03AE61BB79F1000D16C55 /* ReactiveCocoa.framework in Frameworks */,
+				1F81E9831DB05FE00005AB26 /* Runes.framework in Frameworks */,
 				489463581D51B4D300F9AF27 /* Pulsator.framework in Frameworks */,
 				1F12CAD01C9F95D6007D7F51 /* WebLinking.framework in Frameworks */,
 				48DCFA0D1CB7D445001D00EA /* FontAwesome.framework in Frameworks */,
+				1F07C55C1DBFC7E100434B1B /* ReactiveObjC.framework in Frameworks */,
 				48258F621CAA8673003BB383 /* ReactiveArray.framework in Frameworks */,
 				1F7987E41C9F6AE6003AFE72 /* Argo.framework in Frameworks */,
-				1F18AFC41CBBDBA800B82A3A /* Rex.framework in Frameworks */,
 				1F7987F41C9F6F5F003AFE72 /* Curry.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,7 +259,6 @@
 			isa = PBXGroup;
 			children = (
 				1F8CF1781CC5C5F90047C2D2 /* PhotosLike.storyboard */,
-				1F8CF17B1CC5C5F90047C2D2 /* PhotosLikeScene.swift */,
 				1F8CF17C1CC5C5F90047C2D2 /* PhotosViewController.swift */,
 				1F8CF1791CC5C5F90047C2D2 /* PhotosDetailViewController.swift */,
 				1F8CF17A1CC5C5F90047C2D2 /* PhotosLikeManager.swift */,
@@ -262,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				1FDACD111CB5760C00806794 /* MenuBadge.storyboard */,
-				1F2D33BD1CB8DA99005E38E6 /* MenuBadgeScene.swift */,
 				1F28A0941CA2220B00287194 /* MenuTabBarController.swift */,
 				1F5549591CB57C2F002E3B32 /* MenuSettingsViewController.swift */,
 				1FDACD131CB5784600806794 /* MenuCustomViewController.swift */,
@@ -288,10 +295,10 @@
 		1F8517F81BA52E3C00C1FCB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F81E9821DB05FE00005AB26 /* Runes.framework */,
 				489463571D51B4D300F9AF27 /* Pulsator.framework */,
 				486888F51D3DF244008AF8C7 /* ReactiveAutomaton.framework */,
 				1F60F0AB1CC23B4E00D02CA9 /* Cartography.framework */,
-				1F18AFC31CBBDBA800B82A3A /* Rex.framework */,
 				48DCFA0C1CB7D445001D00EA /* FontAwesome.framework */,
 				48258F611CAA8673003BB383 /* ReactiveArray.framework */,
 				1F12CACF1C9F95D6007D7F51 /* WebLinking.framework */,
@@ -299,7 +306,10 @@
 				1F7987E31C9F6AE6003AFE72 /* Argo.framework */,
 				1FE03ADB1BB79F1000D16C55 /* APIKit.framework */,
 				1FE03ADC1BB79F1000D16C55 /* Haneke.framework */,
+				1FDAA8601DBFA5D4009D5ACA /* ReactiveSwift.framework */,
 				1FE03ADE1BB79F1000D16C55 /* ReactiveCocoa.framework */,
+				1F07C55B1DBFC7E100434B1B /* ReactiveObjC.framework */,
+				1F07C5581DBFC7BD00434B1B /* ReactiveObjCBridge.framework */,
 				1FE03ADF1BB79F1000D16C55 /* Result.framework */,
 			);
 			name = Frameworks;
@@ -310,11 +320,9 @@
 			isa = PBXGroup;
 			children = (
 				48EA63931BA939A9007F1251 /* ReactiveCocoa+Ext.swift */,
-				1F24E0481CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift */,
-				482A1CFE1CBD1D2100FE6610 /* Rex+Ext.swift */,
-				487750721CA28DD200B56E7B /* SequenceType+Ext.swift */,
+				1F0D0F191DC4E87E0083700F /* BindingTarget+Ext.swift */,
+				487750721CA28DD200B56E7B /* Sequence+Ext.swift */,
 				1F28635B1C9F85DA004627D3 /* APIKit+Ext.swift */,
-				1F8517FA1BA52E8100C1FCB0 /* UISearchBar+Ext.swift */,
 				1FE0DF7A1CAFF01100893311 /* UIBarButtonItem+Ext.swift */,
 			);
 			path = Extensions;
@@ -397,6 +405,7 @@
 			children = (
 				1FEE10A01BA9E440006E9335 /* Helpers.swift */,
 				487750701CA27C4B00B56E7B /* Prelude.swift */,
+				1FAD0A3C1E34039A00507682 /* Scene.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -565,14 +574,17 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Yasuhiro Inami";
 				TargetAttributes = {
 					48D9143D1B4FB4C400E70080 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = UMBZ5WL247;
+						LastSwiftMigration = 0820;
 					};
 					48D914541B4FB4C400E70080 = {
 						CreatedOnToolsVersion = 6.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 48D9143D1B4FB4C400E70080;
 					};
 				};
@@ -663,26 +675,23 @@
 				48258F651CAA8BCC003BB383 /* ReactiveTableViewController.swift in Sources */,
 				4837D9DA1CC737E400BB1C35 /* GameCommandViewController.swift in Sources */,
 				48D914441B4FB4C400E70080 /* AppDelegate.swift in Sources */,
-				482A1CFF1CBD1D2100FE6610 /* Rex+Ext.swift in Sources */,
-				487750731CA28DD200B56E7B /* SequenceType+Ext.swift in Sources */,
-				1F8517FB1BA52E8100C1FCB0 /* UISearchBar+Ext.swift in Sources */,
+				487750731CA28DD200B56E7B /* Sequence+Ext.swift in Sources */,
+				1F0D0F1A1DC4E87E0083700F /* BindingTarget+Ext.swift in Sources */,
 				1F2863581C9F76C6004627D3 /* PaginationViewController.swift in Sources */,
 				4868890C1D3E12E6008AF8C7 /* AutomatonFixtures.swift in Sources */,
 				1FDACD141CB5784600806794 /* MenuCustomViewController.swift in Sources */,
+				1FAD0A3D1E34039A00507682 /* Scene.swift in Sources */,
 				1FEE10A11BA9E440006E9335 /* Helpers.swift in Sources */,
 				1F2D33BC1CB8DA3F005E38E6 /* MenuId.swift in Sources */,
 				1F28A09B1CA222B600287194 /* MenuManager.swift in Sources */,
 				1F28635A1C9F7C85004627D3 /* PaginationViewModel.swift in Sources */,
 				1F8CF17E1CC5C5F90047C2D2 /* PhotosDetailViewController.swift in Sources */,
 				1F721D6D1C952F290022EC57 /* ZundokoViewController.swift in Sources */,
-				1F2D33BE1CB8DA99005E38E6 /* MenuBadgeScene.swift in Sources */,
 				1F2D33BA1CB8D565005E38E6 /* MenuType.swift in Sources */,
 				1F8CF17F1CC5C5F90047C2D2 /* PhotosLikeManager.swift in Sources */,
 				48EA63911BA938A5007F1251 /* MultipleTextFieldViewController.swift in Sources */,
 				1F99E6AE1CB3FE5000C44598 /* ItemsViewType.swift in Sources */,
 				1FDB70B01CB8ED79000A0462 /* BadgeManager.swift in Sources */,
-				1F24E0491CDCFC060008028E /* ReactiveCocoa+SampleFrom.swift in Sources */,
-				1F8CF1801CC5C5F90047C2D2 /* PhotosLikeScene.swift in Sources */,
 				486888FC1D3DF35F008AF8C7 /* AutomatonViewController.swift in Sources */,
 				48EA638D1BA92F5D007F1251 /* TextFieldViewController.swift in Sources */,
 				1FE0DF7D1CAFF55000893311 /* ReactiveArrayViewModel.swift in Sources */,
@@ -750,8 +759,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -796,8 +807,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -816,6 +829,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -825,12 +839,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = UMBZ5WL247;
 				INFOPLIST_FILE = ReactiveCocoaCatalog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.inamiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -838,12 +856,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = UMBZ5WL247;
 				INFOPLIST_FILE = ReactiveCocoaCatalog/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.inamiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -863,6 +884,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.inamiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveCocoaCatalog.app/ReactiveCocoaCatalog";
 			};
 			name = Debug;
@@ -879,6 +901,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.inamiy.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReactiveCocoaCatalog.app/ReactiveCocoaCatalog";
 			};
 			name = Release;

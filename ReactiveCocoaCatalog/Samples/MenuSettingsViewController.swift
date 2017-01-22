@@ -8,15 +8,17 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
+import ReactiveObjC
+import ReactiveObjCBridge
 
 private let _cellIdentifier = "MenuSettingsCell"
 
-final class MenuSettingsViewController: UITableViewController
+final class MenuSettingsViewController: UITableViewController, StoryboardSceneProvider
 {
-    weak var menu: SettingsMenu?
+    static let storyboardScene = StoryboardScene<MenuSettingsViewController>(name: "MenuBadge")
 
-    deinit { logDeinit(self) }
+    weak var menu: SettingsMenu?
 
     override func viewDidLoad()
     {
@@ -27,13 +29,13 @@ final class MenuSettingsViewController: UITableViewController
             fatalError("Required properties are not set.")
         }
 
-        let menusChanged = menu.menusProperty.signal.triggerize()
-        let badgeChanged = BadgeManager.badges.mergedSignal.triggerize()
+        let menusChanged = menu.menusProperty.signal.map { _ in () }
+        let badgeChanged = BadgeManager.badges.mergedSignal.map { _ in () }
 
         // `reloadData()` when menus or badges changed.
         menusChanged
-            .mergeWith(badgeChanged)
-            .observeNext { [weak self] _ in
+            .merge(with: badgeChanged)
+            .observeValues { [weak self] _ in
                 self?.tableView?.reloadData()
             }
 
@@ -41,10 +43,10 @@ final class MenuSettingsViewController: UITableViewController
         let modalAction = Action<MenuType, (), NoError> { [weak self] menu in
             return SignalProducer { observer, disposable in
                 let modalVC = menu.viewController
-                self?.presentViewController(modalVC, animated: true) {
-                    scheduleAfterNow(1) {
-                        self?.dismissViewControllerAnimated(true) {
-                            observer.sendNext()
+                self?.present(modalVC, animated: true) {
+                    _ = QueueScheduler.main.schedule(after: 1) {
+                        self?.dismiss(animated: true) {
+                            observer.send(value: ())
                             observer.sendCompleted()
                         }
                     }
@@ -53,19 +55,18 @@ final class MenuSettingsViewController: UITableViewController
         }
 
         // `tableView.didSelectRow()` handling
-        self.rac_signalForSelector(Selector._didSelectRow.0, fromProtocol: Selector._didSelectRow.1).toSignalProducer()
+        bridgedSignalProducer(from: self.rac_signal(for: Selector._didSelectRow.0, from: Selector._didSelectRow.1))
             .on(event: logSink("didSelectRow"))
-            .ignoreCastError(NoError)
-            .sampleFrom(self.menu!.menusProperty.producer)
+            .withLatest(from: self.menu!.menusProperty.producer)
             .map { racTuple, menus -> MenuType in
                 let racTuple = racTuple as! RACTuple
                 let indexPath = racTuple.second as! NSIndexPath
                 let menu = menus[indexPath.row]
                 return menu
             }
-            .flatMap(.Merge) { menu in
+            .flatMap(.merge) { menu in
                 return modalAction.apply(menu)
-                    .ignoreCastError(NoError)
+                    .ignoreCastError(NoError.self)
             }
             .start()
 
@@ -73,14 +74,14 @@ final class MenuSettingsViewController: UITableViewController
         self.tableView.delegate = self
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.menu!.menusProperty.value.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(_cellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: _cellIdentifier, for: indexPath)
 
         let menu = self.menu!.menusProperty.value[indexPath.row]
         cell.textLabel?.text = "\(menu.menuId)"
@@ -96,8 +97,8 @@ final class MenuSettingsViewController: UITableViewController
 extension Selector
 {
     // NOTE: needed to upcast to `Protocol` for some reason...
-    private static let _didSelectRow: (Selector, Protocol) = (
-        #selector(UITableViewDelegate.tableView(_:didSelectRowAtIndexPath:)),
+    fileprivate static let _didSelectRow: (Selector, Protocol) = (
+        #selector(UITableViewDelegate.tableView(_:didSelectRowAt:)),
         UITableViewDelegate.self
     )
 }

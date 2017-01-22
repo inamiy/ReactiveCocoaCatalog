@@ -8,14 +8,14 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 
 private let _interval = 0.5
 
 enum Zundoko
 {
-    case Zun
-    case Doko
+    case zun
+    case doko
 }
 
 ///
@@ -25,7 +25,7 @@ enum Zundoko
 ///   - [ズンドコキヨシ with RxSwift - Qiita](http://qiita.com/bricklife/items/4bf8c0e17043498f4452)
 ///   - [きよしのズンドコ節 / 氷川きよし - YouTube](https://www.youtube.com/watch?v=c0H_qGSJKzE)
 ///
-class ZundokoViewController: UIViewController
+class ZundokoViewController: UIViewController, NibSceneProvider
 {
     @IBOutlet weak var textView: UITextView?
 
@@ -33,8 +33,6 @@ class ZundokoViewController: UIViewController
     @IBOutlet weak var dokoButton: UIButton?
 
     var count = 0
-
-    deinit { logDeinit(self) }
 
     override func viewDidLoad()
     {
@@ -51,31 +49,29 @@ class ZundokoViewController: UIViewController
 
     private func _setupProducers()
     {
-        let d = self.rac_deallocDisposable
+        let d = CompositeDisposable()
 
         // Manual chanting of "Zun".
-        let zun = zunButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-            .map { _ in Zundoko.Zun }
-            .ignoreCastError(NoError)
+        let zun = zunButton!.reactive.controlEvents(.touchUpInside)
+            .map { _ in Zundoko.zun }
 
         // Manual chanting of "Doko".
-        let doko = dokoButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-            .map { _ in Zundoko.Doko }
-            .ignoreCastError(NoError)
+        let doko = dokoButton!.reactive.controlEvents(.touchUpInside)
+            .map { _ in Zundoko.doko }
 
-        d += timer(_interval, onScheduler: QueueScheduler.mainQueueScheduler)
-            .map { _ in arc4random_uniform(2) == 0 ? Zundoko.Zun : .Doko }
-            .mergeWith(zun)
-            .mergeWith(doko)
-            .on(next: { [weak self] zundoko in
+        d += timer(interval: .milliseconds(Int(_interval * 1000)), on: QueueScheduler.main)
+            .map { _ in random(2) == 0 ? Zundoko.zun : .doko }
+            .merge(with: zun)
+            .merge(with: doko)
+            .on(value: { [weak self] zundoko in
                 self?._printAll(zundoko)
             })
             .scan([]) { Array(($0 + [$1]).suffix(5)) } // collect 5 recent values
-            .takeWhile { $0 != [.Zun, .Zun, .Zun, .Zun, .Doko] }  // "Zun, Zun Zun, Zun Doko..."
+            .take { $0 != [.zun, .zun, .zun, .zun, .doko] }  // "Zun, Zun Zun, Zun Doko..."
             .concat(
                 // take a deep breath
                 SignalProducer.empty
-                    .delay(min(_interval, 1), onScheduler: QueueScheduler.mainQueueScheduler)
+                    .delay(min(_interval, 1), on: QueueScheduler.main)
             )
             .on(completed: { [weak self] in
                 // "Ki-yo-shi!!!"
@@ -85,9 +81,13 @@ class ZundokoViewController: UIViewController
             .startWithInterrupted {
                 print("Kiyoshi forever!!!") // called when forever-timer is safely disposed
             }
+
+        self.reactive.lifetime.ended.observeCompleted {
+            d.dispose()
+        }
     }
 
-    private func _printAll(message: Any)
+    private func _printAll(_ message: Any)
     {
         self.count = self.count + 1
         print("\(self.count):", message)

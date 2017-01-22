@@ -7,16 +7,16 @@
 //
 
 import Foundation
-import ReactiveCocoa
+import ReactiveSwift
 import APIKit
 
-public protocol BingRequest: RequestType {}
+public protocol BingRequest: Request {}
 
 extension BingRequest
 {
-    public var baseURL: NSURL
+    public var baseURL: URL
     {
-        return NSURL(string: "https://api.bing.com")!
+        return URL(string: "https://api.bing.com")!
     }
 }
 
@@ -26,7 +26,7 @@ public struct BingSearchRequest: BingRequest
 
     public var method: HTTPMethod
     {
-        return .GET
+        return .get
     }
 
     public var path: String
@@ -34,9 +34,9 @@ public struct BingSearchRequest: BingRequest
         return "/osjson.aspx"
     }
 
-    public var queryParameters: [String : AnyObject]?
+    public var queryParameters: [String : Any]?
     {
-        return ["query" : self.query]
+        return ["query": self.query]
     }
 
     public init(query: String)
@@ -44,12 +44,12 @@ public struct BingSearchRequest: BingRequest
         self.query = query
     }
 
-    public func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> BingSearchResponse
+    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> BingSearchResponse
     {
 //        print("response object = \(object)")
 
-        guard let arr = object as? [AnyObject] where arr.count == 2 else {
-            throw ResponseError.UnexpectedObject(object)
+        guard let arr = object as? [AnyObject], arr.count == 2 else {
+            throw ResponseError.unexpectedObject(object)
         }
 
         let query = arr[0] as? String ?? ""
@@ -72,13 +72,13 @@ public struct BingAPI
         return SignalProducer { observer, disposable in
             let request = BingSearchRequest(query: query)
 
-            Session.sendRequest(request) { result in
+            Session.send(request) { result in
                 switch result {
-                    case .Success(let response):
-                        observer.sendNext(response)
+                    case .success(let response):
+                        observer.send(value: response)
                         observer.sendCompleted()
-                    case .Failure(let error):
-                        observer.sendFailed(error)
+                    case .failure(let error):
+                        observer.send(error: error)
                 }
             }
         }

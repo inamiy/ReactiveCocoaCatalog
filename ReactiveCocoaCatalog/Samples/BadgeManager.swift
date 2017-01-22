@@ -8,7 +8,7 @@
 
 import Foundation
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 
 /// Singleton class for on-memory badge persistence.
 final class BadgeManager
@@ -24,7 +24,7 @@ final class BadgeManager
             return property
         }
         else {
-            let property = MutableProperty<Badge>(.None)
+            let property = MutableProperty<Badge>(.none)
             self._badges[menuId] = property
             return property
         }
@@ -33,11 +33,10 @@ final class BadgeManager
     /// - FIXME: This should be created NOT from current `_badges`-dictionary but from combined MutableProperties of badges.
     var mergedSignal: Signal<(MenuId, Badge), NoError>
     {
-        var mergedSignal: Signal<(MenuId, Badge), NoError> = .never
-        for (menuId, property) in self._badges {
-            mergedSignal = mergedSignal.mergeWith(property.signal.map { (menuId, $0) })
+        let signals = self._badges.map { menuId, property in
+            return property.signal.map { (menuId, $0) }
         }
-        return mergedSignal
+        return Signal.merge(signals)
     }
 
     private init() {}
@@ -47,41 +46,41 @@ final class BadgeManager
 
 enum Badge: RawRepresentable
 {
-    case None
-    case New    // "N" mark
-    case Number(Int)
-    case String(Swift.String)
+    case none
+    case new    // "N" mark
+    case number(Int)
+    case string(Swift.String)
 
     var rawValue: Swift.String?
     {
         switch self {
-            case .None:              return nil
-            case .New:               return "N"
-            case .Number(let int):   return int > 999 ? "999+" : int > 0 ? "\(int)" : nil
-            case .String(let str):   return str
+            case .none:              return nil
+            case .new:               return "N"
+            case .number(let int):   return int > 999 ? "999+" : int > 0 ? "\(int)" : nil
+            case .string(let str):   return str
         }
     }
 
     var number: Int?
     {
-        guard case .Number(let int) = self else { return nil }
+        guard case .number(let int) = self else { return nil }
         return int
     }
 
     init(_ intValue: Int)
     {
-        self = .Number(intValue)
+        self = .number(intValue)
     }
 
     init(rawValue: Swift.String?)
     {
         switch rawValue {
-            case .None, .Some("0"), .Some(""):
-                self = .None
-            case .Some("N"):
-                self = .New
-            case let .Some(str):
-                self = Int(str).map { .Number($0) } ?? .String(str)
+            case .none, .some("0"), .some(""):
+                self = .none
+            case .some("N"):
+                self = .new
+            case let .some(str):
+                self = Int(str).map { .number($0) } ?? .string(str)
         }
     }
 }

@@ -8,13 +8,15 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import ReactiveArray
 
 private let _cellIdentifier = "ReactiveTableCellIdentifier"
 
-final class ReactiveTableViewController: UITableViewController, ReactiveArrayViewControllerType
+final class ReactiveTableViewController: UITableViewController, ReactiveArrayViewControllerType, StoryboardSceneProvider
 {
+    static let storyboardScene = StoryboardScene<ReactiveTableViewController>(name: "ReactiveArray")
+
     @IBOutlet weak var insertButtonItem: UIBarButtonItem?
     @IBOutlet weak var replaceButtonItem: UIBarButtonItem?
     @IBOutlet weak var removeButtonItem: UIBarButtonItem?
@@ -26,8 +28,6 @@ final class ReactiveTableViewController: UITableViewController, ReactiveArrayVie
     let viewModel = ReactiveArrayViewModel(cellIdentifier: _cellIdentifier)
 
     let protocolSelectorForDidSelectItem = Selector._didSelectRow
-
-    deinit { logDeinit(self) }
 
     var itemsView: UITableView
     {
@@ -45,7 +45,7 @@ final class ReactiveTableViewController: UITableViewController, ReactiveArrayVie
 
         self.tableView.dataSource = self.viewModel
 
-        // Set delegate after calling `rac_signalForSelector(_:fromProtocol:)`.
+        // Set delegate after calling `rac_signal(for: _:from:)`.
         // - https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1121
         // - http://stackoverflow.com/questions/22000433/rac-signalforselector-needs-empty-implementation
         self.itemsView.delegate = nil   // set nil to clear selector cache
@@ -60,8 +60,8 @@ final class ReactiveTableViewController: UITableViewController, ReactiveArrayVie
 extension Selector
 {
     // NOTE: needed to upcast to `Protocol` for some reason...
-    private static let _didSelectRow: (Selector, Protocol) = (
-        #selector(UITableViewDelegate.tableView(_:didSelectRowAtIndexPath:)),
+    fileprivate static let _didSelectRow: (Selector, Protocol) = (
+        #selector(UITableViewDelegate.tableView(_:didSelectRowAt:)),
         UITableViewDelegate.self
     )
 }

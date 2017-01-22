@@ -7,61 +7,64 @@
 //
 
 import Foundation
-import Curry
-import ReactiveCocoa
+import ReactiveSwift
 import APIKit
 import Argo
+import Curry
+import Runes
 import WebLinking
 
 // MARK: GitHubAPI
 
 struct GitHubAPI {}
 
-// MARK: GitHubRequestType
+// MARK: GitHubRequest
 
-protocol GitHubRequestType: RequestType {}
+protocol GitHubRequest: Request {}
 
-extension GitHubRequestType
+extension GitHubRequest
 {
-    var baseURL: NSURL
+    var baseURL: URL
     {
-        return NSURL(string: "https://api.github.com")!
+        return URL(string: "https://api.github.com")!
     }
 }
 
-/// - Warning: CAN NOT be `extension RequestType` with error "Segmentation fault: 11".
-extension GitHubRequestType where Response: SequenceType, Response.Generator.Element: Decodable, Response.Generator.Element.DecodedType == Response.Generator.Element
+/// - Warning: CAN NOT be `extension Request` with error "Segmentation fault: 11".
+extension GitHubRequest where Response: Sequence, Response.Iterator.Element: Decodable, Response.Iterator.Element.DecodedType == Response.Iterator.Element
 {
     /// Automatic decoding (array).
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> [Response.Generator.Element]
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> [Response.Iterator.Element]
     {
         return try decode(object).dematerialize()
     }
 }
 
-extension GitHubRequestType where Response: PaginationResponseType, Response.Item: Decodable, Response.Item.DecodedType == Response.Item
+extension GitHubRequest where Response: PaginationResponseType, Response.Item: Decodable, Response.Item.DecodedType == Response.Item
 {
     /// Automatic decoding (for PaginationResponse).
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response
     {
         var previousPage: Int?
-        if let previousURI = URLResponse.findLink(relation: "prev")?.uri,
-            queryItems = NSURLComponents(string: previousURI)?.queryItems {
-                previousPage = queryItems
-                    .filter { $0.name == "page" }
-                    .first
-                    .flatMap { $0.value }
-                    .flatMap { Int($0) }
+        if let previousURI = urlResponse.findLink(relation: "prev")?.uri,
+            let queryItems = URLComponents(string: previousURI)?.queryItems
+        {
+            previousPage = queryItems
+                .filter { $0.name == "page" }
+                .first
+                .flatMap { $0.value }
+                .flatMap { Int($0) }
         }
 
         var nextPage: Int?
-        if let nextURI = URLResponse.findLink(relation: "next")?.uri,
-            queryItems = NSURLComponents(string: nextURI)?.queryItems {
-                nextPage = queryItems
-                    .filter { $0.name == "page" }
-                    .first
-                    .flatMap { $0.value }
-                    .flatMap { Int($0) }
+        if let nextURI = urlResponse.findLink(relation: "next")?.uri,
+            let queryItems = URLComponents(string: nextURI)?.queryItems
+        {
+            nextPage = queryItems
+                .filter { $0.name == "page" }
+                .first
+                .flatMap { $0.value }
+                .flatMap { Int($0) }
         }
 
         return try (JSON(object) <|| "items")
@@ -74,7 +77,7 @@ extension GitHubRequestType where Response: PaginationResponseType, Response.Ite
 
 extension GitHubAPI
 {
-    struct UsersRequest: GitHubRequestType
+    struct UsersRequest: GitHubRequest
     {
         typealias Response = [User]
 
@@ -82,7 +85,7 @@ extension GitHubAPI
 
         var method: HTTPMethod
         {
-            return .GET
+            return .get
         }
 
         var path: String
@@ -90,9 +93,9 @@ extension GitHubAPI
             return "/users"
         }
 
-        var queryParameters: [String : AnyObject]?
+        var queryParameters: [String : Any]?
         {
-            return ["since" : self.since]
+            return ["since": self.since]
         }
 
         init(since: Int)
@@ -104,13 +107,13 @@ extension GitHubAPI
     struct User: Decodable
     {
         let login: String
-        let avatarURL: NSURL
+        let avatarURL: URL
 
-        static func decode(j: JSON) -> Decoded<User>
+        static func decode(_ j: JSON) -> Decoded<User>
         {
             return curry(User.init)
                 <^> j <| "login"
-                <*> (j <| "avatar_url").flatMap { .fromOptional(NSURL(string: $0)) }
+                <*> (j <| "avatar_url").flatMap { .fromOptional(URL(string: $0)) }
         }
     }
 }
@@ -119,7 +122,7 @@ extension GitHubAPI
 
 extension GitHubAPI
 {
-    struct SearchRepositoriesRequest: GitHubRequestType, PaginationRequestType
+    struct SearchRepositoriesRequest: GitHubRequest, PaginationRequest
     {
         typealias Response = PaginationResponse<Repository>
 
@@ -132,11 +135,11 @@ extension GitHubAPI
             self.page = page
         }
 
-        // MARK: RequestType
+        // MARK: Request
 
         var method: HTTPMethod
         {
-            return .GET
+            return .get
         }
 
         var path: String
@@ -144,14 +147,14 @@ extension GitHubAPI
             return "/search/repositories"
         }
 
-        var queryParameters: [String: AnyObject]?
+        var queryParameters: [String: Any]?
         {
             return ["q": query, "page": page]
         }
 
-        // MARK: PaginationRequestType
+        // MARK: PaginationRequest
 
-        func requestWithPage(page: Int) -> SearchRepositoriesRequest
+        func requestWithPage(_ page: Int) -> SearchRepositoriesRequest
         {
             return SearchRepositoriesRequest(query: query, page: page)
         }
@@ -163,7 +166,7 @@ extension GitHubAPI
         let fullName: String
         let stargazersCount: Int
 
-        static func decode(j: JSON) -> Decoded<Repository>
+        static func decode(_ j: JSON) -> Decoded<Repository>
         {
             return curry(Repository.init)
                 <^> j <| "id"

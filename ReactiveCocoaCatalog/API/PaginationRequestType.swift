@@ -1,5 +1,5 @@
 //
-//  PaginationRequestType.swift
+//  PaginationRequest.swift
 //  ReactiveCocoaCatalog
 //
 //  Created by Yasuhiro Inami on 2016-03-21.
@@ -9,13 +9,13 @@
 import APIKit
 import Argo
 
-protocol PaginationRequestType: RequestType
+protocol PaginationRequest: Request
 {
     associatedtype Response: PaginationResponseType
 
     var page: Int { get }
 
-    func requestWithPage(page: Int) -> Self
+    func requestWithPage(_ page: Int) -> Self
 }
 
 struct PaginationResponse<Item: Decodable>: PaginationResponseType

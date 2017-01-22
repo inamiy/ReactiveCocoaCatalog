@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReactiveSwift
 
 class MasterViewController: UITableViewController
 {
@@ -16,7 +17,7 @@ class MasterViewController: UITableViewController
     {
         super.awakeFromNib()
 
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             self.clearsSelectionOnViewWillAppear = false
             self.preferredContentSize = CGSize(width: 320.0, height: 600.0)
         }
@@ -29,7 +30,7 @@ class MasterViewController: UITableViewController
         // auto-select
         for i in 0..<self.catalogs.count {
             if self.catalogs[i].selected {
-                self.showDetailViewControllerAtIndex(i)
+                self.showDetailViewController(at: i)
                 break
             }
         }
@@ -37,19 +38,19 @@ class MasterViewController: UITableViewController
 
     // MARK: - UITableViewDataSource
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    override func numberOfSections(in tableView: UITableView) -> Int
     {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.catalogs.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let catalog = self.catalogs[indexPath.row]
         cell.textLabel?.text = catalog.title
@@ -60,26 +61,26 @@ class MasterViewController: UITableViewController
 
     // MARK: UITableViewDelegate
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        self.showDetailViewControllerAtIndex(indexPath.row)
+        self.showDetailViewController(at: indexPath.row)
     }
 
-    func showDetailViewControllerAtIndex(index: Int)
+    func showDetailViewController(at index: Int)
     {
         let catalog = self.catalogs[index]
 
-        let newVC: UIViewController
-        if let storyboard = catalog.storyboard {
-            newVC = storyboard.instantiate()
-        }
-        else {
-            newVC = catalog.class_.init()
-        }
+        let newVC = catalog.scene.instantiate()
         let newNavC = UINavigationController(rootViewController: newVC)
         self.splitViewController?.showDetailViewController(newNavC, sender: self)
 
-        newVC.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+        // Deinit logging.
+        let message = deinitMessage(newVC)
+        newVC.reactive.lifetime.ended.observeCompleted {
+            print(message)
+        }
+
+        newVC.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
         newVC.navigationItem.leftItemsSupplementBackButton = true
     }
 

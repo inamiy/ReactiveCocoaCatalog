@@ -8,23 +8,19 @@
 
 import UIKit
 import Result
+import ReactiveSwift
 import ReactiveCocoa
 
-private enum _DemoMode { case CocoaAction, RACCommand }
-private let _demoMode = _DemoMode.RACCommand    // toggle this flag to see difference
-
 /// `Action` (`CocoaAction` & `RACCommand`) example.
-final class ActionViewController: UIViewController
+final class ActionViewController: UIViewController, NibSceneProvider
 {
     @IBOutlet var label: UILabel?
     @IBOutlet var button1: UIButton?
     @IBOutlet var button2: UIButton?
 
     // NOTE: CocoaAction must be retained to bind to UI
-    var cocoaAction1: CocoaAction?
-    var cocoaAction2: CocoaAction?
-
-    deinit { logDeinit(self) }
+    var cocoaAction1: CocoaAction<UIButton>?
+    var cocoaAction2: CocoaAction<UIButton>?
 
     override func viewDidLoad()
     {
@@ -38,44 +34,35 @@ final class ActionViewController: UIViewController
     private func _setupActions()
     {
         // action1
-        let action1 = Action<AnyObject?, NSDate, NoError> { input -> SignalProducer<NSDate, NoError> in
-            return timer(2, onScheduler: QueueScheduler.mainQueueScheduler).take(1)
+        let action1 = Action<UIButton?, Date, NoError> { input -> SignalProducer<Date, NoError> in
+            return timer(interval: .seconds(2), on: QueueScheduler.main).take(first: 1)
         }
 
         // action2
         // NOTE: action2 is enabled while action1.executing is true
-        let action2 = Action<AnyObject?, NSDate, NoError>(enabledIf: action1.executing) { input -> SignalProducer<NSDate, NoError> in
-            return timer(2, onScheduler: QueueScheduler.mainQueueScheduler).take(1)
+        let action2 = Action<UIButton?, Date, NoError>(enabledIf: action1.isExecuting) { input -> SignalProducer<Date, NoError> in
+            return timer(interval: .seconds(2), on: QueueScheduler.main).take(first: 1)
         }
 
-        switch _demoMode {
-            case .CocoaAction:
-                self.cocoaAction1 = CocoaAction(action1, input: nil)
-                self.button1?.addTarget(self.cocoaAction1, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
-
-                self.cocoaAction2 = CocoaAction(action2, input: nil)
-                self.button2!.addTarget(self.cocoaAction2, action: CocoaAction.selector, forControlEvents: .TouchUpInside)
-
-            case .RACCommand:
-                self.button1!.rac_command = toRACCommand(action1)
-                self.button2!.rac_command = toRACCommand(action2)
-        }
+        self.button1?.reactive.pressed = CocoaAction(action1, input: nil)
+        self.button2?.reactive.pressed = CocoaAction(action2, input: nil)
 
         // logging
-        _setupLoggingForAction("action1", action1)
-        _setupLoggingForAction("action2", action2)
+        _setupActionLogging("action1", for: action1)
+        _setupActionLogging("action2", for: action2)
 
         let combinedProducer: SignalProducer<String?, NoError> =
-            combineLatest(
-                action1.executing.producer.map { "action1.executing = \($0)" },
-                action1.enabled.producer.map { "action1.enabled   = \($0)" },
-                action2.executing.producer.map { "action2.executing = \($0)" },
-                action2.enabled.producer.map { "action2.enabled   = \($0)" })
+            SignalProducer.combineLatest(
+                action1.isExecuting.producer.map { "action1.isExecuting = \($0)" },
+                action1.isEnabled.producer.map { "action1.isEnabled   = \($0)" },
+                action2.isExecuting.producer.map { "action2.isExecuting = \($0)" },
+                action2.isEnabled.producer.map { "action2.isEnabled   = \($0)" }
+            )
                 .map { (s1: String, s2: String, s3: String, s4: String) in  // explicit type annotation to avoid slow compilation
                     "\(s1)\n\(s2)\n\(s3)\n\(s4)"
                 }
 
-        self.label!.rex_text <~ combinedProducer
+        self.label!.reactive.text <~ combinedProducer
     }
 
 }
@@ -87,14 +74,14 @@ private func _testApply()
     print("\(#function) start")
 
     // action1
-    let action1 = Action<AnyObject?, NSDate, NoError> { input -> SignalProducer<NSDate, NoError> in
-        return timer(2, onScheduler: QueueScheduler.mainQueueScheduler).take(1)
+    let action1 = Action<AnyObject?, Date, NoError> { input -> SignalProducer<Date, NoError> in
+        return timer(interval: .seconds(2), on: QueueScheduler.main).take(first: 1)
     }
 
     // action2
     // NOTE: action2 is enabled while action1.executing is true
-    let action2 = Action<AnyObject?, NSDate, NoError>(enabledIf: action1.executing) { input -> SignalProducer<NSDate, NoError> in
-        return timer(2, onScheduler: QueueScheduler.mainQueueScheduler).take(1)
+    let action2 = Action<AnyObject?, Date, NoError>(enabledIf: action1.isExecuting) { input -> SignalProducer<Date, NoError> in
+        return timer(interval: .seconds(2), on: QueueScheduler.main).take(first: 1)
     }
 
     // 1. `action2.apply()` fails because action1 is not executed yet
@@ -124,10 +111,10 @@ private func _testApply()
 
 // MARK: Helpers
 
-private func _setupLoggingForAction<In, Out, Err>(name: String, _ action: Action<In, Out, Err>)
+private func _setupActionLogging<In, Out, Err>(_ name: String, for action: Action<In, Out, Err>)
 {
-    action.executing.producer.start(logSink("\(name).executing"))
-    action.enabled.producer.start(logSink("\(name).enabled"))
+    action.isExecuting.producer.start(logSink("\(name).executing"))
+    action.isEnabled.producer.start(logSink("\(name).enabled"))
     action.events.observe(logSink("\(name).events"))
     action.values.observe(logSink("\(name).values"))
     action.errors.observe(logSink("\(name).errors"))

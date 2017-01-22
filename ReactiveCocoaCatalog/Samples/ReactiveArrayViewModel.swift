@@ -8,7 +8,7 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import ReactiveArray
 
 // MARK: ReactiveArrayViewModel
@@ -27,59 +27,57 @@ final class ReactiveArrayViewModel: NSObject, ReactiveDataSourceType
 {
     let sections = ReactiveArray<Section>()
 
-    let sectionOrItem = MutableProperty<(SectionOrItem, Int)>(.Section, 1)
+    let sectionOrItem = MutableProperty<(SectionOrItem, Int)>(.section, 1)
 
-    private let _cellIdentifier: String
-    private let _headerIdentifier: String?
+    fileprivate let _cellIdentifier: String
+    fileprivate let _headerIdentifier: String?
 
     init(cellIdentifier: String, headerIdentifier: String? = nil)
     {
         self._cellIdentifier = cellIdentifier
         self._headerIdentifier = headerIdentifier
     }
-
-    deinit { logDeinit(self) }
 }
 
 extension ReactiveArrayViewModel: UITableViewDataSource
 {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int
+    func numberOfSections(in tableView: UITableView) -> Int
     {
         return self.sections.observableCount.value
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         let section = self.sections[section]
         return section.items.observableCount.value
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self._cellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: self._cellIdentifier, for: indexPath)
 
         cell.textLabel?.text = self.sections[indexPath.section][indexPath.row].title
 
         return cell
     }
 
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
     {
         return true
     }
 
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath)
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
     {
-        if editingStyle == .Delete {
+        if editingStyle == .delete {
             let section = self.sections[indexPath.section]
-            section.items.removeAtIndex(indexPath.row)
+            section.items.remove(at: indexPath.row)
         }
-        else if editingStyle == .Insert {
+        else if editingStyle == .insert {
 
         }
     }
 
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?
     {
         return self.sections[section].title
     }
@@ -87,33 +85,33 @@ extension ReactiveArrayViewModel: UITableViewDataSource
 
 extension ReactiveArrayViewModel: UICollectionViewDataSource
 {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int
+    func numberOfSections(in collectionView: UICollectionView) -> Int
     {
         return self.sections.observableCount.value
     }
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         let section = self.sections[section]
         return section.items.observableCount.value
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self._cellIdentifier, forIndexPath: indexPath) as! ReactiveCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self._cellIdentifier, for: indexPath) as! ReactiveCollectionViewCell
 
         cell.label?.text = self.sections[indexPath.section][indexPath.row].title
 
         return cell
     }
 
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView
     {
         guard let headerIdentifier = self._headerIdentifier else {
             fatalError("`headerIdentifier` is missing in collectionView dataSource.")
         }
 
-        let reusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerIdentifier, forIndexPath: indexPath) as! ReactiveCollectionReusableView
+        let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerIdentifier, for: indexPath) as! ReactiveCollectionReusableView
 
         if kind == UICollectionElementKindSectionHeader {
             reusableView.label?.text = self.sections[indexPath.section].title
@@ -144,7 +142,7 @@ struct Section: SectionType
     /// - Returns: 1 section with random `1...3` items.
     static func randomData() -> Section
     {
-        let dateString = stringFromDate(NSDate())
+        let dateString = stringFromDate(Date())
 
         let items = ReactiveArray(elements: (0..<(random(3) + 1))
             .map { Item(title: "Item-\($0)") })
@@ -155,7 +153,7 @@ struct Section: SectionType
     /// - Returns: 1 section with 0 item.
     static func emptyData() -> Section
     {
-        let dateString = stringFromDate(NSDate())
+        let dateString = stringFromDate(Date())
 
         return Section(title: "\(dateString)", items: [])
     }
@@ -181,7 +179,7 @@ struct Item: ItemType
 
     static func randomData() -> Item
     {
-        let dateString = stringFromDate(NSDate())
+        let dateString = stringFromDate(Date())
 
         return Item(title: "\(dateString)")
     }
@@ -191,8 +189,8 @@ struct Item: ItemType
 
 enum SectionOrItem: String, CustomStringConvertible
 {
-    case Section = "Section"
-    case Item = "Item"
+    case section = "Section"
+    case item = "Item"
 
     var description: String
     {
@@ -202,8 +200,8 @@ enum SectionOrItem: String, CustomStringConvertible
     var inverse: SectionOrItem
     {
         switch self {
-            case .Section:  return .Item
-            case .Item:     return .Section
+            case .section:  return .item
+            case .item:     return .section
         }
     }
 }

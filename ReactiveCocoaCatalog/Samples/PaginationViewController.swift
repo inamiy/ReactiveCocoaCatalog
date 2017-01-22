@@ -8,8 +8,8 @@
 
 import UIKit
 import Result
+import ReactiveSwift
 import ReactiveCocoa
-import Rex
 import APIKit
 import Argo
 
@@ -21,7 +21,7 @@ private let _cellIdentifier = "PaginationCellIdentifier"
 /// - SeeAlso:
 ///   - https://github.com/tryswift/RxPagination
 ///
-class PaginationViewController: UITableViewController
+class PaginationViewController: UITableViewController, StoryboardSceneProvider
 {
     @IBOutlet weak var indicatorView: UIActivityIndicatorView?
 
@@ -29,41 +29,36 @@ class PaginationViewController: UITableViewController
         paginationRequest: GitHubAPI.SearchRepositoriesRequest(query: "Swift")
     )
 
-    deinit { logDeinit(self) }
-
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .Refresh, target: nil, action: nil)
-//        refreshButtonItem.rac_command = RACCommand.triggerCommand()
+        let refreshButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem = refreshButtonItem
 
-        let refreshAction = triggerAction()
-
-        refreshButtonItem.rex_action
-            <~ SignalProducer<CocoaAction, NoError>(value: CocoaAction(refreshAction, input: nil))
+        let refreshAction = Action<(), (), NoError> { _ in .init(value: ()) }
+        refreshButtonItem.reactive.pressed = CocoaAction(refreshAction)
 
         refreshAction.values
             .observe(self.viewModel.refreshObserver)
 
         // NOTE: Requires KVO (DynamicProperty), not `rex_contentOffset`.
-        DynamicProperty(object: self.tableView, keyPath: "contentOffset").signal
-            .flatMap(.Merge) { [weak self] _ -> SignalProducer<(), NoError> in
+        DynamicProperty<CGPoint>(object: self.tableView, keyPath: #keyPath(UIScrollView.contentOffset)).signal
+            .flatMap(.merge) { [weak self] _ -> SignalProducer<(), NoError> in
                 self?.tableView._reachedBottom == true ? .init(value: ()) : .empty
             }
             .observe(self.viewModel.loadNextObserver)
 
-        self.indicatorView!.rex_animating
+        self.indicatorView!.reactive.isAnimating
             <~ self.viewModel.loading.producer
 
         self.viewModel.items.producer
-            .startWithNext { [weak self] repositories in
+            .startWithValues { [weak self] repositories in
                 self?.tableView.reloadData()
             }
 
         // Trigger refresh manually.
-        self.viewModel.refreshObserver.sendNext()
+        self.viewModel.refreshObserver.send(value: ())
     }
 }
 
@@ -71,14 +66,15 @@ class PaginationViewController: UITableViewController
 
 extension PaginationViewController
 {
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
         return self.viewModel.items.value.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCellWithIdentifier(_cellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: _cellIdentifier, for: indexPath)
+
         let repository = self.viewModel.items.value[indexPath.row]
 
         cell.textLabel?.text = repository.fullName
@@ -92,7 +88,7 @@ extension PaginationViewController
 
 extension UIScrollView
 {
-    private var _reachedBottom: Bool
+    fileprivate var _reachedBottom: Bool
     {
         let visibleHeight = frame.height - contentInset.top - contentInset.bottom
         let y = contentOffset.y + contentInset.top

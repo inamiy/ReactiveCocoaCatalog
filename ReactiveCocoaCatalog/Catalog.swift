@@ -12,8 +12,7 @@ struct Catalog
 {
     let title: String?
     let description: String?
-    let class_: UIViewController.Type
-    let storyboard: StoryboardScene<UIViewController>?
+    let scene: AnyScene
     let selected: Bool
 
     static func allCatalogs() -> [Catalog]
@@ -22,142 +21,81 @@ struct Catalog
             Catalog(
                 title: "UITextField",
                 description: "throttle()",
-                class_: TextFieldViewController.self
+                scene: *TextFieldViewController.nibScene
             ),
             Catalog(
                 title: "UITextField (Multiple)",
                 description: "Login example",
-                class_: MultipleTextFieldViewController.self
+                scene: *MultipleTextFieldViewController.nibScene
             ),
             Catalog(
                 title: "Color Slider",
                 description: "RGB Slider example",
-                class_: ColorSliderViewController.self
+                scene: *ColorSliderViewController.nibScene
             ),
             Catalog(
                 title: "Who To Follow",
                 description: "Suggestion box",
-                class_: WhoToFollowViewController.self
+                scene: *WhoToFollowViewController.nibScene
             ),
             Catalog(
                 title: "Incremental Search",
-                description: "throttle + flatten(.Latest)",
-                class_: IncrementalSearchViewController.self
+                description: "throttle + flatten(.latest)",
+                scene: *IncrementalSearchViewController.nibScene
             ),
             Catalog(
                 title: "Action",
                 description: "Action (CocoaAction & RACCommand) Example",
-                class_: ActionViewController.self
+                scene: *ActionViewController.nibScene
             ),
             Catalog(
                 title: "ZunDoko",
                 description: "Zun, Zun Zun, Zun Doko, Kiyoshi!",
-                class_: ZundokoViewController.self
+                scene: *ZundokoViewController.nibScene
             ),
             Catalog(
                 title: "GameCommand",
                 description: "⬇️↘️➡️👊 → Hadouken!!💥",
-                class_: GameCommandViewController.self,
-                storyboard: StoryboardScene(
-                    name: "GameCommand",
-                    identifier: "GameCommandViewController"
-                )
+                scene: *GameCommandViewController.storyboardScene
             ),
             Catalog(
                 title: "Pagination",
                 description: "Pagination",
-                class_: PaginationViewController.self,
-                storyboard: StoryboardScene(
-                    name: "PaginationViewController",
-                    identifier: "PaginationViewController"
-                )
+                scene: *PaginationViewController.storyboardScene
             ),
             Catalog(
                 title: "ReactiveArray (TableView)",
                 description: "ReactiveArray + TableView",
-                class_: ReactiveTableViewController.self,
-                storyboard: StoryboardScene(
-                    name: "ReactiveArray",
-                    identifier: "ReactiveTableViewController"
-                )
+                scene: *ReactiveTableViewController.storyboardScene
             ),
             Catalog(
                 title: "ReactiveArray (CollectionView)",
                 description: "ReactiveArray + CollectionView",
-                class_: ReactiveCollectionViewController.self,
-                storyboard: StoryboardScene(
-                    name: "ReactiveArray",
-                    identifier: "ReactiveCollectionViewController"
-                )
+                scene: *ReactiveCollectionViewController.storyboardScene
             ),
             Catalog(
                 title: "MenuBadge",
                 description: "Tab + Badge",
-                class_: MenuTabBarController.self,
-                storyboard: StoryboardScene(
-                    name: "MenuBadge",
-                    identifier: "MenuTabBarController"
-                )
+                scene: *MenuTabBarController.storyboardScene
             ),
             Catalog(
                 title: "PhotosLike",
                 description: "Photo Gallery + Like buttons",
-                class_: PhotosViewController.self,
-                storyboard: StoryboardScene(
-                    name: "PhotosLike",
-                    identifier: "PhotosViewController"
-                )
+                scene: *PhotosViewController.storyboardScene
             ),
             Catalog(
                 title: "Automaton (StateMachine)",
                 description: "State machine example",
-                class_: AutomatonViewController.self,
-                storyboard: StoryboardScene(
-                    name: "Automaton",
-                    identifier: "AutomatonViewController"
-                ),
-                selected: true
-            ),
+                scene: *AutomatonViewController.storyboardScene
+            )
         ]
     }
 
-    init(title: String?, description: String?, class_: UIViewController.Type, storyboard: StoryboardScene<UIViewController>? = nil, selected: Bool = false)
+    init(title: String?, description: String?, scene: AnyScene, selected: Bool = false)
     {
         self.title = title
         self.description = description
-        self.class_ = class_
-        self.storyboard = storyboard
+        self.scene = scene
         self.selected = selected
-    }
-}
-
-protocol Instantiateable
-{
-    associatedtype VC: UIViewController
-    func instantiate() -> VC
-}
-
-struct StoryboardScene<VC: UIViewController>: Instantiateable
-{
-    let storyboardName: String
-    let viewControllerIdentifier: String
-    let bundle: NSBundle?
-
-    init(name: String, identifier: String, bundle: NSBundle? = nil)
-    {
-        self.storyboardName = name
-        self.viewControllerIdentifier = identifier
-        self.bundle = bundle
-    }
-
-    func instantiate() -> VC
-    {
-        let storyboard = UIStoryboard(name: self.storyboardName, bundle: self.bundle)
-
-        guard let vc = storyboard.instantiateViewControllerWithIdentifier(self.viewControllerIdentifier) as? VC else {
-            fatalError("Couldn't cast to `\(VC.self)` while `StoryboardScene.instantiate()`.")
-        }
-
-        return vc
     }
 }

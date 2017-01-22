@@ -8,7 +8,7 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import ReactiveArray
 
 /// - Note:
@@ -25,13 +25,13 @@ public protocol ItemType {}
 
 public struct ChangedSectionInfo<Section: SectionType>
 {
-    let sectionOperation: Operation<Section>
+    let sectionOperation: ArrayOperation<Section>
     let sectionCount: Int
 }
 
 public struct ChangedItemInfo<Item: ItemType>
 {
-    let itemOperation: Operation<Item>
+    let itemOperation: ArrayOperation<Item>
     let itemCount: Int
     let sectionIndex: Int
 }
@@ -60,39 +60,26 @@ extension ReactiveDataSourceType
     public var changedSectionInfoSignal: Signal<ChangedSectionInfo<Section>, NoError>
     {
         return self.sections.signal
-            .sampleFrom(self.sections.observableCount.producer)
+            .withLatest(from: self.sections.observableCount.producer)
             .map { ChangedSectionInfo(sectionOperation: $0, sectionCount: $1) }
     }
 
     public var changedItemInfoSignal: Signal<ChangedItemInfo<Section.Item>, NoError>
     {
-        let changedItemInfoPipe = Signal<ChangedItemInfo<Section.Item>, NoError>.pipe()
-
-        let observeItemChangeInSection: Section -> Disposable? = { [unowned self] section in
-            return section.items.signal
-                .sampleFrom(section.items.observableCount.producer)
-                .observeNext { itemOperation, itemCount in
-                    guard let sectionIndex = self.sections.indexOf(section) else { return }
-
-                    let i = ChangedItemInfo<Section.Item>(itemOperation: itemOperation, itemCount: itemCount, sectionIndex: sectionIndex)
-                    changedItemInfoPipe.1.sendNext(i)
-            }
-        }
-
-        self.sections.signal
-            .observeNext { operation in
-                switch operation {
-                    case let .Append(section):
-                        observeItemChangeInSection(section)
-                    case let .Insert(section, _):
-                        observeItemChangeInSection(section)
-                    case let .Update(section, _):
-                        observeItemChangeInSection(section)
-                    case .RemoveElement:
-                        break   // do nothing
+        return self.sections.signal
+            .flatMap(.merge) { operation -> Signal<ChangedItemInfo<Section.Item>, NoError> in
+                guard let section = operation.value else {
+                    return .empty
                 }
-            }
 
-        return changedItemInfoPipe.0
+                return section.items.signal
+                    .withLatest(from: section.items.observableCount.producer)
+                    .map { itemOperation, itemCount -> ChangedItemInfo<Section.Item>? in
+                        guard let sectionIndex = self.sections.index(of: section) else { return nil }
+
+                        return ChangedItemInfo<Section.Item>(itemOperation: itemOperation, itemCount: itemCount, sectionIndex: sectionIndex)
+                    }
+                    .skipNil()
+            }
     }
 }

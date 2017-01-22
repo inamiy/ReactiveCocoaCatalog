@@ -6,30 +6,26 @@
 //  Copyright © 2015 Yasuhiro Inami. All rights reserved.
 //
 
+import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 
 // MARK: Swift
 
-public enum NoValue {}
-
-extension SignalType
+extension SignalProtocol
 {
     /// Ignores values & cast `Value` to `Value2`.
-    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func ignoreCastValue<Value2>(_: Value2.Type) -> Signal<Value2, Error> {
-        return self.flatMap(.Merge) { _ in SignalProducer<Value2, Error>.empty }
+        return self.flatMap(.merge) { _ in SignalProducer<Value2, Error>.empty }
     }
 
     /// Ignores error & cast `Error` to `Error2`.
-    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
-    public func ignoreCastError<Error2: ErrorType>(_: Error2.Type) -> Signal<Value, Error2>
+    public func ignoreCastError<Error2: Swift.Error>(_: Error2.Type) -> Signal<Value, Error2>
     {
         return self.flatMapError { _ in SignalProducer<Value, Error2>.empty }
     }
 
     /// Converts error to single nil value, i.e. from `.Failed` to `.Next(nil)` + `.Complete`.
-    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
     public func errorToNilValue() -> Signal<Value?, NoError>
     {
         return self
@@ -37,35 +33,19 @@ extension SignalType
             .flatMapError { _ in .init(value: nil) }
     }
 
-    /// Converts to `Signal<(), NoError>` (ignoring value & error),
-    /// useful as a trigger signal for `sampleOn`, `takeUntil`, `skipUntil`.
-    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
-    public func triggerize() -> Signal<(), NoError>
+    public func merge(with other: Signal<Value, Error>) -> Signal<Value, Error>
     {
-        return self
-            .ignoreCastError(NoError)
-            .map { _ in () }
+        return Signal.merge(self.signal, other)
     }
 
-    @warn_unused_result(message="Did you forget to call `observe` on the signal?")
-    public func mergeWith(other: Signal<Value, Error>) -> Signal<Value, Error>
-    {
-        return Signal { observer in
-            let d = CompositeDisposable()
-            d += self.observe(observer)
-            d += other.observe(observer)
-            return d
-        }
-    }
-
-    public func animate(duration duration: NSTimeInterval, options: UIViewAnimationOptions = [.AllowUserInteraction]) -> Signal<Value, Error>
+    public func animate(duration: TimeInterval, options: UIViewAnimationOptions = [.allowUserInteraction]) -> Signal<Value, Error>
     {
         return Signal<Value, Error> { observer in
             return self.observe { (event: Event<Value, Error>) in
                 switch event {
-                    case let .Next(value):
-                        UIView.animateWithDuration(duration, delay: 0, options: options, animations: {
-                            observer.sendNext(value)
+                    case let .value(value):
+                        UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
+                            observer.send(value: value)
                         }, completion: { finished in
                             observer.sendCompleted()
                         })
@@ -77,64 +57,54 @@ extension SignalType
     }
 }
 
-extension SignalProducerType
+extension SignalProducerProtocol
 {
     /// Ignores values & cast `Value` to `Value2`.
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func ignoreCastValue<Value2>(_: Value2.Type) -> SignalProducer<Value2, Error> {
-        return lift { $0.ignoreCastValue(Value2) }
+        return lift { $0.ignoreCastValue(Value2.self) }
     }
 
     /// Ignores error & cast `Error` to `Error2`.
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func ignoreCastError<Error2: ErrorType>(_: Error2.Type) -> SignalProducer<Value, Error2>
+    public func ignoreCastError<Error2: Swift.Error>(_: Error2.Type) -> SignalProducer<Value, Error2>
     {
-        return lift { $0.ignoreCastError(Error2) }
+        return lift { $0.ignoreCastError(Error2.self) }
     }
 
     /// Converts error to single nil value, i.e. `.Failed` to `.Next(nil)` + `.Complete`.
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func errorToNilValue() -> SignalProducer<Value?, NoError>
     {
         return lift { $0.errorToNilValue() }
     }
 
-    /// Converts to `SignalProducer<(), NoError>` (ignoring value & error),
-    /// useful as a trigger signal for `sampleOn`, `takeUntil`, `skipUntil`.
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func triggerize() -> SignalProducer<(), NoError>
+    public func merge(with other: Signal<Value, Error>) -> SignalProducer<Value, Error>
     {
-        return lift { $0.triggerize() }
+        return self.merge(with: SignalProducer(other))
     }
 
-    /// - SeeAlso: `Rx.startWith` (renamed to not confuse with `startWithNext()`)
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func beginWith(value: Value) -> SignalProducer<Value, Error>
+    public func merge(with other: SignalProducer<Value, Error>) -> SignalProducer<Value, Error>
     {
-        return SignalProducer(value: value).concat(self.producer)
+        return SignalProducer<SignalProducer<Value, Error>, Error>([self.producer, other]).flatten(.merge)
     }
 
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
-    public func mergeWith(other: SignalProducer<Value, Error>) -> SignalProducer<Value, Error>
+    public func animate(duration: TimeInterval, options: UIViewAnimationOptions = [.allowUserInteraction]) -> SignalProducer<Value, Error>
     {
-        return SignalProducer<SignalProducer<Value, Error>, Error>(values: [self.producer, other]).flatten(.Merge)
+        return lift { $0.animate(duration: duration, options: options) }
     }
 
     /// Repeats `self` forever.
-    @warn_unused_result(message="Did you forget to call `start` on the producer?")
     public func forever() -> SignalProducer<Value, Error>
     {
         return SignalProducer { observer, disposable in
             let serialDisposable = SerialDisposable()
-            disposable.addDisposable(serialDisposable)
+            disposable.add(serialDisposable)
 
             func iterate() {
                 self.startWithSignal { signal, signalDisposable in
-                    serialDisposable.innerDisposable = signalDisposable
+                    serialDisposable.inner = signalDisposable
 
                     signal.observe { event in
                         switch event {
-                            case .Failed, .Completed: // NOTE: not for .Interrupted
+                            case .failed, .completed: // NOTE: not for .Interrupted
                                 iterate()
                             default:
                                 observer.action(event)
@@ -146,156 +116,39 @@ extension SignalProducerType
             iterate()
         }
     }
-    public func animate(duration duration: NSTimeInterval, options: UIViewAnimationOptions = [.AllowUserInteraction]) -> SignalProducer<Value, Error>
-    {
-        return lift { $0.animate(duration: duration, options: options) }
-    }
 }
 
 // MARK: Scheduler / GCD
 
-public func timer(interval: NSTimeInterval) -> SignalProducer<NSDate, NoError>
-{
-    return timer(interval, onScheduler: QueueScheduler.mainQueueScheduler)
-}
-
-public func scheduleAfterNow(seconds: NSTimeInterval, action: () -> ()) -> Disposable?
-{
-    return QueueScheduler.mainQueueScheduler.scheduleAfterNow(seconds, action: action)
-}
-
 extension QueueScheduler
 {
-    public func scheduleAfterNow(seconds: NSTimeInterval, action: () -> ()) -> Disposable?
+    public func schedule(after seconds: TimeInterval, action: @escaping () -> ()) -> Disposable?
     {
-        return self.scheduleAfter(NSDate(timeIntervalSinceNow: seconds), action: action)
+        return self.schedule(after: Date(timeIntervalSinceNow: seconds), action: action)
     }
 }
 
-extension SignalType
-{
-    public func delay(interval: NSTimeInterval) -> Signal<Value, Error>
-    {
-        return self.delay(interval, onScheduler: QueueScheduler.mainQueueScheduler)
-    }
-}
+// MARK: Networking
 
-extension SignalProducerType
-{
-    public func delay(interval: NSTimeInterval) -> SignalProducer<Value, Error>
-    {
-        return lift { $0.delay(interval) }
-    }
-}
-
-// MARK: Action
-
-/// Helper for attaching trigger action to UI components where Input = sender = AnyObject?.
-func triggerAction() -> Action<AnyObject?, (), NoError>
-{
-    return .init({ _ in .init(value: ()) })
-}
-
-// MARK: Foundation
-
-extension RACCommand
-{
-    public static func triggerCommand() -> RACCommand
-    {
-        return toRACCommand(Action<AnyObject?, AnyObject?, NoError> { _ in .init(value: nil) })
-    }
-}
-
-extension NSObject
-{
-    /// Easy selector hook, discarding value and error.
-    public func racc_hookSelector(selector: Selector) -> SignalProducer<(), NoError>
-    {
-        return self.rac_signalForSelector(selector).toSignalProducer()
-            .triggerize()
-    }
-}
-
-extension NSData
+extension Data
 {
     /// Synchronous fetching of remote data.
-    static func racc_downloadDataProducer(url: NSURL) -> SignalProducer<NSData?, NoError>
+    static func racc_downloadDataProducer(url: URL) -> SignalProducer<Data?, NoError>
     {
         return SignalProducer { observer, disposable in
-            let data = NSData(contentsOfURL: url)
-            observer.sendNext(data)
+            let data = try? Data.init(contentsOf: url)
+            observer.send(value: data)
             observer.sendCompleted()
         }
     }
 }
-
-extension NSCache
-{
-    /// Synchronous cache loading.
-    func racc_objectProducer<T: AnyObject>(key key: AnyObject) -> SignalProducer<T?, NoError>
-    {
-        return SignalProducer { [weak self] observer, disposable in
-            observer.sendNext(self?.objectForKey(key) as? T)
-            observer.sendCompleted()
-        }
-    }
-}
-
-// MARK: UIKit
 
 extension UIImage
 {
     /// Synchronous fetching of remote image.
-    static func racc_downloadImageProducer(url: NSURL) -> SignalProducer<UIImage?, NoError>
+    static func racc_downloadImageProducer(url: URL) -> SignalProducer<UIImage?, NoError>
     {
-        return NSData.racc_downloadDataProducer(url)
+        return Data.racc_downloadDataProducer(url: url)
             .map { $0.flatMap(UIImage.init) }
     }
-}
-
-// MARK: Objective-C Bridging
-
-private func defaultNSError(message: String, file: String, line: Int) -> NSError
-{
-    return Result<(), NSError>.error(message, file: file, line: line)
-}
-
-extension RACSignal
-{
-    /// Creates a Signal which will subscribe to the receiver immediately.
-    public func toSignal(file: String = #file, line: Int = #line) -> Signal<AnyObject?, NSError>
-    {
-        return Signal { observer in
-            let next = { obj in
-                observer.sendNext(obj)
-            }
-
-            let failed = { nsError in
-                observer.sendFailed(nsError ?? defaultNSError("Nil RACSignal error", file: file, line: line))
-            }
-
-            let completed = {
-                observer.sendCompleted()
-            }
-
-            return self.subscribeNext(next, error: failed, completed: completed)
-        }
-    }
-}
-
-extension RACCompoundDisposable
-{
-    /// For easy handling of `rac_deallocDisposable` in Swift.
-    public func addDisposable(disposable: Disposable?)
-    {
-        self.addDisposable(RACDisposable {
-            disposable?.dispose()
-        })
-    }
-}
-
-/// For easy handling of `rac_deallocDisposable` in Swift.
-public func += (lhs: RACCompoundDisposable, rhs: Disposable?)
-{
-    return lhs.addDisposable(rhs)
 }

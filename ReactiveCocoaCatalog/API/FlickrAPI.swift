@@ -7,33 +7,33 @@
 //
 
 import Foundation
-import Curry
-import ReactiveCocoa
+import ReactiveSwift
 import APIKit
 import Argo
+import Curry
+import Runes
 
 // MARK: FlickrAPI
 
 struct FlickrAPI {}
 
-// MARK: FlickrRequestType
+// MARK: FlickrRequest
 
-protocol FlickrRequestType: RequestType {}
+protocol FlickrRequest: Request {}
 
-extension FlickrRequestType
+extension FlickrRequest
 {
-    var baseURL: NSURL
+    var baseURL: URL
     {
-        return NSURL(string: "https://api.flickr.com/services/rest")!
+        return URL(string: "https://api.flickr.com/services/rest")!
     }
 }
 
-
-/// - Warning: CAN NOT be `extension RequestType` with error "Segmentation fault: 11".
-extension FlickrRequestType where Response: SequenceType, Response.Generator.Element: Decodable, Response.Generator.Element.DecodedType == Response.Generator.Element
+/// - Warning: CAN NOT be `extension Request` with error "Segmentation fault: 11".
+extension FlickrRequest where Response: Sequence, Response.Iterator.Element: Decodable, Response.Iterator.Element.DecodedType == Response.Iterator.Element
 {
     /// Automatic decoding (array).
-    func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> [Response.Generator.Element]
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> [Response.Iterator.Element]
     {
         return try decode(object).dematerialize()
     }
@@ -44,7 +44,7 @@ extension FlickrRequestType where Response: SequenceType, Response.Generator.Ele
 extension FlickrAPI
 {
     /// - SeeAlso: [Flickr Api Explorer - flickr.photos.search](https://www.flickr.com/services/api/explore/flickr.photos.search)
-    struct PhotosSearchRequest: FlickrRequestType, PaginationRequestType
+    struct PhotosSearchRequest: FlickrRequest, PaginationRequest
     {
         typealias Response = PhotosSearchResponse
 
@@ -53,7 +53,7 @@ extension FlickrAPI
 
         var method: HTTPMethod
         {
-            return .GET
+            return .get
         }
 
         var path: String
@@ -61,15 +61,15 @@ extension FlickrAPI
             return "/" // "/users"
         }
 
-        var queryParameters: [String : AnyObject]?
+        var queryParameters: [String : Any]?
         {
             return [
                 "tags": self.tags,
                 "page": self.page,
-                "method" : "flickr.photos.search",
-                "api_key" : NSString(data: NSData(base64EncodedString: "MTViOTBlYTA0ODQ3YjJlMjg1OTkwMzNmN2NlYzRiMzU=", options: .IgnoreUnknownCharacters)!, encoding: NSUTF8StringEncoding)!,
-                "format" : "json",
-                "nojsoncallback" : 1
+                "method": "flickr.photos.search",
+                "api_key": String(data: Data(base64Encoded: "MTViOTBlYTA0ODQ3YjJlMjg1OTkwMzNmN2NlYzRiMzU=", options: .ignoreUnknownCharacters)!, encoding: .utf8)!,
+                "format": "json",
+                "nojsoncallback": 1
             ]
         }
 
@@ -79,12 +79,12 @@ extension FlickrAPI
             self.page = page
         }
 
-        func responseFromObject(object: AnyObject, URLResponse: NSHTTPURLResponse) throws -> Response
+        func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response
         {
             return try decode(object).dematerialize()
         }
 
-        func requestWithPage(page: Int) -> PhotosSearchRequest
+        func requestWithPage(_ page: Int) -> PhotosSearchRequest
         {
             return PhotosSearchRequest(tags: self.tags, page: page)
         }
@@ -98,7 +98,7 @@ extension FlickrAPI
         let previousPage: Int?
         let nextPage: Int?
 
-        static func decode(j: JSON) -> Decoded<PhotosSearchResponse>
+        static func decode(_ j: JSON) -> Decoded<PhotosSearchResponse>
         {
             return curry(PhotosSearchResponse.init)
                 <^> j <|| ["photos", "photo"]
@@ -119,7 +119,7 @@ extension FlickrAPI
 
         let title: String
 
-        static func decode(j: JSON) -> Decoded<Photo>
+        static func decode(_ j: JSON) -> Decoded<Photo>
         {
             return curry(Photo.init)
                 <^> j <| "farm"
@@ -143,9 +143,9 @@ extension FlickrAPI
         ///   - https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}_[mstzb].jpg
         ///   - https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{o-secret}_o.(jpg|gif|png)
         ///
-        var imageURL: NSURL
+        var imageURL: URL
         {
-            return NSURL(string: "https://farm\(farmId).staticflickr.com/\(serverId)/\(photoId)_\(secret)_m.jpg")!
+            return URL(string: "https://farm\(farmId).staticflickr.com/\(serverId)/\(photoId)_\(secret)_m.jpg")!
         }
     }
 }

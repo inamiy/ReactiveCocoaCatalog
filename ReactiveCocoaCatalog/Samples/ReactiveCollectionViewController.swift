@@ -8,14 +8,16 @@
 
 import UIKit
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import ReactiveArray
 
 private let _cellIdentifier = "ReactiveCollectionViewCellIdentifier"
 private let _headerIdentifier = "ReactiveCollectionHeaderViewIdentifier"
 
-final class ReactiveCollectionViewController: UICollectionViewController, ReactiveArrayViewControllerType
+final class ReactiveCollectionViewController: UICollectionViewController, ReactiveArrayViewControllerType, StoryboardSceneProvider
 {
+    static let storyboardScene = StoryboardScene<ReactiveCollectionViewController>(name: "ReactiveArray")
+
     @IBOutlet weak var insertButtonItem: UIBarButtonItem?
     @IBOutlet weak var replaceButtonItem: UIBarButtonItem?
     @IBOutlet weak var removeButtonItem: UIBarButtonItem?
@@ -27,8 +29,6 @@ final class ReactiveCollectionViewController: UICollectionViewController, Reacti
     let viewModel = ReactiveArrayViewModel(cellIdentifier: _cellIdentifier, headerIdentifier: _headerIdentifier)
 
     let protocolSelectorForDidSelectItem = Selector._didSelectRow
-
-    deinit { logDeinit(self) }
 
     var itemsView: UICollectionView
     {
@@ -46,7 +46,7 @@ final class ReactiveCollectionViewController: UICollectionViewController, Reacti
 
         self.itemsView.dataSource = self.viewModel
 
-        // Set delegate after calling `rac_signalForSelector(_:fromProtocol:)`.
+        // Set delegate after calling `rac_signal(for: _:from:)`.
         // - https://github.com/ReactiveCocoa/ReactiveCocoa/issues/1121
         // - http://stackoverflow.com/questions/22000433/rac-signalforselector-needs-empty-implementation
         self.itemsView.delegate = nil   // set nil to clear selector cache
@@ -61,8 +61,8 @@ final class ReactiveCollectionViewController: UICollectionViewController, Reacti
 extension Selector
 {
     // NOTE: needed to upcast to `Protocol` for some reason...
-    private static let _didSelectRow: (Selector, Protocol) = (
-        #selector(UICollectionViewDelegate.collectionView(_:didSelectItemAtIndexPath:)),
+    fileprivate static let _didSelectRow: (Selector, Protocol) = (
+        #selector(UICollectionViewDelegate.collectionView(_:didSelectItemAt:)),
         UICollectionViewDelegate.self
     )
 }

@@ -12,7 +12,7 @@ import Foundation
 
 private let _maxLogCharacterCount = 200
 
-func logSink<T>(name: String) -> T -> ()
+func logSink<T>(_ name: String) -> (T) -> ()
 {
     return { arg in
         var argChars = "\(arg)".characters
@@ -24,43 +24,42 @@ func logSink<T>(name: String) -> T -> ()
     }
 }
 
-func logDeinit(object: AnyObject)
+func deinitMessage(_ object: AnyObject) -> String
 {
-    let addr = String(format: "%p", unsafeAddressOf(object))
-    print("\n", "[deinit] \(object) \(addr)", "\n")
+    return String(format: "[deinit] %@ %p", String(describing: type(of: object)), Unmanaged.passUnretained(object).toOpaque().hashValue)
 }
 
 // MARK: DateString
 
-private let _dateFormatter: NSDateFormatter = {
-    let formatter = NSDateFormatter()
+private let _dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
 //    formatter.dateFormat = "yyyy/MM/dd HH:mm:ss.SSS"
     formatter.dateFormat = "HH:mm:ss.SSS"
     return formatter
 }()
 
-func stringFromDate(date: NSDate) -> String
+func stringFromDate(_ date: Date) -> String
 {
-    return _dateFormatter.stringFromDate(date)
+    return _dateFormatter.string(from: date)
 }
 
 // MARK: Random
 
-func random(upperBound: Int) -> Int
+func random(_ upperBound: Int) -> Int
 {
     return Int(arc4random_uniform(UInt32(upperBound)))
 }
 
 /// Picks random `count` elements from `sequence`.
-func pickRandom<S: SequenceType>(sequence: S, _ count: Int) -> [S.Generator.Element]
+func pickRandom<S: Sequence>(_ sequence: S, _ count: Int) -> [S.Iterator.Element]
 {
     var array = Array(sequence)
-    var pickedArray = Array<S.Generator.Element>()
+    var pickedArray = Array<S.Iterator.Element>()
 
     for _ in 0..<count {
         if array.isEmpty { break }
 
-        pickedArray.append(array.removeAtIndex(random(array.count)))
+        pickedArray.append(array.remove(at: random(array.count)))
     }
 
     return pickedArray

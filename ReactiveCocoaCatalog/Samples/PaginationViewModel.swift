@@ -8,22 +8,22 @@
 
 import Foundation
 import Result
-import ReactiveCocoa
+import ReactiveSwift
 import APIKit
 import Argo
 
-final class PaginationViewModel<Req: PaginationRequestType>
+final class PaginationViewModel<Req: PaginationRequest>
 {
     let refreshObserver: Observer<(), NoError>
     let loadNextObserver: Observer<(), NoError>
 
-    let items: AnyProperty<[Req.Response.Item]>
+    let items: Property<[Req.Response.Item]>
     private let _items = MutableProperty<[Req.Response.Item]>([])
 
-    let lastLoaded: AnyProperty<(page: Int, hasNext: Bool)>
+    let lastLoaded: Property<(page: Int, hasNext: Bool)>
     private let _lastLoaded = MutableProperty<(page: Int, hasNext: Bool)>(page: 0, hasNext: true)
 
-    let loading: AnyProperty<Bool>
+    let loading: Property<Bool>
     private let _loading = MutableProperty(false)
 
     let paginationRequest: Req
@@ -32,9 +32,9 @@ final class PaginationViewModel<Req: PaginationRequestType>
     {
         self.paginationRequest = paginationRequest
 
-        self.items = AnyProperty(self._items)
-        self.lastLoaded = AnyProperty(self._lastLoaded)
-        self.loading = AnyProperty(self._loading)
+        self.items = Property(self._items)
+        self.lastLoaded = Property(self._lastLoaded)
+        self.loading = Property(self._loading)
 
         let refreshPipe = Signal<(), NoError>.pipe()
         self.refreshObserver = refreshPipe.1
@@ -45,22 +45,22 @@ final class PaginationViewModel<Req: PaginationRequestType>
         print(#function)
 
         let refreshRequest = refreshPipe.0
-            .sampleFrom(self.loading.producer)
+            .withLatest(from: self.loading.producer)
             .map { $1 }
             .filter { !$0 }
             .map { _ in self.paginationRequest.requestWithPage(1) }
-            .on(next: { _ in print("refresh -> requestWithPage(1)") })
+            .on(value: { _ in print("refresh -> requestWithPage(1)") })
 
         let nextPageRequest = loadNextPipe.0
-            .sampleFrom(self.lastLoaded.producer)
+            .withLatest(from: self.lastLoaded.producer)
             .map { $1 }
-            .sampleFrom(self.loading.producer)
+            .withLatest(from: self.loading.producer)
             .map { ($0.0, $0.1, $1) }
             .filter { !$2 }
-            .flatMap(.Merge) { page, hasNext, loading -> SignalProducer<Req, NoError> in
+            .flatMap(.merge) { page, hasNext, loading -> SignalProducer<Req, NoError> in
                 if hasNext {
                     return SignalProducer(value: self.paginationRequest.requestWithPage(page + 1))
-                        .on(next: { _ in print("loadNext -> requestWithPage(\(page + 1))") })
+                        .on(value: { _ in print("loadNext -> requestWithPage(\(page + 1))") })
                 }
                 else {
                     return .empty
@@ -71,8 +71,8 @@ final class PaginationViewModel<Req: PaginationRequestType>
             .on(event: logSink("request"))
 
         let response = request
-            .promoteErrors(SessionTaskError)
-            .flatMap(.Merge) { Session.responseProducer($0) }
+            .promoteErrors(SessionTaskError.self)
+            .flatMap(.merge) { Session.responseProducer($0) }
             .on(event: logSink("response"))
 
         self._loading <~ Signal<Bool, NoError>.merge([
@@ -86,20 +86,18 @@ final class PaginationViewModel<Req: PaginationRequestType>
         self._items <~ refreshPipe.0.map { [] }
 
         self._items <~ response
-            .ignoreCastError(NoError)
-            .sampleFrom(self._items.producer)
+            .ignoreCastError(NoError.self)
+            .withLatest(from: self._items.producer)
             .map { (response: Req.Response, repositories) -> [Req.Response.Item] in
                 return response.hasPreviousPage
                     ? repositories + response.items
                     : response.items
             }
 
-        self._lastLoaded <~ zip(request, response.errorToNilValue())
-            .map { req, resOpt in resOpt.map { (req.page, $0.hasNextPage) } }
-            .ignoreNil()
+        self._lastLoaded <~ Signal.zip(request, response.errorToNilValue())
+            .map { req, resOpt in resOpt.map { (page: req.page, hasNext: $0.hasNextPage) } }
+            .skipNil()
             .on(event: logSink("_lastLoaded"))
 
     }
-
-    deinit { logDeinit(self) }
 }

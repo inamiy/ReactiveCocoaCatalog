@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import ReactiveCocoa
+import Result
+import ReactiveSwift
 import APIKit
 import Haneke
 
@@ -20,7 +21,7 @@ import Haneke
 /// - "Who to follow" Demo (JavaScript)
 ///   http://jsfiddle.net/staltz/8jFJH/48/
 ///
-class WhoToFollowViewController: UIViewController
+class WhoToFollowViewController: UIViewController, NibSceneProvider
 {
     @IBOutlet var user1Button: UIButton?
     @IBOutlet var user2Button: UIButton?
@@ -36,34 +37,36 @@ class WhoToFollowViewController: UIViewController
 
     func _setupButtons()
     {
-        let refreshProducer = self.refreshButton!.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
+        let refreshProducer = SignalProducer(self.refreshButton!.reactive.controlEvents(.touchUpInside))
+            .map { Optional($0) }
 
         let fetchedUsersProducer = refreshProducer
-            .beginWith("startup refresh")
-            .ignoreCastError(SessionTaskError)
-            .flatMap(.Merge) { _ in _randomUsersProducer() }
+            .prefix(value: nil)   // startup refresh
+            .flatMap(.merge) { _ in
+                return _randomUsersProducer()
+                    .ignoreCastError(NoError.self)
+            }
 
-        func bindButton(button: UIButton)
+        func bindButton(_ button: UIButton)
         {
-            let buttonTapProducer = button.rac_signalForControlEvents(.TouchUpInside).toSignalProducer()
-                .beginWith("startup userButton")
+            let buttonTapProducer = SignalProducer(button.reactive.controlEvents(.touchUpInside))
+                .map { Optional($0) }
+                .prefix(value: nil)    // startup userButton tap
 
-            combineLatest(buttonTapProducer, fetchedUsersProducer.mapError { $0 as NSError })
+            SignalProducer.combineLatest(buttonTapProducer, fetchedUsersProducer)
                 .map { _, users -> GitHubAPI.User? in
-                    let randomIndex = Int(arc4random_uniform(UInt32(users.count)))
-                    return users[randomIndex]
+                    return users[random(users.count)]
                 }
-                .mergeWith(refreshProducer.map { _ in nil })
-                .beginWith(nil) // user = nil for emptying labels
-                .ignoreError()
-                .startWithNext { [weak button] user in
+                .merge(with: refreshProducer.map { _ in nil })
+                .prefix(value: nil) // user = nil for emptying labels
+                .startWithValues { [weak button] user in
 
                     // update UI
-                    button?.setTitle(user?.login, forState: .Normal)
-                    button?.setImage(nil, forState: .Normal)
+                    button?.setTitle(user?.login, for: .normal)
+                    button?.setImage(nil, for: .normal)
 
                     if let avatarURL = user?.avatarURL {
-                        button?.hnk_setImageFromURL(avatarURL, state: .Normal)
+                        button?.hnk_setImageFromURL(avatarURL, state: .normal)
                     }
                 }
         }
@@ -75,7 +78,7 @@ class WhoToFollowViewController: UIViewController
     }
 }
 
-private func _randomUsersProducer(since: Int = Int(arc4random_uniform(500))) -> SignalProducer<[GitHubAPI.User], SessionTaskError>
+private func _randomUsersProducer(since: Int = random(500)) -> SignalProducer<[GitHubAPI.User], SessionTaskError>
 {
     let request = GitHubAPI.UsersRequest(since: since)
     return Session.responseProducer(request)

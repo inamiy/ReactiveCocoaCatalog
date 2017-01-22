@@ -8,30 +8,31 @@
 
 import UIKit
 import Result
+import ReactiveSwift
 import ReactiveCocoa
 import APIKit
 import Argo
 
 /// Tab + Badge example.
-final class MenuTabBarController: UITabBarController
+final class MenuTabBarController: UITabBarController, StoryboardSceneProvider
 {
+    static let storyboardScene = StoryboardScene<MenuTabBarController>(name: "MenuBadge")
+
     @IBOutlet weak var menuButton: UIButton?
     @IBOutlet weak var badgeButton: UIButton?
 
     let menuManager = MenuManager()
 
     // NOTE: CocoaAction must be retained to bind to UI
-    var menuAction: CocoaAction?
-    var badgeAction: CocoaAction?
-
-    deinit { logDeinit(self) }
+    var menuAction: CocoaAction<UIBarButtonItem>?
+    var badgeAction: CocoaAction<UIBarButtonItem>?
 
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
-        let menuAction = CocoaAction(self.menuManager.menuAction) { _ in 0.0 }
-        let badgeAction = CocoaAction(self.menuManager.badgeAction) { _ in 0.0 }
+        let menuAction = CocoaAction<UIBarButtonItem>(self.menuManager.menuAction) { _ in 0.0 }
+        let badgeAction = CocoaAction<UIBarButtonItem>(self.menuManager.badgeAction) { _ in 0.0 }
 
         self.menuAction = menuAction
         self.badgeAction = badgeAction
@@ -41,24 +42,24 @@ final class MenuTabBarController: UITabBarController
         // doesn't support "Nav > TabBar" controller stacks.
         let menuButtonItem = UIBarButtonItem(
             title: "Menu",
-            style: .Plain,
+            style: .plain,
             target: menuAction,
-            action: CocoaAction.selector
+            action: CocoaAction<UIBarButtonItem>.selector
         )
         let badgeButtonItem = UIBarButtonItem(
             title: "Badge",
-            style: .Plain,
+            style: .plain,
             target: badgeAction,
-            action: CocoaAction.selector
+            action: CocoaAction<UIBarButtonItem>.selector
         )
         self.navigationItem.rightBarButtonItems = [menuButtonItem, badgeButtonItem]
 
         let tabVCsChanged = self.menuManager.tabViewControllersProperty.signal
 
-        self.rex_viewControllers <~ tabVCsChanged.map { $0 }
+        self.reactive.viewControllers <~ tabVCsChanged.map { $0 }
 
         // Always select last tab (= `MenuId.Settings`) on change.
-        self.rex_selectedIndex <~ tabVCsChanged.map { $0.count - 1 }
+        self.reactive.selectedIndex <~ tabVCsChanged.map { $0.count - 1 }
 
         // Trigger Menu API manually so that random viewControllers will be set.
         self.menuManager.menuAction.apply(0.0).start()

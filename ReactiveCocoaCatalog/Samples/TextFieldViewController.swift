@@ -8,10 +8,10 @@
 
 import UIKit
 import Result
+import ReactiveSwift
 import ReactiveCocoa
-import Rex
 
-class TextFieldViewController: UIViewController
+class TextFieldViewController: UIViewController, NibSceneProvider
 {
     @IBOutlet var label: UILabel?
     @IBOutlet var throttleLabel: UILabel?
@@ -22,14 +22,13 @@ class TextFieldViewController: UIViewController
     {
         super.viewDidLoad()
 
-        let textProducer = self.textField!.rac_textSignal().toSignalProducer()
-            .ignoreCastError(NoError)
+        let textProducer = self.textField!.reactive.continuousTextValues
 
-        self.label!.rex_text <~ textProducer
+        self.label!.reactive.text <~ textProducer
             .map { "Normal: \($0!)" }
 
-        self.throttleLabel!.rex_text <~ textProducer
-            .throttle(1, onScheduler: QueueScheduler.mainQueueScheduler)    // throttle for 1 sec
+        self.throttleLabel!.reactive.text <~ textProducer
+            .throttle(1, on: QueueScheduler.main)    // throttle for 1 sec
             .map { "Throttled: \($0!)" }
     }
 }
